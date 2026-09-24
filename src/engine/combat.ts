@@ -154,7 +154,9 @@ export function resolveCombat(s: GameState, exp: Expedition, enc: Encounter, sin
       if (living.length === 0) break;
       const target = pickTarget(s, living);
       const def = defenceOf(s, target);
-      const reduced = (roundDmg / c.hitsPerRound) * traitMult(target, 'damageTaken', { firstDay }) * (1 - def / (def + balance.derived.armourK));
+      let reduced = (roundDmg / c.hitsPerRound) * traitMult(target, 'damageTaken', { firstDay }) * (1 - def / (def + balance.derived.armourK));
+      // Now and then a blow lands just right.
+      if (roll(s, c.critChance)) reduced *= c.critMult;
       damageMember(s, exp, target, reduced, enc.depth, m.name, sink);
     }
 

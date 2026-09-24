@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import { GameMenu } from './components/GameMenu';
 import type { ObjectiveType } from '../engine/types';
 import { EventLog } from './components/EventLog';
 import { Notices } from './components/Notices';
@@ -31,6 +32,23 @@ export function App() {
     return TABS.some((x) => x.id === t) ? (t as Tab) : 'tavern';
   });
   const [selected, setSelected] = useState<string | null>(null);
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  // Space toggles pause, unless typing in a field.
+  const lastSpeed = useRef<Speed>(1);
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (e.code !== 'Space' || e.target instanceof HTMLInputElement || e.target instanceof HTMLSelectElement) return;
+      e.preventDefault();
+      if (game.speed === 0) game.setSpeed(lastSpeed.current);
+      else {
+        lastSpeed.current = game.speed;
+        game.setSpeed(0);
+      }
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [game]);
 
   const [plan, setPlan] = useState<{ type: ObjectiveType; level: number; graveId?: string; key: number } | null>(null);
 
@@ -71,6 +89,9 @@ export function App() {
               {sp === 0 ? '❚❚' : `${sp}×`}
             </button>
           ))}
+          <button onClick={() => setMenuOpen(true)} title="Save, load, new game" style={{ marginLeft: 8 }}>
+            Ledger
+          </button>
           <label className={styles.autopause} title="Pause every evening, when recruits arrive">
             <input type="checkbox" checked={game.autoPauseEvening} onChange={(e) => game.setAutoPauseEvening(e.target.checked)} />
             pause at evening
@@ -103,6 +124,7 @@ export function App() {
       </aside>
 
       <Legacy game={game} />
+      {menuOpen && <GameMenu game={game} onClose={() => setMenuOpen(false)} />}
       <Notices notices={game.notices} onDismiss={game.dismissNotice} />
     </div>
   );

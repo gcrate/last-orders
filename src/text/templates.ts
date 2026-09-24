@@ -164,10 +164,10 @@ export function describeEvent(e: GameEvent, s: GameState): LogLine | null {
       );
     case 'INCOME':
       return null;
+    // The player did these themselves; no need to narrate them.
     case 'ITEM_BOUGHT':
-      return line(`Bought ${s.items[e.itemId]?.name ?? 'something'} for ${e.cost} gold.`, 'quiet');
     case 'ITEM_SOLD':
-      return line(`Sold for ${e.gold} gold.`, 'quiet');
+      return null;
     case 'ITEM_UPGRADED':
       return line(`The smith reworked it into ${s.items[e.itemId]?.name ?? 'something better'}.`, 'quiet');
     case 'ITEM_EQUIPPED':
@@ -405,6 +405,16 @@ export const LEGACY_TEXT: Record<LegacyId, { name: string; found: string; effect
     effect: 'Veterans return as trainers, and elite recruits wait at the bar.',
   },
 };
+
+/** Opening lines for a new game. */
+export function introLines(s: GameState): LogLine[] {
+  const at = (text: string, tone: Tone): LogLine => ({ hour: s.hour, text, tone, expeditionId: null });
+  return [
+    at(`You are ${s.keeper.name}. You used to go down there yourself.`, 'keeper'),
+    at('Now the cough keeps you by the fire, and the curse in your blood is counting your days. Somewhere below, on the fiftieth level, the thing that cursed your family is still alive.', 'keeper'),
+    at('You can\'t fight any more. But you can pour drinks, and give advice, and send others down in your place.', 'keeper'),
+  ];
+}
 
 /** The keeper's private read on how a party will take its orders. */
 export function frictionText(f: OrderFriction, s: GameState): string {

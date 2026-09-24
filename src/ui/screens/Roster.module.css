@@ -30,3 +30,11 @@
   flex-direction: column;
   gap: 4px;
 }
+
+.single {
+  display: block;
+}
+
+.tableWrap {
+  overflow-x: auto;
+}

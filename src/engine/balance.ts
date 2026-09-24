@@ -82,7 +82,7 @@ export const DEFAULT_BALANCE = {
     levelStatGain: 1, // stat points per level up
     levelPrimaryChance: 0.5, // chance each stat point goes to the class primary
     maxLevel: 30,
-    recruitLevelPerRep: 0.05, // extra recruit levels per reputation point
+    recruitLevelPerRep: 0.08, // extra recruit levels per reputation point
     recruitStatPerRep: 0.04,
     recruitStayDays: 2,
     maimChance: 0.35, // chance a rescued adventurer is maimed
@@ -171,10 +171,10 @@ export const DEFAULT_BALANCE = {
     levels: 50,
     bandSize: 10,
     threatBase: 30,
-    threatGrowth: 1.065, // per level
+    threatGrowth: 1.058, // per level
     bossThreatMult: 1.7,
     bossHpMult: 2.2,
-    sourceThreatMult: 2.2,
+    sourceThreatMult: 1.8,
     sourceHpMult: 3.0,
     guardianThreatMult: 1.4,
     guardianHpMult: 1.6,
@@ -215,8 +215,8 @@ export const DEFAULT_BALANCE = {
     itemChance: 0.3,
     itemTierPerBand: 0.55, // expected item tier rises with band
     bossLootMult: 5,
-    regrowthMin: 0.1,
-    regrowthMax: 0.15,
+    regrowthMin: 0.05,
+    regrowthMax: 0.08,
     legendaryGraveCount: 3,
     legendaryGraveMinLevel: 5, // adventurer level needed to become a legendary grave
     legendaryGraveItemTierBonus: 1,
@@ -263,10 +263,12 @@ export const DEFAULT_BALANCE = {
     woundedFrac: 0.35, // below this fraction of max HP a member counts as wounded
     severeFrac: 0.15,
     encHpPerThreat: 2.0,
-    dmgFrac: 0.15, // fraction of party max HP dealt per round at ratio 1
+    dmgFrac: 0.17, // fraction of party max HP dealt per round at ratio 1
     rollMin: 0.6,
     rollMax: 1.4,
     hitsPerRound: 1,
+    critChance: 0.08,
+    critMult: 2.2,
     stance: {
       cautious: { dealt: 0.85, taken: 0.8, explore: 0.8 },
       balanced: { dealt: 1.0, taken: 1.0, explore: 1.0 },
@@ -375,6 +377,7 @@ export const DEFAULT_BALANCE = {
 
   upgrades: {
     maxTier: 3,
+    costMult: 0.65, // scales every upgrade cost
     costs: {
       rooms: [200, 550, 1400],
       forge: [250, 700, 1800],
@@ -432,8 +435,8 @@ export const DEFAULT_BALANCE = {
   portals: {
     usesStart: 5,
     lifeDays: 30,
-    decayedUses: 2,
-    decayedCost: 150,
+    decayedUses: 6,
+    decayedCost: 100,
     stoneLifeDays: 120, // the inherited portal stone lasts longer than a fresh portal
   },
 
@@ -442,7 +445,7 @@ export const DEFAULT_BALANCE = {
     yearsMin: 15,
     yearsMax: 25,
     upgradeTierLoss: 1,
-    reputationCarry: 0.3,
+    reputationCarry: 0.5,
     journalLevelsKept: true,
     portalStoneMinLevel: 20,
     oldFriendsMinRetired: 3,

@@ -64,6 +64,7 @@ export function unequipAll(s: GameState, a: Adventurer): void {
     if (id) s.stash.push(id);
     a.equipment[slot] = null;
   }
+  a.hp = Math.min(a.hp, maxHp(s, a));
 }
 
 // ---------------------------------------------------------------------------
@@ -193,7 +194,7 @@ export function ageEveryone(s: GameState): void {
 export function upgradeCost(s: GameState, u: UpgradeId): number | null {
   const tier = s.upgrades[u];
   if (tier >= balance.upgrades.maxTier) return null;
-  return balance.upgrades.costs[u][tier];
+  return Math.round(balance.upgrades.costs[u][tier] * balance.upgrades.costMult);
 }
 
 export function buyUpgrade(s: GameState, u: UpgradeId, sink: EventSink): void {

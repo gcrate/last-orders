@@ -5,8 +5,8 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { newGame } from '../engine/state';
 import { step } from '../engine/step';
 import type { GameEvent, GameEventType, GameState, PlayerInput } from '../engine/types';
-import { clearStorage, deserialize, loadFromStorage, saveToStorage } from '../save/save';
-import { type LogLine, describeEvent } from '../text/templates';
+import { type SaveFile, clearStorage, deserialize, loadFromStorage, saveToStorage } from '../save/save';
+import { type LogLine, describeEvent, introLines } from '../text/templates';
 
 export type Speed = 0 | 1 | 2 | 4;
 
@@ -48,6 +48,8 @@ export interface GameApi {
   notices: Notice[];
   dismissNotice: (id: number) => void;
   newGameWithSeed: (seed: string) => void;
+  loadSave: (save: SaveFile) => void;
+  saveNow: () => Promise<void>;
   loadedFromSave: boolean;
 }
 
@@ -60,7 +62,8 @@ export function useGame(): GameApi {
   const [initial] = useState(() => {
     const save = loadFromStorage();
     if (save) return { state: save.state, log: save.log, loaded: true };
-    return { state: newGame(freshSeed()), log: [] as LogLine[], loaded: false };
+    const s = newGame(freshSeed());
+    return { state: s, log: introLines(s), loaded: false };
   });
   const [state, setState] = useState<GameState>(initial.state);
   const [log, setLog] = useState<LogLine[]>(initial.log);
@@ -156,11 +159,25 @@ export function useGame(): GameApi {
     clearStorage();
     const s = newGame(seed || freshSeed());
     setSpeed(0);
-    logRef.current = [];
-    setLog([]);
+    const intro = introLines(s);
+    logRef.current = intro;
+    setLog(intro);
     stateRef.current = s;
     setState(s);
-    saveToStorage(s, []);
+    saveToStorage(s, intro);
+  }, []);
+
+  const loadSave = useCallback((save: SaveFile) => {
+    setSpeed(0);
+    logRef.current = save.log;
+    setLog(save.log);
+    stateRef.current = save.state;
+    setState(save.state);
+    saveToStorage(save.state, save.log);
+  }, []);
+
+  const saveNow = useCallback(async () => {
+    saveToStorage(stateRef.current, logRef.current);
   }, []);
 
   const dismissNotice = useCallback((id: number) => setNotices((n) => n.filter((x) => x.id !== id)), []);
@@ -176,6 +193,8 @@ export function useGame(): GameApi {
     notices,
     dismissNotice,
     newGameWithSeed,
+    loadSave,
+    saveNow,
     loadedFromSave: initial.loaded,
   };
 }

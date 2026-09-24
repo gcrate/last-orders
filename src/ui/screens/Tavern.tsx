@@ -50,8 +50,17 @@ export function Tavern({ game, onOpenAdventurer }: Props) {
   const k = balance.keeper;
   const resting = isResting(s);
 
+  const day = Math.floor((s.hour - s.generationStartHour) / balance.time.hoursPerDay) + 1;
+
   return (
     <div className={styles.grid}>
+      {s.generation === 1 && day <= 3 && (
+        <section className={`panel ${styles.hint}`}>
+          <strong>How the tavern runs.</strong> Press <kbd>space</kbd> or a speed button to let time pass. Each evening new faces come to the bar and
+          the game pauses. Hire a few, give them gear from the stash, and send them below from <em>Send a party</em>. Watch the log on the right: it's
+          where their stories come back to you. Your own effort (training, counsel) costs days of your life. Rest when you can.
+        </section>
+      )}
       {/* Keeper */}
       <section className={`panel ${styles.keeper}`}>
         <Sprite id={keeperPortraitId(s)} scale={2} title={s.keeper.name} />

@@ -26,8 +26,8 @@ export function Roster({ game, selected, onSelect }: Props) {
   const current = selected ? s.adventurers[selected] : null;
 
   return (
-    <div className={styles.layout}>
-      <section className="panel">
+    <div className={current ? styles.layout : styles.single}>
+      <section className={`panel ${styles.tableWrap}`}>
         <h3>Roster</h3>
         <table>
           <thead>

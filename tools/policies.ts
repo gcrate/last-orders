@@ -4,7 +4,8 @@
 import { balance } from '../src/engine/balance';
 import { maxHp, powerOf } from '../src/engine/adventurers';
 import { shopCatalog } from '../src/engine/economy';
-import { bossThreat, isBossLevel, level, levelThreat, portalsActive } from '../src/engine/dungeon';
+import { bandOf, bossThreat, isBossLevel, level, levelThreat, portalsActive } from '../src/engine/dungeon';
+import { bossForBand } from '../src/engine/monsters';
 import { CLASS_ARMOUR, CLASS_WEAPONS, isEquipSlot } from '../src/engine/items';
 import { exertBlocked } from '../src/engine/keeper';
 import { housedCount, roomCapacity, upgradeCost } from '../src/engine/tavern';
@@ -28,6 +29,9 @@ export const POLICIES: Record<string, PolicyConfig> = {
   aggressive: { name: 'aggressive', pushRatio: 0.95, bossRatio: 0.9, retreatHp: 0.3, stance: 'aggressive', counselDeep: false, tonics: 3, rest: false, train: true },
   idle: { name: 'idle', pushRatio: 0, bossRatio: 0, retreatHp: 0.5, stance: 'cautious', counselDeep: false, tonics: 0, rest: false, train: false },
 };
+
+// Halving damage taken is roughly worth this much of the threat ratio (damage ~ ratio squared).
+const WARD_EQUIV = 0.72;
 
 const UPGRADE_PRIORITY: UpgradeId[] = ['rooms', 'forge', 'library', 'commonRoom', 'noticeBoard', 'shrine'];
 
@@ -105,7 +109,7 @@ export function policyInputs(s: GameState, cfg: PolicyConfig): PlayerInput[] {
       }
     }
   }
-  for (const [kind, n] of [['rations', 4], ['potion', 4], ['portal', 1], ['healing', 1]] as [ItemKind, number][]) {
+  for (const [kind, n] of [['rations', 4], ['potion', 4], ['portal', 1], ['healing', 1], ['ward', 1]] as [ItemKind, number][]) {
     const entry = catalog.find((e) => e.kind === kind);
     if (!entry) continue;
     for (let i = wanted(s, kind); i < n && entry.price + reserve <= gold; i++) {
@@ -167,6 +171,7 @@ export function policyInputs(s: GameState, cfg: PolicyConfig): PlayerInput[] {
     take('potion', 2);
     take('healing', 1);
     if (plan.level >= 5) take('portal', 1);
+    if (plan.type === 'boss') take('ward', 1);
     const counsel = cfg.counselDeep && !counselled && plan.type === 'boss' && exertBlocked(s) === null;
     if (counsel) counselled = true;
     out.push({
@@ -211,7 +216,12 @@ function planObjective(s: GameState, power: number, cfg: PolicyConfig): Plan {
     if (ratio > cfg.pushRatio) break;
     target = d;
     if (isBossLevel(d) && level(s, d).bossAlive) {
-      const bossRatio = bossThreat(s, d) / power;
+      // A boss fight gets the works: counsel, a ward if there is one, and any insight.
+      const boss = bossForBand(bandOf(d));
+      let eff = power * (1 + balance.keeper.counselPower);
+      if (s.journal.insights.includes(boss.id)) eff *= 1 + balance.combat.insightPower;
+      const ward = s.stash.some((id) => s.items[id]?.kind === 'ward') ? WARD_EQUIV : 1;
+      const bossRatio = (bossThreat(s, d) / eff) * ward;
       if (bossRatio <= cfg.bossRatio) {
         return { type: 'boss', level: d, portalId: bestPortal(s, d) };
       }
@@ -227,7 +237,8 @@ function planObjective(s: GameState, power: number, cfg: PolicyConfig): Plan {
 
 function bestPortal(s: GameState, maxLevel: number): string | null {
   const ps = portalsActive(s)
-    .filter((p) => p.level <= maxLevel && !p.decayed)
+    // An old decayed portal is worth waking only if there is gold to spare.
+    .filter((p) => p.level <= maxLevel && (!p.decayed || s.gold >= balance.portals.decayedCost * 2))
     .sort((a, b) => b.level - a.level);
   return ps[0]?.id ?? null;
 }
