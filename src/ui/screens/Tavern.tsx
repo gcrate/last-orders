@@ -2,13 +2,14 @@ import { useState } from 'react';
 import { balance } from '../../engine/balance';
 import { partyHp } from '../../engine/combat';
 import { shopCatalog } from '../../engine/economy';
-import { ITEM_KINDS, isEquipSlot, sellPrice, upgradeCost as itemUpgradeCost } from '../../engine/items';
+import { ITEM_KINDS, isEquipSlot, itemAsset, itemStatsFor, sellPrice, upgradeCost as itemUpgradeCost } from '../../engine/items';
 import { estimate, isResting, portraitStage } from '../../engine/keeper';
 import { housedCount, roomCapacity, upgradeCost } from '../../engine/tavern';
-import type { GameState, Item, UpgradeId } from '../../engine/types';
+import type { GameState, Item, ItemKind, UpgradeId } from '../../engine/types';
 import { UPGRADES } from '../../engine/types';
 import { estimateText, objectiveText, upgradeName } from '../../text/templates';
 import { AdventurerCard, Meter } from '../components/AdventurerCard';
+import { ItemTooltip } from '../components/ItemTooltip';
 import { Sprite } from '../components/Sprite';
 import { firstName } from '../format';
 import type { GameApi } from '../useGame';
@@ -197,13 +198,15 @@ function itemStats(i: Item): string {
 
 export function ItemLabel({ item }: { item: Item }) {
   return (
-    <span className="row" style={{ gap: 6 }} title={itemStats(item)}>
-      <Sprite id={item.asset} />
-      <span className={item.legendary ? 'tone-good' : ''}>{item.name}</span>
-      <span className="faint" style={{ fontSize: 12 }}>
-        {itemStats(item)}
+    <ItemTooltip kind={item.kind} name={item.name} tier={item.tier} stats={item} legendary={item.legendary}>
+      <span className="row" style={{ gap: 6 }}>
+        <Sprite id={item.asset} />
+        <span className={item.legendary ? 'tone-good' : ''}>{item.name}</span>
+        <span className="faint" style={{ fontSize: 12 }}>
+          {itemStats(item)}
+        </span>
       </span>
-    </span>
+    </ItemTooltip>
   );
 }
 
@@ -221,12 +224,17 @@ function Market({ game }: { game: GameApi }) {
     <section className="panel">
       <h3>Stash and market</h3>
       <div className="row" style={{ marginBottom: 6 }}>
-        {[...counts.entries()].map(([kind, n]) => (
-          <span key={kind} className="row" style={{ gap: 4 }}>
-            <Sprite id={stash.find((i) => i.kind === kind)!.asset} />
-            {ITEM_KINDS[kind as keyof typeof ITEM_KINDS].names[0]} ×{n}
-          </span>
-        ))}
+        {[...counts.entries()].map(([kind, n]) => {
+          const k = kind as ItemKind;
+          return (
+            <ItemTooltip key={kind} kind={k} name={ITEM_KINDS[k].names[0]} tier={1} stats={itemStatsFor(k, 1)}>
+              <span className="row" style={{ gap: 4 }}>
+                <Sprite id={stash.find((i) => i.kind === kind)!.asset} />
+                {ITEM_KINDS[k].names[0]} ×{n}
+              </span>
+            </ItemTooltip>
+          );
+        })}
       </div>
       <table>
         <tbody>
@@ -258,11 +266,19 @@ function Market({ game }: { game: GameApi }) {
       {showShop && (
         <table style={{ marginTop: 6 }}>
           <tbody>
-            {catalog.map((e) => (
+            {catalog.map((e) => {
+              const def = ITEM_KINDS[e.kind];
+              const name = def.names[Math.min(2, e.tier - 1)];
+              return (
               <tr key={`${e.kind}-${e.tier}`}>
                 <td>
-                  {ITEM_KINDS[e.kind].names[Math.min(2, e.tier - 1)]}
-                  {isEquipSlot(ITEM_KINDS[e.kind].slot) && <span className="faint"> (tier {e.tier})</span>}
+                  <ItemTooltip kind={e.kind} name={name} tier={e.tier} stats={itemStatsFor(e.kind, e.tier)}>
+                    <span className="row" style={{ gap: 6 }}>
+                      <Sprite id={itemAsset(e.kind, e.tier, def.slot)} />
+                      {name}
+                      {isEquipSlot(def.slot) && <span className="faint"> (tier {e.tier})</span>}
+                    </span>
+                  </ItemTooltip>
                 </td>
                 <td>
                   <button onClick={() => dispatch({ type: 'BUY', kind: e.kind, tier: e.tier })} disabled={s.gold < e.price}>
@@ -270,7 +286,8 @@ function Market({ game }: { game: GameApi }) {
                   </button>
                 </td>
               </tr>
-            ))}
+              );
+            })}
           </tbody>
         </table>
       )}

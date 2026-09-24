@@ -10,6 +10,9 @@ export interface AssetEntry {
   size: [number, number];
   usage: string;
   prompt: string;
+  approved?: boolean;
+  view?: string; // Pixen camera hint used when generating
+  note?: string;
 }
 
 const files = import.meta.glob('../../assets/**/*.png', {

@@ -97,28 +97,44 @@ export function itemValue(kind: ItemKind, tier: number): number {
   return b.tierValue[Math.max(0, Math.min(4, tier))];
 }
 
-function fillStats(item: Item): void {
-  const def = ITEM_KINDS[item.kind];
-  const base = tierBase(def.slot, item.tier);
+export type ItemStats = Pick<Item, 'attack' | 'defence' | 'spell' | 'trapSense' | 'hpBonus'>;
+
+/** The stats an item of this kind and tier has. Pure, so the UI can preview shop stock. */
+export function itemStatsFor(kind: ItemKind, tier: number): ItemStats {
+  const def = ITEM_KINDS[kind];
+  const base = tierBase(def.slot, tier);
   if (def.slot === 'weapon') {
-    item.attack = Math.round(base.atk * (def.attack ?? 0));
-    item.spell = Math.round(base.atk * (def.spell ?? 0));
-    item.defence = Math.round(base.atk * (def.defence ?? 0));
-    item.trapSense = Math.round(base.atk * (def.trap ?? 0));
-    item.hpBonus = 0;
-  } else if (def.slot === 'armour') {
-    item.attack = 0;
-    item.defence = Math.round(base.def * (def.defence ?? 0));
-    item.spell = Math.round(base.def * (def.spell ?? 0));
-    item.trapSense = Math.round(base.def * (def.trap ?? 0));
-    item.hpBonus = Math.round(base.hp * (def.hp ?? 0));
-  } else if (def.slot === 'trinket') {
-    item.attack = Math.round(base.trinket * (def.attack ?? 0));
-    item.spell = Math.round(base.trinket * (def.spell ?? 0));
-    item.defence = Math.round(base.trinket * (def.defence ?? 0));
-    item.trapSense = Math.round(base.trinket * (def.trap ?? 0));
-    item.hpBonus = Math.round(base.trinket * (def.hp ?? 0));
+    return {
+      attack: Math.round(base.atk * (def.attack ?? 0)),
+      spell: Math.round(base.atk * (def.spell ?? 0)),
+      defence: Math.round(base.atk * (def.defence ?? 0)),
+      trapSense: Math.round(base.atk * (def.trap ?? 0)),
+      hpBonus: 0,
+    };
   }
+  if (def.slot === 'armour') {
+    return {
+      attack: 0,
+      defence: Math.round(base.def * (def.defence ?? 0)),
+      spell: Math.round(base.def * (def.spell ?? 0)),
+      trapSense: Math.round(base.def * (def.trap ?? 0)),
+      hpBonus: Math.round(base.hp * (def.hp ?? 0)),
+    };
+  }
+  if (def.slot === 'trinket') {
+    return {
+      attack: Math.round(base.trinket * (def.attack ?? 0)),
+      spell: Math.round(base.trinket * (def.spell ?? 0)),
+      defence: Math.round(base.trinket * (def.defence ?? 0)),
+      trapSense: Math.round(base.trinket * (def.trap ?? 0)),
+      hpBonus: Math.round(base.trinket * (def.hp ?? 0)),
+    };
+  }
+  return { attack: 0, defence: 0, spell: 0, trapSense: 0, hpBonus: 0 };
+}
+
+function fillStats(item: Item): void {
+  if (isEquipSlot(item.slot)) Object.assign(item, itemStatsFor(item.kind, item.tier));
   item.value = itemValue(item.kind, item.tier);
 }
 
