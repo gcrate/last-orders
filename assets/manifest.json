@@ -21,7 +21,8 @@
         64
       ],
       "usage": "First keeper, illness stage 2 (inpaint from stage 1)",
-      "prompt": "Portrait of an old sick tavern keeper, former adventurer, grey short beard, scar over eyebrow, gaunt pale face, tired determined eyes, wool blanket over shoulders, innkeeper apron, paler skin, hollow cheeks, candle burned lower, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style"
+      "prompt": "Portrait of an old sick tavern keeper, former adventurer, grey short beard, scar over eyebrow, gaunt pale face, tired determined eyes, wool blanket over shoulders, innkeeper apron, paler skin, hollow cheeks, candle burned lower, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style",
+      "approved": true
     },
     {
       "id": "keeper_stage3",
@@ -31,7 +32,8 @@
         64
       ],
       "usage": "First keeper, illness stage 3 (inpaint from stage 1)",
-      "prompt": "Portrait of an old sick tavern keeper, former adventurer, grey short beard, scar over eyebrow, gaunt pale face, tired determined eyes, wool blanket over shoulders, innkeeper apron, grey waxy skin, dark rings under eyes, blanket pulled tight, small candle stub, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style"
+      "prompt": "Portrait of an old sick tavern keeper, former adventurer, grey short beard, scar over eyebrow, gaunt pale face, tired determined eyes, wool blanket over shoulders, innkeeper apron, grey waxy skin, dark rings under eyes, blanket pulled tight, small candle stub, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style",
+      "approved": true
     },
     {
       "id": "keeper_stage4",
@@ -41,7 +43,8 @@
         64
       ],
       "usage": "First keeper, illness stage 4 (inpaint from stage 1)",
-      "prompt": "Portrait of an old sick tavern keeper, former adventurer, grey short beard, scar over eyebrow, gaunt pale face, tired determined eyes, wool blanket over shoulders, innkeeper apron, near death, skeletal gaunt face, sunken dark eyes, huddled in blanket, guttering candle, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style"
+      "prompt": "Portrait of an old sick tavern keeper, former adventurer, grey short beard, scar over eyebrow, gaunt pale face, tired determined eyes, wool blanket over shoulders, innkeeper apron, near death, skeletal gaunt face, sunken dark eyes, huddled in blanket, guttering candle, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style",
+      "approved": true
     },
     {
       "id": "heir_1_stage1",
@@ -51,7 +54,8 @@
         64
       ],
       "usage": "Keeper of generation 2, illness stage 1",
-      "prompt": "Portrait of a tavern keeper in her forties, daughter of an old adventurer, grey-streaked auburn hair tied back, scar over eyebrow, pale tired face, determined eyes, wool shawl, innkeeper apron, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style"
+      "prompt": "Portrait of a tavern keeper woman in her forties, daughter of an old adventurer, auburn red-brown hair with a few grey streaks tied back, scar over eyebrow, pale tired face, determined eyes, wool shawl, innkeeper apron, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style",
+      "approved": true
     },
     {
       "id": "heir_1_stage2",
@@ -61,7 +65,8 @@
         64
       ],
       "usage": "Keeper of generation 2, illness stage 2 (inpaint from stage 1)",
-      "prompt": "Portrait of a tavern keeper in her forties, daughter of an old adventurer, grey-streaked auburn hair tied back, scar over eyebrow, pale tired face, determined eyes, wool shawl, innkeeper apron, paler skin, hollow cheeks, candle burned lower, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style"
+      "prompt": "Portrait of a tavern keeper in her forties, daughter of an old adventurer, grey-streaked auburn hair tied back, scar over eyebrow, pale tired face, determined eyes, wool shawl, innkeeper apron, paler skin, hollow cheeks, candle burned lower, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style",
+      "approved": true
     },
     {
       "id": "heir_1_stage3",
@@ -71,7 +76,8 @@
         64
       ],
       "usage": "Keeper of generation 2, illness stage 3 (inpaint from stage 1)",
-      "prompt": "Portrait of a tavern keeper in her forties, daughter of an old adventurer, grey-streaked auburn hair tied back, scar over eyebrow, pale tired face, determined eyes, wool shawl, innkeeper apron, grey waxy skin, dark rings under eyes, blanket pulled tight, small candle stub, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style"
+      "prompt": "Portrait of a tavern keeper in her forties, daughter of an old adventurer, grey-streaked auburn hair tied back, scar over eyebrow, pale tired face, determined eyes, wool shawl, innkeeper apron, grey waxy skin, dark rings under eyes, blanket pulled tight, small candle stub, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style",
+      "approved": true
     },
     {
       "id": "heir_1_stage4",
@@ -81,7 +87,8 @@
         64
       ],
       "usage": "Keeper of generation 2, illness stage 4 (inpaint from stage 1)",
-      "prompt": "Portrait of a tavern keeper in her forties, daughter of an old adventurer, grey-streaked auburn hair tied back, scar over eyebrow, pale tired face, determined eyes, wool shawl, innkeeper apron, near death, skeletal gaunt face, sunken dark eyes, huddled in blanket, guttering candle, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style"
+      "prompt": "Portrait of a tavern keeper in her forties, daughter of an old adventurer, grey-streaked auburn hair tied back, scar over eyebrow, pale tired face, determined eyes, wool shawl, innkeeper apron, near death, skeletal gaunt face, sunken dark eyes, huddled in blanket, guttering candle, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style",
+      "approved": true
     },
     {
       "id": "heir_2_stage1",
@@ -91,7 +98,8 @@
         64
       ],
       "usage": "Keeper of generation 3, illness stage 1",
-      "prompt": "Portrait of a young tavern keeper in his twenties, grandson of an adventurer, short auburn hair, thin pale face, determined eyes, patched wool coat, innkeeper apron, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style"
+      "prompt": "Portrait of a young tavern keeper in his twenties, grandson of an adventurer, short auburn hair, thin pale face, determined eyes, patched wool coat, innkeeper apron, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style",
+      "approved": true
     },
     {
       "id": "heir_2_stage2",
@@ -101,7 +109,8 @@
         64
       ],
       "usage": "Keeper of generation 3, illness stage 2 (inpaint from stage 1)",
-      "prompt": "Portrait of a young tavern keeper in his twenties, grandson of an adventurer, short auburn hair, thin pale face, determined eyes, patched wool coat, innkeeper apron, paler skin, hollow cheeks, candle burned lower, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style"
+      "prompt": "Portrait of a young tavern keeper in his twenties, grandson of an adventurer, short auburn hair, thin pale face, determined eyes, patched wool coat, innkeeper apron, paler skin, hollow cheeks, candle burned lower, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style",
+      "approved": true
     },
     {
       "id": "heir_2_stage3",
@@ -111,7 +120,8 @@
         64
       ],
       "usage": "Keeper of generation 3, illness stage 3 (inpaint from stage 1)",
-      "prompt": "Portrait of a young tavern keeper in his twenties, grandson of an adventurer, short auburn hair, thin pale face, determined eyes, patched wool coat, innkeeper apron, grey waxy skin, dark rings under eyes, blanket pulled tight, small candle stub, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style"
+      "prompt": "Portrait of a young tavern keeper in his twenties, grandson of an adventurer, short auburn hair, thin pale face, determined eyes, patched wool coat, innkeeper apron, grey waxy skin, dark rings under eyes, blanket pulled tight, small candle stub, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style",
+      "approved": true
     },
     {
       "id": "heir_2_stage4",
@@ -121,7 +131,8 @@
         64
       ],
       "usage": "Keeper of generation 3, illness stage 4 (inpaint from stage 1)",
-      "prompt": "Portrait of a young tavern keeper in his twenties, grandson of an adventurer, short auburn hair, thin pale face, determined eyes, patched wool coat, innkeeper apron, near death, skeletal gaunt face, sunken dark eyes, huddled in blanket, guttering candle, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style"
+      "prompt": "Portrait of a young tavern keeper in his twenties, grandson of an adventurer, short auburn hair, thin pale face, determined eyes, patched wool coat, innkeeper apron, near death, skeletal gaunt face, sunken dark eyes, huddled in blanket, guttering candle, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style",
+      "approved": true
     },
     {
       "id": "heir_3_stage1",
@@ -131,7 +142,8 @@
         64
       ],
       "usage": "Keeper of generation 4, illness stage 1",
-      "prompt": "Portrait of a middle-aged tavern keeper woman, auburn braid with grey, gaunt pale face, old burn scar on cheek, wool blanket over shoulders, innkeeper apron, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style"
+      "prompt": "Portrait of a middle-aged tavern keeper woman, auburn braid with grey, gaunt pale face, old burn scar on cheek, wool blanket over shoulders, innkeeper apron, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style",
+      "approved": true
     },
     {
       "id": "heir_3_stage2",
@@ -141,7 +153,8 @@
         64
       ],
       "usage": "Keeper of generation 4, illness stage 2 (inpaint from stage 1)",
-      "prompt": "Portrait of a middle-aged tavern keeper woman, auburn braid with grey, gaunt pale face, old burn scar on cheek, wool blanket over shoulders, innkeeper apron, paler skin, hollow cheeks, candle burned lower, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style"
+      "prompt": "Portrait of a middle-aged tavern keeper woman, auburn braid with grey, gaunt pale face, old burn scar on cheek, wool blanket over shoulders, innkeeper apron, paler skin, hollow cheeks, candle burned lower, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style",
+      "approved": true
     },
     {
       "id": "heir_3_stage3",
@@ -151,7 +164,8 @@
         64
       ],
       "usage": "Keeper of generation 4, illness stage 3 (inpaint from stage 1)",
-      "prompt": "Portrait of a middle-aged tavern keeper woman, auburn braid with grey, gaunt pale face, old burn scar on cheek, wool blanket over shoulders, innkeeper apron, grey waxy skin, dark rings under eyes, blanket pulled tight, small candle stub, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style"
+      "prompt": "Portrait of a middle-aged tavern keeper woman, auburn braid with grey, gaunt pale face, old burn scar on cheek, wool blanket over shoulders, innkeeper apron, grey waxy skin, dark rings under eyes, blanket pulled tight, small candle stub, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style",
+      "approved": true
     },
     {
       "id": "heir_3_stage4",
@@ -161,7 +175,8 @@
         64
       ],
       "usage": "Keeper of generation 4, illness stage 4 (inpaint from stage 1)",
-      "prompt": "Portrait of a middle-aged tavern keeper woman, auburn braid with grey, gaunt pale face, old burn scar on cheek, wool blanket over shoulders, innkeeper apron, near death, skeletal gaunt face, sunken dark eyes, huddled in blanket, guttering candle, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style"
+      "prompt": "Portrait of a middle-aged tavern keeper woman, auburn braid with grey, gaunt pale face, old burn scar on cheek, wool blanket over shoulders, innkeeper apron, near death, skeletal gaunt face, sunken dark eyes, huddled in blanket, guttering candle, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style",
+      "approved": true
     },
     {
       "id": "heir_4_stage1",
@@ -171,7 +186,8 @@
         64
       ],
       "usage": "Keeper of generation 5, illness stage 1",
-      "prompt": "Portrait of an old tavern keeper man, last of his line, thin white hair with traces of auburn, very gaunt pale face, scar over eyebrow, wool blanket, innkeeper apron, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style"
+      "prompt": "Portrait of an old tavern keeper man, last of his line, thin white hair with traces of auburn, very gaunt pale face, scar over eyebrow, wool blanket, innkeeper apron, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style",
+      "approved": true
     },
     {
       "id": "heir_4_stage2",
@@ -181,7 +197,8 @@
         64
       ],
       "usage": "Keeper of generation 5, illness stage 2 (inpaint from stage 1)",
-      "prompt": "Portrait of an old tavern keeper man, last of his line, thin white hair with traces of auburn, very gaunt pale face, scar over eyebrow, wool blanket, innkeeper apron, paler skin, hollow cheeks, candle burned lower, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style"
+      "prompt": "Portrait of an old tavern keeper man, last of his line, thin white hair with traces of auburn, very gaunt pale face, scar over eyebrow, wool blanket, innkeeper apron, paler skin, hollow cheeks, candle burned lower, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style",
+      "approved": true
     },
     {
       "id": "heir_4_stage3",
@@ -191,7 +208,8 @@
         64
       ],
       "usage": "Keeper of generation 5, illness stage 3 (inpaint from stage 1)",
-      "prompt": "Portrait of an old tavern keeper man, last of his line, thin white hair with traces of auburn, very gaunt pale face, scar over eyebrow, wool blanket, innkeeper apron, grey waxy skin, dark rings under eyes, blanket pulled tight, small candle stub, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style"
+      "prompt": "Portrait of an old tavern keeper man, last of his line, thin white hair with traces of auburn, very gaunt pale face, scar over eyebrow, wool blanket, innkeeper apron, grey waxy skin, dark rings under eyes, blanket pulled tight, small candle stub, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style",
+      "approved": true
     },
     {
       "id": "heir_4_stage4",
@@ -201,7 +219,8 @@
         64
       ],
       "usage": "Keeper of generation 5, illness stage 4 (inpaint from stage 1)",
-      "prompt": "Portrait of an old tavern keeper man, last of his line, thin white hair with traces of auburn, very gaunt pale face, scar over eyebrow, wool blanket, innkeeper apron, near death, skeletal gaunt face, sunken dark eyes, huddled in blanket, guttering candle, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style"
+      "prompt": "Portrait of an old tavern keeper man, last of his line, thin white hair with traces of auburn, very gaunt pale face, scar over eyebrow, wool blanket, innkeeper apron, near death, skeletal gaunt face, sunken dark eyes, huddled in blanket, guttering candle, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style",
+      "approved": true
     },
     {
       "id": "adv_fighter_01",
@@ -222,7 +241,8 @@
         64
       ],
       "usage": "Adventurer portrait (fighter)",
-      "prompt": "Portrait of a grizzled old man with a white beard, fighter, padded gambeson and round shield, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style"
+      "prompt": "Portrait of a grizzled old man with a white beard, fighter, padded gambeson and round shield, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style",
+      "approved": true
     },
     {
       "id": "adv_fighter_03",
@@ -232,7 +252,8 @@
         64
       ],
       "usage": "Adventurer portrait (fighter)",
-      "prompt": "Portrait of a young man with freckles and red hair, fighter, worn plate pauldrons, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style"
+      "prompt": "Portrait of a young man with freckles and red hair, fighter, worn plate pauldrons, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style",
+      "approved": true
     },
     {
       "id": "adv_fighter_04",
@@ -242,7 +263,8 @@
         64
       ],
       "usage": "Adventurer portrait (fighter)",
-      "prompt": "Portrait of a middle-aged woman with a braided grey plait, fighter, leather jerkin with a sword over shoulder, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style"
+      "prompt": "Portrait of a middle-aged woman with a braided grey plait, fighter, leather jerkin with a sword over shoulder, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style",
+      "approved": true
     },
     {
       "id": "adv_fighter_05",
@@ -252,7 +274,8 @@
         64
       ],
       "usage": "Adventurer portrait (fighter)",
-      "prompt": "Portrait of a broad-shouldered man with a shaved head, fighter, scale mail and a broad axe, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style"
+      "prompt": "Portrait of a broad-shouldered man with a shaved head, fighter, scale mail and a broad axe, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style",
+      "approved": true
     },
     {
       "id": "adv_fighter_06",
@@ -262,7 +285,8 @@
         64
       ],
       "usage": "Adventurer portrait (fighter)",
-      "prompt": "Portrait of a thin young woman with sharp features, fighter, dented iron helm and chainmail, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style"
+      "prompt": "Portrait of a thin young woman with sharp features, fighter, dented iron helm and chainmail, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style",
+      "approved": true
     },
     {
       "id": "adv_fighter_07",
@@ -272,7 +296,8 @@
         64
       ],
       "usage": "Adventurer portrait (fighter)",
-      "prompt": "Portrait of a weathered woman with a scarred jaw, fighter, padded gambeson and round shield, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style"
+      "prompt": "Portrait of a weathered woman with a scarred jaw, fighter, padded gambeson and round shield, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style",
+      "approved": true
     },
     {
       "id": "adv_fighter_08",
@@ -282,7 +307,8 @@
         64
       ],
       "usage": "Adventurer portrait (fighter)",
-      "prompt": "Portrait of a boyish young man with curly brown hair, fighter, worn plate pauldrons, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style"
+      "prompt": "Portrait of a boyish young man with curly brown hair, fighter, worn plate pauldrons, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style",
+      "approved": true
     },
     {
       "id": "adv_fighter_09",
@@ -292,7 +318,8 @@
         64
       ],
       "usage": "Adventurer portrait (fighter)",
-      "prompt": "Portrait of a stocky dwarf-like man with a thick black beard, fighter, leather jerkin with a sword over shoulder, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style"
+      "prompt": "Portrait of a stocky dwarf-like man with a thick black beard, fighter, leather jerkin with a sword over shoulder, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style",
+      "approved": true
     },
     {
       "id": "adv_fighter_10",
@@ -302,7 +329,8 @@
         64
       ],
       "usage": "Adventurer portrait (fighter)",
-      "prompt": "Portrait of a tall pale woman with long black hair, fighter, scale mail and a broad axe, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style"
+      "prompt": "Portrait of a tall pale woman with long black hair, fighter, scale mail and a broad axe, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style",
+      "approved": true
     },
     {
       "id": "adv_fighter_11",
@@ -312,7 +340,8 @@
         64
       ],
       "usage": "Adventurer portrait (fighter)",
-      "prompt": "Portrait of a one-eyed veteran man with an eyepatch, fighter, dented iron helm and chainmail, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style"
+      "prompt": "Portrait of a one-eyed veteran man with an eyepatch, fighter, dented iron helm and chainmail, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style",
+      "approved": true
     },
     {
       "id": "adv_fighter_12",
@@ -322,7 +351,8 @@
         64
       ],
       "usage": "Adventurer portrait (fighter)",
-      "prompt": "Portrait of a young woman with a nose ring and blonde hair, fighter, padded gambeson and round shield, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style"
+      "prompt": "Portrait of a young woman with a nose ring and blonde hair, fighter, padded gambeson and round shield, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style",
+      "approved": true
     },
     {
       "id": "adv_fighter_13",
@@ -332,7 +362,8 @@
         64
       ],
       "usage": "Adventurer portrait (fighter)",
-      "prompt": "Portrait of a old woman with deep wrinkles and white hair, fighter, worn plate pauldrons, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style"
+      "prompt": "Portrait of a old woman with deep wrinkles and white hair, fighter, worn plate pauldrons, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style",
+      "approved": true
     },
     {
       "id": "adv_fighter_14",
@@ -342,7 +373,8 @@
         64
       ],
       "usage": "Adventurer portrait (fighter)",
-      "prompt": "Portrait of a dark-skinned man with a close beard, fighter, leather jerkin with a sword over shoulder, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style"
+      "prompt": "Portrait of a dark-skinned man with a close beard, fighter, leather jerkin with a sword over shoulder, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style",
+      "approved": true
     },
     {
       "id": "adv_fighter_15",
@@ -352,7 +384,8 @@
         64
       ],
       "usage": "Adventurer portrait (fighter)",
-      "prompt": "Portrait of a dark-skinned young woman with short curls, fighter, scale mail and a broad axe, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style"
+      "prompt": "Portrait of a dark-skinned young woman with short curls, fighter, scale mail and a broad axe, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style",
+      "approved": true
     },
     {
       "id": "adv_fighter_16",
@@ -362,7 +395,8 @@
         64
       ],
       "usage": "Adventurer portrait (fighter)",
-      "prompt": "Portrait of a gaunt man with sunken cheeks, fighter, dented iron helm and chainmail, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style"
+      "prompt": "Portrait of a gaunt man with sunken cheeks, fighter, dented iron helm and chainmail, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style",
+      "approved": true
     },
     {
       "id": "adv_fighter_17",
@@ -372,7 +406,8 @@
         64
       ],
       "usage": "Adventurer portrait (fighter)",
-      "prompt": "Portrait of a cheerful round-faced young man, fighter, padded gambeson and round shield, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style"
+      "prompt": "Portrait of a cheerful round-faced young man, fighter, padded gambeson and round shield, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style",
+      "approved": true
     },
     {
       "id": "adv_fighter_18",
@@ -382,7 +417,8 @@
         64
       ],
       "usage": "Adventurer portrait (fighter)",
-      "prompt": "Portrait of a stern middle-aged woman with a burn scar, fighter, worn plate pauldrons, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style"
+      "prompt": "Portrait of a stern middle-aged woman with a burn scar, fighter, worn plate pauldrons, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style",
+      "approved": true
     },
     {
       "id": "adv_fighter_19",
@@ -392,7 +428,8 @@
         64
       ],
       "usage": "Adventurer portrait (fighter)",
-      "prompt": "Portrait of a old veteran man with a grey moustache and scars, fighter, leather jerkin with a sword over shoulder, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style"
+      "prompt": "Portrait of a old veteran man with a grey moustache and scars, fighter, leather jerkin with a sword over shoulder, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style",
+      "approved": true
     },
     {
       "id": "adv_fighter_20",
@@ -402,7 +439,8 @@
         64
       ],
       "usage": "Adventurer portrait (fighter)",
-      "prompt": "Portrait of a young woman with ash-blond hair and a bandaged cheek, fighter, scale mail and a broad axe, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style"
+      "prompt": "Portrait of a young woman with ash-blond hair and a bandaged cheek, fighter, scale mail and a broad axe, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style",
+      "approved": true
     },
     {
       "id": "adv_rogue_01",
@@ -412,7 +450,8 @@
         64
       ],
       "usage": "Adventurer portrait (rogue)",
-      "prompt": "Portrait of a young woman with short dark hair, rogue, dark hood and leather armour, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style"
+      "prompt": "Portrait of a young woman with short dark hair, rogue, dark hood and leather armour, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style",
+      "approved": true
     },
     {
       "id": "adv_rogue_02",
@@ -422,7 +461,8 @@
         64
       ],
       "usage": "Adventurer portrait (rogue)",
-      "prompt": "Portrait of a grizzled old man with a white beard, rogue, patched cloak with daggers on belt, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style"
+      "prompt": "Portrait of a grizzled old man with a white beard, rogue, patched cloak with daggers on belt, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style",
+      "approved": true
     },
     {
       "id": "adv_rogue_03",
@@ -432,7 +472,8 @@
         64
       ],
       "usage": "Adventurer portrait (rogue)",
-      "prompt": "Portrait of a young man with freckles and red hair, rogue, scarf over lower face, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style"
+      "prompt": "Portrait of a young man with freckles and red hair, rogue, scarf over lower face, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style",
+      "approved": true
     },
     {
       "id": "adv_rogue_04",
@@ -442,7 +483,8 @@
         64
       ],
       "usage": "Adventurer portrait (rogue)",
-      "prompt": "Portrait of a middle-aged woman with a braided grey plait, rogue, studded leather and a shortbow, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style"
+      "prompt": "Portrait of a middle-aged woman with a braided grey plait, rogue, studded leather and a shortbow, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style",
+      "approved": true
     },
     {
       "id": "adv_rogue_05",
@@ -452,7 +494,8 @@
         64
       ],
       "usage": "Adventurer portrait (rogue)",
-      "prompt": "Portrait of a broad-shouldered man with a shaved head, rogue, grey hood with a lockpick behind ear, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style"
+      "prompt": "Portrait of a broad-shouldered man with a shaved head, rogue, grey hood with a lockpick behind ear, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style",
+      "approved": true
     },
     {
       "id": "adv_rogue_06",
@@ -462,7 +505,8 @@
         64
       ],
       "usage": "Adventurer portrait (rogue)",
-      "prompt": "Portrait of a thin young woman with sharp features, rogue, dark hood and leather armour, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style"
+      "prompt": "Portrait of a thin young woman with sharp features, rogue, dark hood and leather armour, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style",
+      "approved": true
     },
     {
       "id": "adv_rogue_07",
@@ -472,7 +516,8 @@
         64
       ],
       "usage": "Adventurer portrait (rogue)",
-      "prompt": "Portrait of a weathered woman with a scarred jaw, rogue, patched cloak with daggers on belt, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style"
+      "prompt": "Portrait of a weathered woman with a scarred jaw, rogue, patched cloak with daggers on belt, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style",
+      "approved": true
     },
     {
       "id": "adv_rogue_08",
@@ -482,7 +527,8 @@
         64
       ],
       "usage": "Adventurer portrait (rogue)",
-      "prompt": "Portrait of a boyish young man with curly brown hair, rogue, scarf over lower face, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style"
+      "prompt": "Portrait of a boyish young man with curly brown hair, rogue, scarf over lower face, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style",
+      "approved": true
     },
     {
       "id": "adv_rogue_09",
@@ -492,7 +538,8 @@
         64
       ],
       "usage": "Adventurer portrait (rogue)",
-      "prompt": "Portrait of a stocky dwarf-like man with a thick black beard, rogue, studded leather and a shortbow, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style"
+      "prompt": "Portrait of a stocky dwarf-like man with a thick black beard, rogue, studded leather and a shortbow, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style",
+      "approved": true
     },
     {
       "id": "adv_rogue_10",
@@ -502,7 +549,8 @@
         64
       ],
       "usage": "Adventurer portrait (rogue)",
-      "prompt": "Portrait of a tall pale woman with long black hair, rogue, grey hood with a lockpick behind ear, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style"
+      "prompt": "Portrait of a tall pale woman with long black hair, rogue, grey hood with a lockpick behind ear, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style",
+      "approved": true
     },
     {
       "id": "adv_rogue_11",
@@ -512,7 +560,8 @@
         64
       ],
       "usage": "Adventurer portrait (rogue)",
-      "prompt": "Portrait of a one-eyed veteran man with an eyepatch, rogue, dark hood and leather armour, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style"
+      "prompt": "Portrait of a one-eyed veteran man with an eyepatch, rogue, dark hood and leather armour, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style",
+      "approved": true
     },
     {
       "id": "adv_rogue_12",
@@ -522,7 +571,8 @@
         64
       ],
       "usage": "Adventurer portrait (rogue)",
-      "prompt": "Portrait of a young woman with a nose ring and blonde hair, rogue, patched cloak with daggers on belt, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style"
+      "prompt": "Portrait of a young woman with a nose ring and blonde hair, rogue, patched cloak with daggers on belt, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style",
+      "approved": true
     },
     {
       "id": "adv_rogue_13",
@@ -532,7 +582,8 @@
         64
       ],
       "usage": "Adventurer portrait (rogue)",
-      "prompt": "Portrait of a old woman with deep wrinkles and white hair, rogue, scarf over lower face, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style"
+      "prompt": "Portrait of a old woman with deep wrinkles and white hair, rogue, scarf over lower face, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style",
+      "approved": true
     },
     {
       "id": "adv_rogue_14",
@@ -542,7 +593,8 @@
         64
       ],
       "usage": "Adventurer portrait (rogue)",
-      "prompt": "Portrait of a dark-skinned man with a close beard, rogue, studded leather and a shortbow, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style"
+      "prompt": "Portrait of a dark-skinned man with a close beard, rogue, studded leather and a shortbow, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style",
+      "approved": true
     },
     {
       "id": "adv_rogue_15",
@@ -552,7 +604,8 @@
         64
       ],
       "usage": "Adventurer portrait (rogue)",
-      "prompt": "Portrait of a dark-skinned young woman with short curls, rogue, grey hood with a lockpick behind ear, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style"
+      "prompt": "Portrait of a dark-skinned young woman with short curls, rogue, grey hood with a lockpick behind ear, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style",
+      "approved": true
     },
     {
       "id": "adv_rogue_16",
@@ -562,7 +615,8 @@
         64
       ],
       "usage": "Adventurer portrait (rogue)",
-      "prompt": "Portrait of a gaunt man with sunken cheeks, rogue, dark hood and leather armour, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style"
+      "prompt": "Portrait of a gaunt man with sunken cheeks, rogue, dark hood and leather armour, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style",
+      "approved": true
     },
     {
       "id": "adv_rogue_17",
@@ -572,7 +626,8 @@
         64
       ],
       "usage": "Adventurer portrait (rogue)",
-      "prompt": "Portrait of a cheerful round-faced young man, rogue, patched cloak with daggers on belt, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style"
+      "prompt": "Portrait of a cheerful round-faced young man, rogue, patched cloak with daggers on belt, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style",
+      "approved": true
     },
     {
       "id": "adv_rogue_18",
@@ -582,7 +637,8 @@
         64
       ],
       "usage": "Adventurer portrait (rogue)",
-      "prompt": "Portrait of a stern middle-aged woman with a burn scar, rogue, scarf over lower face, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style"
+      "prompt": "Portrait of a stern middle-aged woman with a burn scar, rogue, scarf over lower face, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style",
+      "approved": true
     },
     {
       "id": "adv_rogue_19",
@@ -592,7 +648,8 @@
         64
       ],
       "usage": "Adventurer portrait (rogue)",
-      "prompt": "Portrait of a old veteran man with a grey moustache and scars, rogue, studded leather and a shortbow, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style"
+      "prompt": "Portrait of a old veteran man with a grey moustache and scars, rogue, studded leather and a shortbow, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style",
+      "approved": true
     },
     {
       "id": "adv_rogue_20",
@@ -602,7 +659,8 @@
         64
       ],
       "usage": "Adventurer portrait (rogue)",
-      "prompt": "Portrait of a young woman with ash-blond hair and a bandaged cheek, rogue, grey hood with a lockpick behind ear, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style"
+      "prompt": "Portrait of a young woman with ash-blond hair and a bandaged cheek, rogue, grey hood with a lockpick behind ear, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style",
+      "approved": true
     },
     {
       "id": "adv_cleric_01",
@@ -612,7 +670,8 @@
         64
       ],
       "usage": "Adventurer portrait (cleric)",
-      "prompt": "Portrait of a young woman with short dark hair, cleric, simple grey robes and a holy symbol, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style"
+      "prompt": "Portrait of a young woman with short dark hair, cleric, simple grey robes and a holy symbol, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style",
+      "approved": true
     },
     {
       "id": "adv_cleric_02",
@@ -622,7 +681,8 @@
         64
       ],
       "usage": "Adventurer portrait (cleric)",
-      "prompt": "Portrait of a grizzled old man with a white beard, cleric, mail under a white tabard, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style"
+      "prompt": "Portrait of a grizzled old man with a white beard, cleric, mail under a white tabard, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style",
+      "approved": true
     },
     {
       "id": "adv_cleric_03",
@@ -632,7 +692,8 @@
         64
       ],
       "usage": "Adventurer portrait (cleric)",
-      "prompt": "Portrait of a young man with freckles and red hair, cleric, hooded robes with prayer beads, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style"
+      "prompt": "Portrait of a young man with freckles and red hair, cleric, hooded robes with prayer beads, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style",
+      "approved": true
     },
     {
       "id": "adv_cleric_04",
@@ -642,7 +703,8 @@
         64
       ],
       "usage": "Adventurer portrait (cleric)",
-      "prompt": "Portrait of a middle-aged woman with a braided grey plait, cleric, wooden sun pendant and a mace, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style"
+      "prompt": "Portrait of a middle-aged woman with a braided grey plait, cleric, wooden sun pendant and a mace, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style",
+      "approved": true
     },
     {
       "id": "adv_cleric_05",
@@ -652,7 +714,8 @@
         64
       ],
       "usage": "Adventurer portrait (cleric)",
-      "prompt": "Portrait of a broad-shouldered man with a shaved head, cleric, worn vestments and a small lantern, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style"
+      "prompt": "Portrait of a broad-shouldered man with a shaved head, cleric, worn vestments and a small lantern, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style",
+      "approved": true
     },
     {
       "id": "adv_cleric_06",
@@ -662,7 +725,8 @@
         64
       ],
       "usage": "Adventurer portrait (cleric)",
-      "prompt": "Portrait of a thin young woman with sharp features, cleric, simple grey robes and a holy symbol, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style"
+      "prompt": "Portrait of a thin young woman with sharp features, cleric, simple grey robes and a holy symbol, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style",
+      "approved": true
     },
     {
       "id": "adv_cleric_07",
@@ -672,7 +736,8 @@
         64
       ],
       "usage": "Adventurer portrait (cleric)",
-      "prompt": "Portrait of a weathered woman with a scarred jaw, cleric, mail under a white tabard, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style"
+      "prompt": "Portrait of a weathered woman with a scarred jaw, cleric, mail under a white tabard, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style",
+      "approved": true
     },
     {
       "id": "adv_cleric_08",
@@ -682,7 +747,8 @@
         64
       ],
       "usage": "Adventurer portrait (cleric)",
-      "prompt": "Portrait of a boyish young man with curly brown hair, cleric, hooded robes with prayer beads, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style"
+      "prompt": "Portrait of a boyish young man with curly brown hair, cleric, hooded robes with prayer beads, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style",
+      "approved": true
     },
     {
       "id": "adv_cleric_09",
@@ -692,7 +758,8 @@
         64
       ],
       "usage": "Adventurer portrait (cleric)",
-      "prompt": "Portrait of a stocky dwarf-like man with a thick black beard, cleric, wooden sun pendant and a mace, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style"
+      "prompt": "Portrait of a stocky dwarf-like man with a thick black beard, cleric, wooden sun pendant and a mace, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style",
+      "approved": true
     },
     {
       "id": "adv_cleric_10",
@@ -702,7 +769,8 @@
         64
       ],
       "usage": "Adventurer portrait (cleric)",
-      "prompt": "Portrait of a tall pale woman with long black hair, cleric, worn vestments and a small lantern, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style"
+      "prompt": "Portrait of a tall pale woman with long black hair, cleric, worn vestments and a small lantern, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style",
+      "approved": true
     },
     {
       "id": "adv_cleric_11",
@@ -712,7 +780,8 @@
         64
       ],
       "usage": "Adventurer portrait (cleric)",
-      "prompt": "Portrait of a one-eyed veteran man with an eyepatch, cleric, simple grey robes and a holy symbol, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style"
+      "prompt": "Portrait of a one-eyed veteran man with an eyepatch, cleric, simple grey robes and a holy symbol, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style",
+      "approved": true
     },
     {
       "id": "adv_cleric_12",
@@ -722,7 +791,8 @@
         64
       ],
       "usage": "Adventurer portrait (cleric)",
-      "prompt": "Portrait of a young woman with a nose ring and blonde hair, cleric, mail under a white tabard, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style"
+      "prompt": "Portrait of a young woman with a nose ring and blonde hair, cleric, mail under a white tabard, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style",
+      "approved": true
     },
     {
       "id": "adv_cleric_13",
@@ -732,7 +802,8 @@
         64
       ],
       "usage": "Adventurer portrait (cleric)",
-      "prompt": "Portrait of a old woman with deep wrinkles and white hair, cleric, hooded robes with prayer beads, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style"
+      "prompt": "Portrait of a old woman with deep wrinkles and white hair, cleric, hooded robes with prayer beads, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style",
+      "approved": true
     },
     {
       "id": "adv_cleric_14",
@@ -742,7 +813,8 @@
         64
       ],
       "usage": "Adventurer portrait (cleric)",
-      "prompt": "Portrait of a dark-skinned man with a close beard, cleric, wooden sun pendant and a mace, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style"
+      "prompt": "Portrait of a dark-skinned man with a close beard, cleric, wooden sun pendant and a mace, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style",
+      "approved": true
     },
     {
       "id": "adv_cleric_15",
@@ -752,7 +824,8 @@
         64
       ],
       "usage": "Adventurer portrait (cleric)",
-      "prompt": "Portrait of a dark-skinned young woman with short curls, cleric, worn vestments and a small lantern, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style"
+      "prompt": "Portrait of a dark-skinned young woman with short curls, cleric, worn vestments and a small lantern, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style",
+      "approved": true
     },
     {
       "id": "adv_cleric_16",
@@ -762,7 +835,8 @@
         64
       ],
       "usage": "Adventurer portrait (cleric)",
-      "prompt": "Portrait of a gaunt man with sunken cheeks, cleric, simple grey robes and a holy symbol, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style"
+      "prompt": "Portrait of a gaunt man with sunken cheeks, cleric, simple grey robes and a holy symbol, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style",
+      "approved": true
     },
     {
       "id": "adv_cleric_17",
@@ -772,7 +846,8 @@
         64
       ],
       "usage": "Adventurer portrait (cleric)",
-      "prompt": "Portrait of a cheerful round-faced young man, cleric, mail under a white tabard, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style"
+      "prompt": "Portrait of a cheerful round-faced young man, cleric, mail under a white tabard, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style",
+      "approved": true
     },
     {
       "id": "adv_cleric_18",
@@ -782,7 +857,8 @@
         64
       ],
       "usage": "Adventurer portrait (cleric)",
-      "prompt": "Portrait of a stern middle-aged woman with a burn scar, cleric, hooded robes with prayer beads, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style"
+      "prompt": "Portrait of a stern middle-aged woman with a burn scar, cleric, hooded robes with prayer beads, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style",
+      "approved": true
     },
     {
       "id": "adv_cleric_19",
@@ -792,7 +868,8 @@
         64
       ],
       "usage": "Adventurer portrait (cleric)",
-      "prompt": "Portrait of a old veteran man with a grey moustache and scars, cleric, wooden sun pendant and a mace, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style"
+      "prompt": "Portrait of a old veteran man with a grey moustache and scars, cleric, wooden sun pendant and a mace, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style",
+      "approved": true
     },
     {
       "id": "adv_cleric_20",
@@ -802,7 +879,8 @@
         64
       ],
       "usage": "Adventurer portrait (cleric)",
-      "prompt": "Portrait of a young woman with ash-blond hair and a bandaged cheek, cleric, worn vestments and a small lantern, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style"
+      "prompt": "Portrait of a young woman with ash-blond hair and a bandaged cheek, cleric, worn vestments and a small lantern, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style",
+      "approved": true
     },
     {
       "id": "adv_mage_01",
@@ -812,7 +890,8 @@
         64
       ],
       "usage": "Adventurer portrait (mage)",
-      "prompt": "Portrait of a young woman with short dark hair, mage, faded blue robes and a staff, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style"
+      "prompt": "Portrait of a young woman with short dark hair, mage, faded blue robes and a staff, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style",
+      "approved": true
     },
     {
       "id": "adv_mage_02",
@@ -822,7 +901,8 @@
         64
       ],
       "usage": "Adventurer portrait (mage)",
-      "prompt": "Portrait of a grizzled old man with a white beard, mage, tattered hood with glowing runes, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style"
+      "prompt": "Portrait of a grizzled old man with a white beard, mage, tattered hood with glowing runes, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style",
+      "approved": true
     },
     {
       "id": "adv_mage_03",
@@ -832,7 +912,8 @@
         64
       ],
       "usage": "Adventurer portrait (mage)",
-      "prompt": "Portrait of a young man with freckles and red hair, mage, spectacles and ink-stained robes, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style"
+      "prompt": "Portrait of a young man with freckles and red hair, mage, spectacles and ink-stained robes, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style",
+      "approved": true
     },
     {
       "id": "adv_mage_04",
@@ -842,7 +923,8 @@
         64
       ],
       "usage": "Adventurer portrait (mage)",
-      "prompt": "Portrait of a middle-aged woman with a braided grey plait, mage, fur-lined mantle and a crystal, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style"
+      "prompt": "Portrait of a middle-aged woman with a braided grey plait, mage, fur-lined mantle and a crystal, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style",
+      "approved": true
     },
     {
       "id": "adv_mage_05",
@@ -852,7 +934,8 @@
         64
       ],
       "usage": "Adventurer portrait (mage)",
-      "prompt": "Portrait of a broad-shouldered man with a shaved head, mage, patched robes with a spellbook, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style"
+      "prompt": "Portrait of a broad-shouldered man with a shaved head, mage, patched robes with a spellbook, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style",
+      "approved": true
     },
     {
       "id": "adv_mage_06",
@@ -862,7 +945,8 @@
         64
       ],
       "usage": "Adventurer portrait (mage)",
-      "prompt": "Portrait of a thin young woman with sharp features, mage, faded blue robes and a staff, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style"
+      "prompt": "Portrait of a thin young woman with sharp features, mage, faded blue robes and a staff, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style",
+      "approved": true
     },
     {
       "id": "adv_mage_07",
@@ -872,7 +956,8 @@
         64
       ],
       "usage": "Adventurer portrait (mage)",
-      "prompt": "Portrait of a weathered woman with a scarred jaw, mage, tattered hood with glowing runes, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style"
+      "prompt": "Portrait of a weathered woman with a scarred jaw, mage, tattered hood with glowing runes, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style",
+      "approved": true
     },
     {
       "id": "adv_mage_08",
@@ -882,7 +967,8 @@
         64
       ],
       "usage": "Adventurer portrait (mage)",
-      "prompt": "Portrait of a boyish young man with curly brown hair, mage, spectacles and ink-stained robes, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style"
+      "prompt": "Portrait of a boyish young man with curly brown hair, mage, spectacles and ink-stained robes, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style",
+      "approved": true
     },
     {
       "id": "adv_mage_09",
@@ -892,7 +978,8 @@
         64
       ],
       "usage": "Adventurer portrait (mage)",
-      "prompt": "Portrait of a stocky dwarf-like man with a thick black beard, mage, fur-lined mantle and a crystal, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style"
+      "prompt": "Portrait of a stocky dwarf-like man with a thick black beard, mage, fur-lined mantle and a crystal, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style",
+      "approved": true
     },
     {
       "id": "adv_mage_10",
@@ -902,7 +989,8 @@
         64
       ],
       "usage": "Adventurer portrait (mage)",
-      "prompt": "Portrait of a tall pale woman with long black hair, mage, patched robes with a spellbook, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style"
+      "prompt": "Portrait of a tall pale woman with long black hair, mage, patched robes with a spellbook, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style",
+      "approved": true
     },
     {
       "id": "adv_mage_11",
@@ -912,7 +1000,8 @@
         64
       ],
       "usage": "Adventurer portrait (mage)",
-      "prompt": "Portrait of a one-eyed veteran man with an eyepatch, mage, faded blue robes and a staff, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style"
+      "prompt": "Portrait of a one-eyed veteran man with an eyepatch, mage, faded blue robes and a staff, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style",
+      "approved": true
     },
     {
       "id": "adv_mage_12",
@@ -922,7 +1011,8 @@
         64
       ],
       "usage": "Adventurer portrait (mage)",
-      "prompt": "Portrait of a young woman with a nose ring and blonde hair, mage, tattered hood with glowing runes, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style"
+      "prompt": "Portrait of a young woman with a nose ring and blonde hair, mage, tattered hood with glowing runes, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style",
+      "approved": true
     },
     {
       "id": "adv_mage_13",
@@ -932,7 +1022,8 @@
         64
       ],
       "usage": "Adventurer portrait (mage)",
-      "prompt": "Portrait of a old woman with deep wrinkles and white hair, mage, spectacles and ink-stained robes, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style"
+      "prompt": "Portrait of a old woman with deep wrinkles and white hair, mage, spectacles and ink-stained robes, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style",
+      "approved": true
     },
     {
       "id": "adv_mage_14",
@@ -942,7 +1033,8 @@
         64
       ],
       "usage": "Adventurer portrait (mage)",
-      "prompt": "Portrait of a dark-skinned man with a close beard, mage, fur-lined mantle and a crystal, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style"
+      "prompt": "Portrait of a dark-skinned man with a close beard, mage, fur-lined mantle and a crystal, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style",
+      "approved": true
     },
     {
       "id": "adv_mage_15",
@@ -952,7 +1044,8 @@
         64
       ],
       "usage": "Adventurer portrait (mage)",
-      "prompt": "Portrait of a dark-skinned young woman with short curls, mage, patched robes with a spellbook, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style"
+      "prompt": "Portrait of a dark-skinned young woman with short curls, mage, patched robes with a spellbook, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style",
+      "approved": true
     },
     {
       "id": "adv_mage_16",
@@ -962,7 +1055,8 @@
         64
       ],
       "usage": "Adventurer portrait (mage)",
-      "prompt": "Portrait of a gaunt man with sunken cheeks, mage, faded blue robes and a staff, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style"
+      "prompt": "Portrait of a gaunt man with sunken cheeks, mage, faded blue robes and a staff, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style",
+      "approved": true
     },
     {
       "id": "adv_mage_17",
@@ -972,7 +1066,8 @@
         64
       ],
       "usage": "Adventurer portrait (mage)",
-      "prompt": "Portrait of a cheerful round-faced young man, mage, tattered hood with glowing runes, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style"
+      "prompt": "Portrait of a cheerful round-faced young man, mage, tattered hood with glowing runes, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style",
+      "approved": true
     },
     {
       "id": "adv_mage_18",
@@ -982,7 +1077,8 @@
         64
       ],
       "usage": "Adventurer portrait (mage)",
-      "prompt": "Portrait of a stern middle-aged woman with a burn scar, mage, spectacles and ink-stained robes, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style"
+      "prompt": "Portrait of a stern middle-aged woman with a burn scar, mage, spectacles and ink-stained robes, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style",
+      "approved": true
     },
     {
       "id": "adv_mage_19",
@@ -992,7 +1088,8 @@
         64
       ],
       "usage": "Adventurer portrait (mage)",
-      "prompt": "Portrait of a old veteran man with a grey moustache and scars, mage, fur-lined mantle and a crystal, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style"
+      "prompt": "Portrait of a old veteran man with a grey moustache and scars, mage, fur-lined mantle and a crystal, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style",
+      "approved": true
     },
     {
       "id": "adv_mage_20",
@@ -1002,7 +1099,8 @@
         64
       ],
       "usage": "Adventurer portrait (mage)",
-      "prompt": "Portrait of a young woman with ash-blond hair and a bandaged cheek, mage, patched robes with a spellbook, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style"
+      "prompt": "Portrait of a young woman with ash-blond hair and a bandaged cheek, mage, patched robes with a spellbook, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style",
+      "approved": true
     },
     {
       "id": "boss_warden",
@@ -1012,7 +1110,8 @@
         64
       ],
       "usage": "Band boss portrait",
-      "prompt": "Portrait of the Crypt Warden, a towering armoured skeleton knight with a rusted crown, green grave-light in its eye sockets, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style"
+      "prompt": "Portrait of the Crypt Warden, a towering armoured skeleton knight with a rusted crown, green grave-light in its eye sockets, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style",
+      "approved": true
     },
     {
       "id": "boss_bloom",
@@ -1022,7 +1121,8 @@
         64
       ],
       "usage": "Band boss portrait",
-      "prompt": "Portrait of the Mother Bloom, a huge pulsing fungal mass with a half-absorbed human face, glowing spores, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style"
+      "prompt": "Portrait of the Mother Bloom, a huge pulsing fungal mass with a half-absorbed human face, glowing spores, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style",
+      "approved": true
     },
     {
       "id": "boss_tidewight",
@@ -1032,7 +1132,8 @@
         64
       ],
       "usage": "Band boss portrait",
-      "prompt": "Portrait of the Tidewight, a drowned king corpse with seaweed hair and barnacled crown, dripping water, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style"
+      "prompt": "Portrait of the Tidewight, a drowned king corpse with seaweed hair and barnacled crown, dripping water, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style",
+      "approved": true
     },
     {
       "id": "boss_anvilking",
@@ -1042,7 +1143,8 @@
         64
       ],
       "usage": "Band boss portrait",
-      "prompt": "Portrait of the Anvil King, a massive iron-and-cinder golem wearing a crown of hammers, molten cracks glowing, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style"
+      "prompt": "Portrait of the Anvil King, a massive iron-and-cinder golem wearing a crown of hammers, molten cracks glowing, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style",
+      "approved": true
     },
     {
       "id": "boss_source",
@@ -1052,7 +1154,8 @@
         64
       ],
       "usage": "Band boss portrait",
-      "prompt": "Portrait of the Source, a living wound in the stone, a beating heart of flesh veined with black roots and a single human eye, alive and wrong, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style"
+      "prompt": "Portrait of the Source, a living wound in the stone, a beating heart of flesh veined with black roots and a single human eye, alive and wrong, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style",
+      "approved": true
     },
     {
       "id": "band_1",
@@ -1062,7 +1165,8 @@
         144
       ],
       "usage": "Depth view background, band 1",
-      "prompt": "Wide dungeon background, old stone cellars and crypts, niches with skulls, dripping candles, muted earthy colors, fantasy RPG style"
+      "prompt": "Wide dungeon background, old stone cellars and crypts, niches with skulls, dripping candles, muted earthy colors, fantasy RPG style",
+      "approved": true
     },
     {
       "id": "band_2",
@@ -1072,7 +1176,8 @@
         144
       ],
       "usage": "Depth view background, band 2",
-      "prompt": "Wide dungeon background, vast fungal caverns, towering glowing mushrooms, spore haze, muted earthy colors, fantasy RPG style"
+      "prompt": "Wide dungeon background, vast fungal caverns, towering glowing mushrooms, spore haze, muted earthy colors, fantasy RPG style",
+      "approved": true
     },
     {
       "id": "band_3",
@@ -1082,7 +1187,8 @@
         144
       ],
       "usage": "Depth view background, band 3",
-      "prompt": "Wide dungeon background, drowned ruins, flooded marble halls, pale green water light, muted earthy colors, fantasy RPG style"
+      "prompt": "Wide dungeon background, side view of drowned ruins, flooded marble halls with arches seen straight on, pale green water light, muted earthy colors, fantasy RPG style",
+      "approved": true
     },
     {
       "id": "band_4",
@@ -1092,7 +1198,8 @@
         144
       ],
       "usage": "Depth view background, band 4",
-      "prompt": "Wide dungeon background, the forge deeps, black iron walkways over rivers of molten metal, muted earthy colors, fantasy RPG style"
+      "prompt": "Wide dungeon background, side view of the forge deeps, black iron walkways over rivers of molten metal seen straight on, muted earthy colors, fantasy RPG style",
+      "approved": true
     },
     {
       "id": "band_5",
@@ -1102,7 +1209,8 @@
         144
       ],
       "usage": "Depth view background, band 5",
-      "prompt": "Wide dungeon background, the Heart, a cavern of living flesh-like stone, pulsing red veins, dread, muted earthy colors, fantasy RPG style"
+      "prompt": "Wide dungeon background, the Heart, side view of a deep cavern whose walls are living flesh-like stone, pulsing dark red veins and black roots across the walls, no heart symbol, dread, muted earthy colors, fantasy RPG style",
+      "approved": true
     },
     {
       "id": "grave",
@@ -1112,7 +1220,8 @@
         32
       ],
       "usage": "Depth view icon",
-      "prompt": "a simple stone grave marker with a sword planted beside it, single object centered, dark background, muted earthy colors, fantasy RPG style"
+      "prompt": "a simple stone grave marker with a sword planted beside it, single object centered, dark background, muted earthy colors, fantasy RPG style",
+      "approved": true
     },
     {
       "id": "grave_legendary",
@@ -1122,7 +1231,8 @@
         32
       ],
       "usage": "Depth view icon",
-      "prompt": "an ancient mossy grave marker with a translucent pale ghost rising from it, single object centered, dark background, muted earthy colors, fantasy RPG style"
+      "prompt": "an ancient mossy grave marker with a translucent pale ghost rising from it, single object centered, dark background, muted earthy colors, fantasy RPG style",
+      "approved": true
     },
     {
       "id": "portal_active",
@@ -1132,7 +1242,8 @@
         32
       ],
       "usage": "Depth view icon",
-      "prompt": "a glowing blue magic portal ring on a dungeon floor, single object centered, dark background, muted earthy colors, fantasy RPG style"
+      "prompt": "a glowing blue magic portal ring on a dungeon floor, single object centered, dark background, muted earthy colors, fantasy RPG style",
+      "approved": true
     },
     {
       "id": "portal_decayed",
@@ -1142,7 +1253,8 @@
         32
       ],
       "usage": "Depth view icon",
-      "prompt": "a cracked dim magic portal ring, faint flickering light, single object centered, dark background, muted earthy colors, fantasy RPG style"
+      "prompt": "a cracked dim magic portal ring, faint flickering light, single object centered, dark background, muted earthy colors, fantasy RPG style",
+      "approved": true
     },
     {
       "id": "stairs",
@@ -1152,7 +1264,8 @@
         32
       ],
       "usage": "Depth view icon",
-      "prompt": "worn stone stairs descending into darkness, single object centered, dark background, muted earthy colors, fantasy RPG style"
+      "prompt": "worn stone stairs descending into darkness, single object centered, dark background, muted earthy colors, fantasy RPG style",
+      "approved": true
     },
     {
       "id": "tavern_rundown",
@@ -1162,7 +1275,8 @@
         144
       ],
       "usage": "Tavern hub background",
-      "prompt": "Tavern interior, rundown, dusty tables, broken chairs, cobwebs, a single candle, cold hearth, muted earthy colors, fantasy RPG style"
+      "prompt": "Tavern interior, rundown, dusty tables, broken chairs, cobwebs, a single candle, cold hearth, muted earthy colors, fantasy RPG style",
+      "approved": true
     },
     {
       "id": "tavern_restored",
@@ -1172,7 +1286,8 @@
         144
       ],
       "usage": "Tavern hub background",
-      "prompt": "Tavern interior, restored, clean wooden tables, a fire in the hearth, a few patrons, muted earthy colors, fantasy RPG style"
+      "prompt": "Tavern interior seen from the front at eye level, restored, clean wooden tables, a fire in the hearth, a few patrons, muted earthy colors, fantasy RPG style",
+      "approved": true
     },
     {
       "id": "tavern_prosperous",
@@ -1182,7 +1297,8 @@
         144
       ],
       "usage": "Tavern hub background",
-      "prompt": "Tavern interior, prosperous and busy, roaring hearth, banners, crowded tables, warm lamplight, muted earthy colors, fantasy RPG style"
+      "prompt": "Tavern interior, prosperous and busy, roaring hearth, banners, crowded tables, warm lamplight, muted earthy colors, fantasy RPG style",
+      "approved": true
     },
     {
       "id": "bar_counter",
@@ -1192,7 +1308,8 @@
         48
       ],
       "usage": "Bar counter foreground for recruits",
-      "prompt": "Wooden tavern bar counter seen from the front, tankards and a candle, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style"
+      "prompt": "Wooden tavern bar counter seen from the front, tankards and a candle, warm candlelight from left, dark background, muted earthy colors, fantasy RPG style",
+      "approved": true
     },
     {
       "id": "item_sword_1",
@@ -1202,7 +1319,8 @@
         32
       ],
       "usage": "Item icon, sword tier 1",
-      "prompt": "Item icon of a rusty short sword, single object centered, dark background, muted earthy colors, fantasy RPG style"
+      "prompt": "Item icon of a rusty short sword, single object centered, dark background, muted earthy colors, fantasy RPG style",
+      "approved": true
     },
     {
       "id": "item_sword_2",
@@ -1212,7 +1330,8 @@
         32
       ],
       "usage": "Item icon, sword tier 2",
-      "prompt": "Item icon of a steel longsword, single object centered, dark background, muted earthy colors, fantasy RPG style"
+      "prompt": "Item icon of a steel longsword, single object centered, dark background, muted earthy colors, fantasy RPG style",
+      "approved": true
     },
     {
       "id": "item_sword_3",
@@ -1222,7 +1341,8 @@
         32
       ],
       "usage": "Item icon, sword tier 3",
-      "prompt": "Item icon of an ornate knight's blade, single object centered, dark background, muted earthy colors, fantasy RPG style"
+      "prompt": "Item icon of an ornate knight's blade, single object centered, dark background, muted earthy colors, fantasy RPG style",
+      "approved": true
     },
     {
       "id": "item_axe_1",
@@ -1232,7 +1352,8 @@
         32
       ],
       "usage": "Item icon, axe tier 1",
-      "prompt": "Item icon of a small hatchet, single object centered, dark background, muted earthy colors, fantasy RPG style"
+      "prompt": "Item icon of a small hatchet, object only, no person, no character, single object centered, dark background, muted earthy colors, fantasy RPG style",
+      "approved": true
     },
     {
       "id": "item_axe_2",
@@ -1242,7 +1363,8 @@
         32
       ],
       "usage": "Item icon, axe tier 2",
-      "prompt": "Item icon of a war axe, single object centered, dark background, muted earthy colors, fantasy RPG style"
+      "prompt": "Item icon of a war axe, single object centered, dark background, muted earthy colors, fantasy RPG style",
+      "approved": true
     },
     {
       "id": "item_axe_3",
@@ -1252,7 +1374,8 @@
         32
       ],
       "usage": "Item icon, axe tier 3",
-      "prompt": "Item icon of a heavy dwarven greataxe, single object centered, dark background, muted earthy colors, fantasy RPG style"
+      "prompt": "Item icon of a heavy dwarven greataxe, single object centered, dark background, muted earthy colors, fantasy RPG style",
+      "approved": true
     },
     {
       "id": "item_mace_1",
@@ -1262,7 +1385,9 @@
         32
       ],
       "usage": "Item icon, mace tier 1",
-      "prompt": "Item icon of a wooden cudgel, single object centered, dark background, muted earthy colors, fantasy RPG style"
+      "prompt": "Item icon of a single knobbly wooden cudgel club, lying diagonally, no axe, no person, no character, single object centered, dark background, muted earthy colors, fantasy RPG style",
+      "view": "high top-down",
+      "approved": true
     },
     {
       "id": "item_mace_2",
@@ -1272,7 +1397,8 @@
         32
       ],
       "usage": "Item icon, mace tier 2",
-      "prompt": "Item icon of a flanged iron mace, single object centered, dark background, muted earthy colors, fantasy RPG style"
+      "prompt": "Item icon of a flanged iron mace, object only, no person, no character, single object centered, dark background, muted earthy colors, fantasy RPG style",
+      "approved": true
     },
     {
       "id": "item_mace_3",
@@ -1282,7 +1408,9 @@
         32
       ],
       "usage": "Item icon, mace tier 3",
-      "prompt": "Item icon of a blessed morningstar with a sun emblem, single object centered, dark background, muted earthy colors, fantasy RPG style"
+      "prompt": "Item icon of a single blessed morningstar weapon, a wooden handle topped with a spiked iron ball bearing a golden sun emblem, lying diagonally, no person, no character, single object centered, dark background, muted earthy colors, fantasy RPG style",
+      "view": "high top-down",
+      "approved": true
     },
     {
       "id": "item_dagger_1",
@@ -1292,7 +1420,8 @@
         32
       ],
       "usage": "Item icon, dagger tier 1",
-      "prompt": "Item icon of a rusty knife, single object centered, dark background, muted earthy colors, fantasy RPG style"
+      "prompt": "Item icon of a rusty knife, single object centered, dark background, muted earthy colors, fantasy RPG style",
+      "approved": true
     },
     {
       "id": "item_dagger_2",
@@ -1302,7 +1431,9 @@
         32
       ],
       "usage": "Item icon, dagger tier 2",
-      "prompt": "Item icon of a thin stiletto, single object centered, dark background, muted earthy colors, fantasy RPG style"
+      "prompt": "Item icon of a single thin steel stiletto dagger with a narrow straight blade, lying diagonally, no person, no character, single object centered, dark background, muted earthy colors, fantasy RPG style",
+      "view": "high top-down",
+      "approved": true
     },
     {
       "id": "item_dagger_3",
@@ -1312,7 +1443,9 @@
         32
       ],
       "usage": "Item icon, dagger tier 3",
-      "prompt": "Item icon of a black curved dagger, single object centered, dark background, muted earthy colors, fantasy RPG style"
+      "prompt": "Item icon of a single black curved dagger with a wrapped hilt, lying diagonally, no person, no character, single object centered, dark background, muted earthy colors, fantasy RPG style",
+      "view": "high top-down",
+      "approved": true
     },
     {
       "id": "item_staff_1",
@@ -1322,7 +1455,9 @@
         32
       ],
       "usage": "Item icon, staff tier 1",
-      "prompt": "Item icon of a plain walking staff, single object centered, dark background, muted earthy colors, fantasy RPG style"
+      "prompt": "Item icon of a single plain wooden walking stick lying diagonally, no person, no character, no hands, single object centered, dark background, muted earthy colors, fantasy RPG style",
+      "view": "high top-down",
+      "approved": true
     },
     {
       "id": "item_staff_2",
@@ -1332,7 +1467,9 @@
         32
       ],
       "usage": "Item icon, staff tier 2",
-      "prompt": "Item icon of an oak staff with a carved head, single object centered, dark background, muted earthy colors, fantasy RPG style"
+      "prompt": "Item icon of a single oak staff with a carved knot at the top lying diagonally, no person, no character, no hands, single object centered, dark background, muted earthy colors, fantasy RPG style",
+      "view": "high top-down",
+      "approved": true
     },
     {
       "id": "item_staff_3",
@@ -1342,7 +1479,8 @@
         32
       ],
       "usage": "Item icon, staff tier 3",
-      "prompt": "Item icon of a runed staff with a glowing crystal, single object centered, dark background, muted earthy colors, fantasy RPG style"
+      "prompt": "Item icon of a runed staff with a glowing crystal, single object centered, dark background, muted earthy colors, fantasy RPG style",
+      "approved": true
     },
     {
       "id": "item_bow_1",
@@ -1352,7 +1490,9 @@
         32
       ],
       "usage": "Item icon, bow tier 1",
-      "prompt": "Item icon of a simple shortbow, single object centered, dark background, muted earthy colors, fantasy RPG style"
+      "prompt": "Item icon of a single simple curved wooden shortbow with a string, not a crossbow, lying diagonally, no person, no character, single object centered, dark background, muted earthy colors, fantasy RPG style",
+      "view": "high top-down",
+      "approved": true
     },
     {
       "id": "item_bow_2",
@@ -1362,7 +1502,8 @@
         32
       ],
       "usage": "Item icon, bow tier 2",
-      "prompt": "Item icon of a longbow, single object centered, dark background, muted earthy colors, fantasy RPG style"
+      "prompt": "Item icon of a longbow, object only, no person, no character, single object centered, dark background, muted earthy colors, fantasy RPG style",
+      "approved": true
     },
     {
       "id": "item_bow_3",
@@ -1372,7 +1513,8 @@
         32
       ],
       "usage": "Item icon, bow tier 3",
-      "prompt": "Item icon of a yew warbow with fletched arrows, single object centered, dark background, muted earthy colors, fantasy RPG style"
+      "prompt": "Item icon of a yew warbow with fletched arrows, single object centered, dark background, muted earthy colors, fantasy RPG style",
+      "approved": true
     },
     {
       "id": "item_cloth_1",
@@ -1382,7 +1524,8 @@
         32
       ],
       "usage": "Item icon, cloth tier 1",
-      "prompt": "Item icon of plain wool robes, single object centered, dark background, muted earthy colors, fantasy RPG style"
+      "prompt": "Item icon of plain wool robes, object only, no person, no character, single object centered, dark background, muted earthy colors, fantasy RPG style",
+      "approved": true
     },
     {
       "id": "item_cloth_2",
@@ -1392,7 +1535,9 @@
         32
       ],
       "usage": "Item icon, cloth tier 2",
-      "prompt": "Item icon of padded robes, single object centered, dark background, muted earthy colors, fantasy RPG style"
+      "prompt": "Item icon of folded padded cloth robes laid flat, empty garment, no person, no character, no head, single object centered, dark background, muted earthy colors, fantasy RPG style",
+      "view": "high top-down",
+      "approved": true
     },
     {
       "id": "item_cloth_3",
@@ -1402,7 +1547,8 @@
         32
       ],
       "usage": "Item icon, cloth tier 3",
-      "prompt": "Item icon of embroidered warded vestments, single object centered, dark background, muted earthy colors, fantasy RPG style"
+      "prompt": "Item icon of embroidered warded vestments, single object centered, dark background, muted earthy colors, fantasy RPG style",
+      "approved": true
     },
     {
       "id": "item_leather_1",
@@ -1412,7 +1558,9 @@
         32
       ],
       "usage": "Item icon, leather tier 1",
-      "prompt": "Item icon of patched leather armour, single object centered, dark background, muted earthy colors, fantasy RPG style"
+      "prompt": "Item icon of an empty patched leather chest armour vest with stitched patches, laid flat, no person, no character, no head, single object centered, dark background, muted earthy colors, fantasy RPG style",
+      "view": "high top-down",
+      "approved": true
     },
     {
       "id": "item_leather_2",
@@ -1422,7 +1570,9 @@
         32
       ],
       "usage": "Item icon, leather tier 2",
-      "prompt": "Item icon of studded leather armour, single object centered, dark background, muted earthy colors, fantasy RPG style"
+      "prompt": "Item icon of an empty studded leather chest armour vest laid flat, no person, no character, no head, single object centered, dark background, muted earthy colors, fantasy RPG style",
+      "view": "high top-down",
+      "approved": true
     },
     {
       "id": "item_leather_3",
@@ -1432,7 +1582,9 @@
         32
       ],
       "usage": "Item icon, leather tier 3",
-      "prompt": "Item icon of dark shadowhide armour, single object centered, dark background, muted earthy colors, fantasy RPG style"
+      "prompt": "Item icon of an empty dark black leather chest armour vest with shadowy grey trim, laid flat, no person, no character, no head, no face, single object centered, dark background, muted earthy colors, fantasy RPG style",
+      "view": "high top-down",
+      "approved": true
     },
     {
       "id": "item_plate_1",
@@ -1442,7 +1594,8 @@
         32
       ],
       "usage": "Item icon, plate tier 1",
-      "prompt": "Item icon of rusted mail shirt, single object centered, dark background, muted earthy colors, fantasy RPG style"
+      "prompt": "Item icon of rusted mail shirt, single object centered, dark background, muted earthy colors, fantasy RPG style",
+      "approved": true
     },
     {
       "id": "item_plate_2",
@@ -1452,7 +1605,8 @@
         32
       ],
       "usage": "Item icon, plate tier 2",
-      "prompt": "Item icon of a chain hauberk, single object centered, dark background, muted earthy colors, fantasy RPG style"
+      "prompt": "Item icon of a chain hauberk, single object centered, dark background, muted earthy colors, fantasy RPG style",
+      "approved": true
     },
     {
       "id": "item_plate_3",
@@ -1462,7 +1616,9 @@
         32
       ],
       "usage": "Item icon, plate tier 3",
-      "prompt": "Item icon of a polished plate harness, single object centered, dark background, muted earthy colors, fantasy RPG style"
+      "prompt": "Item icon of an empty polished steel breastplate laid flat, no person, no character, no head, single object centered, dark background, muted earthy colors, fantasy RPG style",
+      "view": "high top-down",
+      "approved": true
     },
     {
       "id": "item_ring_1",
@@ -1472,7 +1628,8 @@
         32
       ],
       "usage": "Item icon, ring tier 1",
-      "prompt": "Item icon of a copper ring, single object centered, dark background, muted earthy colors, fantasy RPG style"
+      "prompt": "Item icon of a copper ring, object only, no person, no character, single object centered, dark background, muted earthy colors, fantasy RPG style",
+      "approved": true
     },
     {
       "id": "item_ring_2",
@@ -1482,7 +1639,8 @@
         32
       ],
       "usage": "Item icon, ring tier 2",
-      "prompt": "Item icon of a silver ring, single object centered, dark background, muted earthy colors, fantasy RPG style"
+      "prompt": "Item icon of a silver ring, single object centered, dark background, muted earthy colors, fantasy RPG style",
+      "approved": true
     },
     {
       "id": "item_ring_3",
@@ -1492,7 +1650,8 @@
         32
       ],
       "usage": "Item icon, ring tier 3",
-      "prompt": "Item icon of a gold signet ring, single object centered, dark background, muted earthy colors, fantasy RPG style"
+      "prompt": "Item icon of a gold signet ring, single object centered, dark background, muted earthy colors, fantasy RPG style",
+      "approved": true
     },
     {
       "id": "item_amulet_1",
@@ -1502,7 +1661,8 @@
         32
       ],
       "usage": "Item icon, amulet tier 1",
-      "prompt": "Item icon of a bone amulet on a cord, single object centered, dark background, muted earthy colors, fantasy RPG style"
+      "prompt": "Item icon of a bone amulet on a cord, single object centered, dark background, muted earthy colors, fantasy RPG style",
+      "approved": true
     },
     {
       "id": "item_amulet_2",
@@ -1512,7 +1672,8 @@
         32
       ],
       "usage": "Item icon, amulet tier 2",
-      "prompt": "Item icon of a silver amulet, single object centered, dark background, muted earthy colors, fantasy RPG style"
+      "prompt": "Item icon of a silver amulet, object only, no person, no character, single object centered, dark background, muted earthy colors, fantasy RPG style",
+      "approved": true
     },
     {
       "id": "item_amulet_3",
@@ -1522,7 +1683,8 @@
         32
       ],
       "usage": "Item icon, amulet tier 3",
-      "prompt": "Item icon of a sunstone amulet, single object centered, dark background, muted earthy colors, fantasy RPG style"
+      "prompt": "Item icon of a sunstone amulet, single object centered, dark background, muted earthy colors, fantasy RPG style",
+      "approved": true
     },
     {
       "id": "item_charm_1",
@@ -1532,7 +1694,9 @@
         32
       ],
       "usage": "Item icon, charm tier 1",
-      "prompt": "Item icon of a rabbit's foot charm, single object centered, dark background, muted earthy colors, fantasy RPG style"
+      "prompt": "Item icon of a rabbit's foot keychain charm, an elongated white fluffy foot with tiny dark claws at one end and a small metal ring at the other, lying diagonally, single object centered, dark background, muted earthy colors, fantasy RPG style",
+      "view": "high top-down",
+      "approved": true
     },
     {
       "id": "item_charm_2",
@@ -1542,7 +1706,8 @@
         32
       ],
       "usage": "Item icon, charm tier 2",
-      "prompt": "Item icon of a carved wooden charm, single object centered, dark background, muted earthy colors, fantasy RPG style"
+      "prompt": "Item icon of a carved wooden charm, single object centered, dark background, muted earthy colors, fantasy RPG style",
+      "approved": true
     },
     {
       "id": "item_charm_3",
@@ -1552,7 +1717,8 @@
         32
       ],
       "usage": "Item icon, charm tier 3",
-      "prompt": "Item icon of a woven witch knot charm, single object centered, dark background, muted earthy colors, fantasy RPG style"
+      "prompt": "Item icon of a woven witch knot charm, single object centered, dark background, muted earthy colors, fantasy RPG style",
+      "approved": true
     },
     {
       "id": "scroll_portal",
@@ -1562,7 +1728,8 @@
         32
       ],
       "usage": "portal scroll",
-      "prompt": "Item icon of a rolled parchment scroll with a blue swirl seal, single object centered, dark background, muted earthy colors, fantasy RPG style"
+      "prompt": "Item icon of a rolled parchment scroll with a blue swirl seal, single object centered, dark background, muted earthy colors, fantasy RPG style",
+      "approved": true
     },
     {
       "id": "scroll_healing",
@@ -1572,7 +1739,8 @@
         32
       ],
       "usage": "healing scroll",
-      "prompt": "Item icon of a rolled parchment scroll with a red cross seal, single object centered, dark background, muted earthy colors, fantasy RPG style"
+      "prompt": "Item icon of a rolled parchment scroll with a red cross seal, single object centered, dark background, muted earthy colors, fantasy RPG style",
+      "approved": true
     },
     {
       "id": "scroll_light",
@@ -1582,7 +1750,8 @@
         32
       ],
       "usage": "light scroll",
-      "prompt": "Item icon of a rolled parchment scroll with a sun seal, single object centered, dark background, muted earthy colors, fantasy RPG style"
+      "prompt": "Item icon of a rolled parchment scroll with a sun seal, single object centered, dark background, muted earthy colors, fantasy RPG style",
+      "approved": true
     },
     {
       "id": "scroll_ward",
@@ -1592,7 +1761,8 @@
         32
       ],
       "usage": "ward scroll",
-      "prompt": "Item icon of a rolled parchment scroll with a shield seal, single object centered, dark background, muted earthy colors, fantasy RPG style"
+      "prompt": "Item icon of a rolled parchment scroll with a shield seal, single object centered, dark background, muted earthy colors, fantasy RPG style",
+      "approved": true
     },
     {
       "id": "scroll_identify",
@@ -1602,7 +1772,8 @@
         32
       ],
       "usage": "identify scroll",
-      "prompt": "Item icon of a rolled parchment scroll with a eye seal, single object centered, dark background, muted earthy colors, fantasy RPG style"
+      "prompt": "Item icon of a rolled parchment scroll with a eye seal, single object centered, dark background, muted earthy colors, fantasy RPG style",
+      "approved": true
     },
     {
       "id": "scroll_blank",
@@ -1612,7 +1783,8 @@
         32
       ],
       "usage": "blank scroll",
-      "prompt": "Item icon of a rolled parchment scroll, single object centered, dark background, muted earthy colors, fantasy RPG style"
+      "prompt": "Item icon of a rolled parchment scroll, single object centered, dark background, muted earthy colors, fantasy RPG style",
+      "approved": true
     },
     {
       "id": "consumable_tonic",
@@ -1622,7 +1794,8 @@
         32
       ],
       "usage": "tonic",
-      "prompt": "Item icon of a small brown tonic bottle, single object centered, dark background, muted earthy colors, fantasy RPG style"
+      "prompt": "Item icon of a small brown tonic bottle, single object centered, dark background, muted earthy colors, fantasy RPG style",
+      "approved": true
     },
     {
       "id": "consumable_potion",
@@ -1632,7 +1805,8 @@
         32
       ],
       "usage": "potion",
-      "prompt": "Item icon of a red healing potion flask, single object centered, dark background, muted earthy colors, fantasy RPG style"
+      "prompt": "Item icon of a red healing potion flask, single object centered, dark background, muted earthy colors, fantasy RPG style",
+      "approved": true
     },
     {
       "id": "consumable_rations",
@@ -1642,7 +1816,8 @@
         32
       ],
       "usage": "rations",
-      "prompt": "Item icon of a bundle of travel rations wrapped in cloth, single object centered, dark background, muted earthy colors, fantasy RPG style"
+      "prompt": "Item icon of a bundle of travel rations wrapped in cloth, single object centered, dark background, muted earthy colors, fantasy RPG style",
+      "approved": true
     },
     {
       "id": "consumable_torch",
@@ -1652,7 +1827,9 @@
         32
       ],
       "usage": "torch",
-      "prompt": "Item icon of a wooden torch, single object centered, dark background, muted earthy colors, fantasy RPG style"
+      "prompt": "Item icon of a single wooden torch with a burning flame at the top, lying diagonally, no person, no character, single object centered, dark background, muted earthy colors, fantasy RPG style",
+      "view": "high top-down",
+      "approved": true
     },
     {
       "id": "legendary_keepersSword",
@@ -1662,7 +1839,8 @@
         32
       ],
       "usage": "Legendary item",
-      "prompt": "Item icon of an old well-kept longsword with a worn leather grip, the sword from the wall of the keeper's tavern, glowing faintly, single object centered, dark background, muted earthy colors, fantasy RPG style"
+      "prompt": "Item icon of an old well-kept longsword with a worn leather grip, the sword from the wall of the keeper's tavern, glowing faintly, single object centered, dark background, muted earthy colors, fantasy RPG style",
+      "approved": true
     },
     {
       "id": "legendary_mourningStar",
@@ -1672,7 +1850,9 @@
         32
       ],
       "usage": "Legendary item",
-      "prompt": "Item icon of a black morningstar wreathed in pale light, glowing faintly, single object centered, dark background, muted earthy colors, fantasy RPG style"
+      "prompt": "Item icon of a single black spiked morningstar weapon with a handle and a spiked ball, faint pale glow, lying diagonally, no person, no character, single object centered, dark background, muted earthy colors, fantasy RPG style",
+      "view": "high top-down",
+      "approved": true
     },
     {
       "id": "legendary_whisper",
@@ -1682,7 +1862,8 @@
         32
       ],
       "usage": "Legendary item",
-      "prompt": "Item icon of a slim silver dagger that seems to fade into shadow, glowing faintly, single object centered, dark background, muted earthy colors, fantasy RPG style"
+      "prompt": "Item icon of a slim silver dagger that seems to fade into shadow, glowing faintly, single object centered, dark background, muted earthy colors, fantasy RPG style",
+      "approved": true
     },
     {
       "id": "legendary_deepwell",
@@ -1692,7 +1873,9 @@
         32
       ],
       "usage": "Legendary item",
-      "prompt": "Item icon of a staff of dark driftwood with water swirling around its head, glowing faintly, single object centered, dark background, muted earthy colors, fantasy RPG style"
+      "prompt": "Item icon of a single long staff of dark driftwood lying diagonally with a small swirl of blue water around its top end, faint glow, no person, no character, single object centered, dark background, muted earthy colors, fantasy RPG style",
+      "view": "high top-down",
+      "approved": true
     },
     {
       "id": "legendary_drownedMail",
@@ -1702,7 +1885,9 @@
         32
       ],
       "usage": "Legendary item",
-      "prompt": "Item icon of barnacle-crusted royal plate armour, glowing faintly, single object centered, dark background, muted earthy colors, fantasy RPG style"
+      "prompt": "Item icon of an empty royal steel breastplate with a few barnacles and a strand of green seaweed, simple clear silhouette, faint glow, laid flat, no person, no character, no head, single object centered, dark background, muted earthy colors, fantasy RPG style",
+      "view": "high top-down",
+      "approved": true
     },
     {
       "id": "legendary_lastOrders",
@@ -1712,7 +1897,8 @@
         32
       ],
       "usage": "Legendary item",
-      "prompt": "Item icon of a plain iron ring engraved with a tankard, glowing faintly, single object centered, dark background, muted earthy colors, fantasy RPG style"
+      "prompt": "Item icon of a plain iron ring engraved with a tankard, glowing faintly, single object centered, dark background, muted earthy colors, fantasy RPG style",
+      "approved": true
     },
     {
       "id": "icon_gold",
@@ -1722,7 +1908,8 @@
         16
       ],
       "usage": "UI icon",
-      "prompt": "Tiny UI icon of a small stack of gold coins, single object centered, dark background, muted earthy colors, fantasy RPG style"
+      "prompt": "Tiny UI icon of a bold stack of three shiny bright gold coins with a highlight, simple bold shapes, high contrast, single object centered, dark background, muted earthy colors, fantasy RPG style",
+      "approved": true
     },
     {
       "id": "icon_day",
@@ -1732,7 +1919,8 @@
         16
       ],
       "usage": "UI icon",
-      "prompt": "Tiny UI icon of a small sun over a hill, single object centered, dark background, muted earthy colors, fantasy RPG style"
+      "prompt": "Tiny UI icon of a bright yellow sun with short rays rising over a green hill, simple bold shapes, single object centered, dark background, muted earthy colors, fantasy RPG style",
+      "approved": true
     },
     {
       "id": "icon_morale",
@@ -1742,7 +1930,8 @@
         16
       ],
       "usage": "UI icon",
-      "prompt": "Tiny UI icon of a small flickering flame, single object centered, dark background, muted earthy colors, fantasy RPG style"
+      "prompt": "Tiny UI icon of a small flickering flame, single object centered, dark background, muted earthy colors, fantasy RPG style",
+      "approved": true
     },
     {
       "id": "icon_loyalty",
@@ -1752,7 +1941,8 @@
         16
       ],
       "usage": "UI icon",
-      "prompt": "Tiny UI icon of a small tankard, single object centered, dark background, muted earthy colors, fantasy RPG style"
+      "prompt": "Tiny UI icon of a single bold golden-brown beer tankard with white foam on top and a handle, simple bold shapes, high contrast, single object centered, dark background, muted earthy colors, fantasy RPG style",
+      "approved": true
     },
     {
       "id": "icon_hp",
@@ -1762,7 +1952,8 @@
         16
       ],
       "usage": "UI icon",
-      "prompt": "Tiny UI icon of a small red heart, single object centered, dark background, muted earthy colors, fantasy RPG style"
+      "prompt": "Tiny UI icon of a small red heart, single object centered, dark background, muted earthy colors, fantasy RPG style",
+      "approved": true
     },
     {
       "id": "icon_reputation",
@@ -1772,7 +1963,8 @@
         16
       ],
       "usage": "UI icon",
-      "prompt": "Tiny UI icon of a small laurel wreath, single object centered, dark background, muted earthy colors, fantasy RPG style"
+      "prompt": "Tiny UI icon of a bold bright golden laurel wreath, thick simple leaf shapes in a round open ring, high contrast, single object centered, dark background, muted earthy colors, fantasy RPG style",
+      "approved": true
     },
     {
       "id": "ui_panel",
@@ -1782,7 +1974,8 @@
         48
       ],
       "usage": "Panel frame, 9-slice 16px corners",
-      "prompt": "Dark wooden panel frame with iron corner studs, 9-slice, muted earthy colors, fantasy RPG style"
+      "prompt": "Game UI panel frame, square dark wooden border with small iron corner studs, plain empty flat dark wood centre with no decoration, 9-slice, muted earthy colors, fantasy RPG style",
+      "approved": true
     },
     {
       "id": "ui_button",
@@ -1792,7 +1985,9 @@
         16
       ],
       "usage": "Button, 9-slice 4px corners",
-      "prompt": "Small dark wooden button with brass edge, muted earthy colors, fantasy RPG style"
+      "prompt": "Flat rectangular game UI button, wide horizontal bar filling the whole canvas edge to edge, dark wooden plank face with a thin brass border on all four sides, front view, no background, muted earthy colors, fantasy RPG style",
+      "note": "Generated at 48x32 (Pixen needs square canvases below 32px) and cropped to the centre 48x16; no scaling.",
+      "approved": true
     },
     {
       "id": "legacy_journal",
@@ -1802,7 +1997,8 @@
         32
       ],
       "usage": "Legacy object: the Journal",
-      "prompt": "Item icon of a worn leather-bound journal tied with cord, loose map pages sticking out, single object centered, dark background, muted earthy colors, fantasy RPG style"
+      "prompt": "Item icon of a worn leather-bound journal tied with cord, loose map pages sticking out, single object centered, dark background, muted earthy colors, fantasy RPG style",
+      "approved": true
     },
     {
       "id": "legacy_portalstone",
@@ -1812,7 +2008,8 @@
         32
       ],
       "usage": "Legacy object: the portal stone",
-      "prompt": "Item icon of a cracked grey stone with a faint blue glow inside the cracks, single object centered, dark background, muted earthy colors, fantasy RPG style"
+      "prompt": "Item icon of a cracked grey stone with a faint blue glow inside the cracks, single object centered, dark background, muted earthy colors, fantasy RPG style",
+      "approved": true
     }
   ]
 }

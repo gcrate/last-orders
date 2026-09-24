@@ -4,3 +4,5 @@ tools/out
 *.log
 .DS_Store
 assets/placeholders
+
+.claude/settings.local.json
