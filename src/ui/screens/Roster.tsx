@@ -1,7 +1,8 @@
 import { attackOf, defenceOf, maxHp, powerOf, relation, spellOf, trapSenseOf, xpToNext } from '../../engine/adventurers';
 import { balance } from '../../engine/balance';
+import { upgradeCost } from '../../engine/items';
 import { exertBlocked } from '../../engine/keeper';
-import type { Adventurer, EquipSlot } from '../../engine/types';
+import type { Adventurer, EquipSlot, Item } from '../../engine/types';
 import { STATS } from '../../engine/types';
 import { AdventurerCard, TraitChips } from '../components/AdventurerCard';
 import { Sprite } from '../components/Sprite';
@@ -52,7 +53,10 @@ export function Roster({ game, selected, onSelect }: Props) {
             {people.map((a) => (
               <tr key={a.id} className={`${styles.row} ${a.id === selected ? styles.selected : ''}`} onClick={() => onSelect(a.id)}>
                 <td>
-                  <Sprite id={a.portrait} scale={1} />
+                  <div className={styles.portrait}>
+                    <Sprite id={a.portrait} scale={1} />
+                    <StatusDot s={s} a={a} />
+                  </div>
                 </td>
                 <td>
                   {a.name}
@@ -83,12 +87,32 @@ export function Roster({ game, selected, onSelect }: Props) {
   );
 }
 
+function itemOption(i: Item): string {
+  return `${i.name} (atk ${i.attack} def ${i.defence} spell ${i.spell})`;
+}
+
+function StatusDot({ s, a }: { s: GameApi['state']; a: Adventurer }) {
+  if (a.status === 'expedition') {
+    return <span className={`${styles.dot} ${styles.away}`} title="Away in the dungeon" />;
+  }
+  const max = maxHp(s, a);
+  if (a.status === 'resident' && a.hp < max) {
+    return <span className={`${styles.dot} ${styles.recovering}`} title={`Recovering (${a.hp}/${max} HP)`} />;
+  }
+  return null;
+}
+
 function Detail({ game, a }: { game: GameApi; a: Adventurer }) {
   const { state: s, dispatch } = game;
   const here = a.status === 'resident';
   const k = balance.keeper;
   const blocked = exertBlocked(s);
   const stashFor = (slot: EquipSlot) => s.stash.map((id) => s.items[id]).filter((i) => i && i.slot === slot);
+  const canRework = (i: Item) => s.upgrades.forge > 0 && i.tier < balance.shop.forgeMaxTier[s.upgrades.forge] && !i.legendary;
+  const wornBy = (slot: EquipSlot) =>
+    Object.values(s.adventurers)
+      .filter((o) => o.id !== a.id && o.status === 'resident' && o.equipment[slot] && s.items[o.equipment[slot]!])
+      .map((o) => ({ owner: o, item: s.items[o.equipment[slot]!] }));
   const relations = Object.entries(a.relations)
     .filter(([id, v]) => Math.abs(v) >= 15 && s.adventurers[id])
     .sort((x, y) => y[1] - x[1]);
@@ -135,15 +159,17 @@ function Detail({ game, a }: { game: GameApi; a: Adventurer }) {
             </tr>
           </tbody>
         </table>
-        <div className="col">
-          <h4>Relationships</h4>
-          {relations.length === 0 && <span className="faint">No strong feelings yet.</span>}
-          {relations.map(([id, v]) => (
-            <span key={id} className={v > 0 ? 'tone-good' : 'tone-bad'}>
-              {firstName(s.adventurers[id].name)}: {v >= balance.relations.friendThreshold ? 'friend' : v <= balance.relations.rivalThreshold ? 'rival' : v > 0 ? 'warm' : 'cool'} ({relation(a, id)})
-            </span>
-          ))}
-        </div>
+        {a.status !== 'dead' && (
+          <div className="col">
+            <h4>Relationships</h4>
+            {relations.length === 0 && <span className="faint">No strong feelings yet.</span>}
+            {relations.map(([id, v]) => (
+              <span key={id} className={v > 0 ? 'tone-good' : 'tone-bad'}>
+                {firstName(s.adventurers[id].name)}: {v >= balance.relations.friendThreshold ? 'friend' : v <= balance.relations.rivalThreshold ? 'rival' : v > 0 ? 'warm' : 'cool'} ({relation(a, id)})
+              </span>
+            ))}
+          </div>
+        )}
       </div>
 
       <h4>Equipment</h4>
@@ -156,15 +182,33 @@ function Detail({ game, a }: { game: GameApi; a: Adventurer }) {
               {slot}
             </span>
             {item ? <ItemLabel item={item} /> : <span className="faint">none</span>}
+            {here && item && canRework(item) && (
+              <button onClick={() => dispatch({ type: 'UPGRADE_ITEM', itemId: item.id })} disabled={s.gold < upgradeCost(item)}>
+                Rework ({upgradeCost(item)}g)
+              </button>
+            )}
             {here && item && <button onClick={() => dispatch({ type: 'UNEQUIP', adventurerId: a.id, slot })}>Take off</button>}
-            {here && stashFor(slot).length > 0 && (
+            {here && (stashFor(slot).length > 0 || wornBy(slot).length > 0) && (
               <select value="" onChange={(e) => e.target.value && dispatch({ type: 'EQUIP', adventurerId: a.id, itemId: e.target.value })}>
-                <option value="">Give from stash…</option>
-                {stashFor(slot).map((i) => (
-                  <option key={i.id} value={i.id}>
-                    {i.name} (atk {i.attack} def {i.defence} spell {i.spell})
-                  </option>
-                ))}
+                <option value="">{item ? 'Swap for…' : 'Give…'}</option>
+                {stashFor(slot).length > 0 && (
+                  <optgroup label="From the stash">
+                    {stashFor(slot).map((i) => (
+                      <option key={i.id} value={i.id}>
+                        {itemOption(i)}
+                      </option>
+                    ))}
+                  </optgroup>
+                )}
+                {wornBy(slot).length > 0 && (
+                  <optgroup label="Take from someone">
+                    {wornBy(slot).map(({ owner, item: i }) => (
+                      <option key={i.id} value={i.id}>
+                        {firstName(owner.name)}: {itemOption(i)}
+                      </option>
+                    ))}
+                  </optgroup>
+                )}
               </select>
             )}
           </div>

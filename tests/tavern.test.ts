@@ -65,6 +65,33 @@ describe('tavern loop', () => {
     expect(s.items[swordId]).toBeUndefined();
   });
 
+  it('equipping takes an item straight off another resident', () => {
+    const s = newGame('tavern-4');
+    stepInPlace(s, { type: 'BUY', kind: 'sword', tier: 1 }, 0);
+    const swordId = s.stash.find((id) => s.items[id].kind === 'sword')!;
+    const [first, second] = Object.values(s.adventurers).filter((a) => a.status === 'resident');
+    stepInPlace(s, { type: 'EQUIP', adventurerId: first.id, itemId: swordId }, 0);
+    const secondOld = second.equipment.weapon;
+    stepInPlace(s, { type: 'EQUIP', adventurerId: second.id, itemId: swordId }, 0);
+    expect(second.equipment.weapon).toBe(swordId);
+    expect(first.equipment.weapon).toBeNull();
+    expect(s.stash).not.toContain(swordId);
+    if (secondOld) expect(s.stash).toContain(secondOld);
+  });
+
+  it('the forge can rework an item someone is wearing', () => {
+    const s = newGame('tavern-4');
+    s.upgrades.forge = 1;
+    s.gold = 10000;
+    stepInPlace(s, { type: 'BUY', kind: 'sword', tier: 1 }, 0);
+    const swordId = s.stash.find((id) => s.items[id].kind === 'sword')!;
+    const fighter = Object.values(s.adventurers)[0];
+    stepInPlace(s, { type: 'EQUIP', adventurerId: fighter.id, itemId: swordId }, 0);
+    stepInPlace(s, { type: 'UPGRADE_ITEM', itemId: swordId }, 0);
+    expect(s.items[swordId].tier).toBe(2);
+    expect(fighter.equipment.weapon).toBe(swordId);
+  });
+
   it('shop tiers depend on the forge', () => {
     const s = newGame('tavern-5');
     s.gold = 100000;

@@ -38,3 +38,27 @@
 .tableWrap {
   overflow-x: auto;
 }
+
+.portrait {
+  position: relative;
+  display: inline-block;
+}
+
+.dot {
+  position: absolute;
+  top: -2px;
+  right: -2px;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  border: 1px solid var(--bg);
+  cursor: help;
+}
+
+.away {
+  background: var(--danger);
+}
+
+.recovering {
+  background: #e3c440;
+}

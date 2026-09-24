@@ -91,12 +91,20 @@ export function equip(s: GameState, adventurerId: string, itemId: string, sink: 
   const a = s.adventurers[adventurerId];
   const item = s.items[itemId];
   if (!a || a.status !== 'resident') return reject('They are not at the tavern.');
-  if (!item || !s.stash.includes(itemId)) return reject('That is not in the stash.');
-  if (!isEquipSlot(item.slot)) return reject('That cannot be worn.');
+  if (!item || !isEquipSlot(item.slot)) return reject('That cannot be worn.');
   const slot = item.slot;
+  // The item can come from the stash or straight off another resident.
+  const wearer = Object.values(s.adventurers).find((o) => o.status === 'resident' && o.equipment[slot] === itemId);
+  if (wearer === a) return;
+  if (!wearer && !s.stash.includes(itemId)) return reject('That is not in the stash.');
   const current = a.equipment[slot];
   if (current) s.stash.push(current);
-  s.stash = s.stash.filter((id) => id !== itemId);
+  if (wearer) {
+    wearer.equipment[slot] = null;
+    wearer.hp = Math.min(wearer.hp, maxHp(s, wearer));
+  } else {
+    s.stash = s.stash.filter((id) => id !== itemId);
+  }
   a.equipment[slot] = itemId;
   a.hp = Math.min(a.hp, maxHp(s, a));
   sink.emit({ type: 'ITEM_EQUIPPED', adventurerId, itemId });
