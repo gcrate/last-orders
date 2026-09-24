@@ -5,7 +5,7 @@ import { EventLog } from './components/EventLog';
 import { Notices } from './components/Notices';
 import { Sprite } from './components/Sprite';
 import { clockText, dateText, generationDay } from './format';
-import { PartyBuilder } from './screens/PartyBuilder';
+import { PartyBuilder, newPartyDraft } from './screens/PartyBuilder';
 import { DepthView } from './screens/DepthView';
 import { Journal } from './screens/Journal';
 import { Legacy } from './screens/Legacy';
@@ -50,14 +50,16 @@ export function App() {
     return () => window.removeEventListener('keydown', onKey);
   }, [game]);
 
-  const [plan, setPlan] = useState<{ type: ObjectiveType; level: number; graveId?: string; key: number } | null>(null);
+  const [partyDraft, setPartyDraft] = useState(newPartyDraft);
+  useEffect(() => setPartyDraft(newPartyDraft()), [game.session]);
 
   const openAdventurer = (id: string) => {
     setSelected(id);
     setTab('roster');
   };
   const planParty = (type: ObjectiveType, level: number, graveId?: string) => {
-    setPlan({ type, level, graveId, key: Date.now() });
+    // Keep who's going and how; just point them at the new objective.
+    setPartyDraft((d) => ({ ...d, objType: type, objLevel: level, graveId: graveId ?? '', portalChoice: null }));
     setTab('party');
   };
 
@@ -111,7 +113,7 @@ export function App() {
         {tab === 'tavern' && <Tavern game={game} onOpenAdventurer={openAdventurer} />}
         {tab === 'roster' && <Roster game={game} selected={selected} onSelect={setSelected} />}
         {tab === 'party' && (
-          <PartyBuilder key={plan?.key ?? 0} game={game} initialObjective={plan ?? undefined} onSent={() => setTab('tavern')} />
+          <PartyBuilder game={game} draft={partyDraft} onDraftChange={setPartyDraft} onSent={() => setTab('tavern')} />
         )}
         {tab === 'journal' && <Journal game={game} />}
         {tab === 'depth' && (

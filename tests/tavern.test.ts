@@ -140,3 +140,24 @@ describe('tavern loop', () => {
     }
   });
 });
+
+describe('portraits', () => {
+  it('every age a recruit can have has a matching portrait in each class', () => {
+    const b = balance.adventurer;
+    for (const ranges of Object.values(balance.portraitAges)) {
+      for (let age = b.ageMin; age <= b.veteranAgeMin + 10; age++) {
+        expect(ranges.some(([min, max]) => age >= min && age <= max), `age ${age}`).toBe(true);
+      }
+    }
+  });
+
+  it('new adventurers get a portrait that looks their age', () => {
+    const s = newGame('portraits-1');
+    for (const a of Object.values(s.adventurers)) {
+      const index = Number(a.portrait.slice(-2)) - 1;
+      const [min, max] = balance.portraitAges[a.classId][index];
+      expect(a.age).toBeGreaterThanOrEqual(min);
+      expect(a.age).toBeLessThanOrEqual(max);
+    }
+  });
+});

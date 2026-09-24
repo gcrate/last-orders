@@ -16,10 +16,42 @@ import type { GameApi } from '../useGame';
 import { itemStats } from './Tavern';
 import styles from './PartyBuilder.module.css';
 
+/** Everything set up on this screen. Held by the App so it survives switching tabs. */
+export interface PartyDraft {
+  members: string[];
+  objType: ObjectiveType;
+  objLevel: number;
+  graveId: string;
+  setPortal: boolean;
+  stance: Stance;
+  retreat: number;
+  returnBy: string;
+  counsel: boolean;
+  portalChoice: string | null; // null until the player picks: then we default to the deepest portal they can use
+  supplies: Record<string, number>;
+}
+
+export function newPartyDraft(): PartyDraft {
+  return {
+    members: [],
+    objType: 'push',
+    objLevel: 1,
+    graveId: '',
+    setPortal: false,
+    stance: 'balanced',
+    retreat: 40,
+    returnBy: '',
+    counsel: false,
+    portalChoice: null,
+    supplies: {},
+  };
+}
+
 interface Props {
   game: GameApi;
+  draft: PartyDraft;
+  onDraftChange: (draft: PartyDraft) => void;
   onSent: () => void;
-  initialObjective?: { type: ObjectiveType; level: number; graveId?: string };
 }
 
 const OBJECTIVES: { id: ObjectiveType; label: string; help: string }[] = [
@@ -68,24 +100,27 @@ function EquipmentPopup({ s, a }: { s: GameState; a: Adventurer }) {
   );
 }
 
-export function PartyBuilder({ game, onSent, initialObjective }: Props) {
+export function PartyBuilder({ game, draft, onDraftChange, onSent }: Props) {
   const { state: s, dispatch } = game;
   const residents = Object.values(s.adventurers).filter((a) => a.status === 'resident');
-  const [members, setMembers] = useState<string[]>([]);
-  const [objType, setObjType] = useState<ObjectiveType>(initialObjective?.type ?? 'push');
-  const [objLevel, setObjLevel] = useState<number>(initialObjective?.level ?? 1);
-  const [graveId, setGraveId] = useState<string>(initialObjective?.graveId ?? '');
-  const [setPortal, setSetPortal] = useState(false);
-  const [stance, setStance] = useState<Stance>('balanced');
-  const [retreat, setRetreat] = useState(40);
-  const [returnBy, setReturnBy] = useState<string>('');
-  const [counsel, setCounsel] = useState(false);
-  // null until the player picks: then we default to the deepest portal they can use.
-  const [portalChoice, setPortalChoice] = useState<string | null>(null);
-  const [supplies, setSupplies] = useState<Record<string, number>>({});
+  const { objType, objLevel, setPortal, stance, retreat, returnBy, counsel, portalChoice } = draft;
   const [shopOpen, setShopOpen] = useState(false);
+  const update = (patch: Partial<PartyDraft>) => onDraftChange({ ...draft, ...patch });
+  const setObjType = (objType: ObjectiveType) => update({ objType });
+  const setObjLevel = (objLevel: number) => update({ objLevel });
+  const setGraveId = (graveId: string) => update({ graveId });
+  const setSetPortal = (setPortal: boolean) => update({ setPortal });
+  const setStance = (stance: Stance) => update({ stance });
+  const setRetreat = (retreat: number) => update({ retreat });
+  const setReturnBy = (returnBy: string) => update({ returnBy });
+  const setCounsel = (counsel: boolean) => update({ counsel });
+  const setPortalChoice = (portalChoice: string | null) => update({ portalChoice });
+  const setSupplies = (supplies: Record<string, number>) => update({ supplies });
 
+  // Things may have changed while the player was on another tab: drop what no longer applies.
+  const members = draft.members.filter((id) => s.adventurers[id]?.status === 'resident');
   const graves = Object.values(s.graves).filter((g) => !g.recovered);
+  const graveId = graves.some((g) => g.id === draft.graveId) ? draft.graveId : '';
   const stashByKind = useMemo(() => {
     const m = new Map<ItemKind, string[]>();
     for (const id of s.stash) {
@@ -97,8 +132,10 @@ export function PartyBuilder({ game, onSent, initialObjective }: Props) {
   }, [s.stash, s.items]);
 
   const toggle = (id: string) => {
-    setMembers((m) => (m.includes(id) ? m.filter((x) => x !== id) : m.length >= balance.party.maxSize ? m : [...m, id]));
+    update({ members: members.includes(id) ? members.filter((x) => x !== id) : members.length >= balance.party.maxSize ? members : [...members, id] });
   };
+  const supplies: Record<string, number> = {};
+  for (const [kind, ids] of stashByKind) supplies[kind] = Math.min(draft.supplies[kind] ?? 0, ids.length);
 
   const power = members.reduce((t, id) => t + powerOf(s, s.adventurers[id]), 0);
   const effLevel = objType === 'recover' && graveId ? s.graves[graveId]?.level ?? objLevel : objLevel;
@@ -136,9 +173,8 @@ export function PartyBuilder({ game, onSent, initialObjective }: Props) {
       startPortalId: portalId || null,
     });
     if (events.some((e) => e.type === 'PARTY_DEPARTED')) {
-      setMembers([]);
-      setSupplies({});
-      setPortalChoice(null);
+      // Keep the objective and orders for the next party; clear who went and what they took.
+      onDraftChange({ ...draft, members: [], supplies: {}, portalChoice: null, counsel: false, returnBy: '' });
       onSent();
     }
   };

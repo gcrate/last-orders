@@ -51,6 +51,8 @@ export interface GameApi {
   loadSave: (save: SaveFile) => void;
   saveNow: () => Promise<void>;
   loadedFromSave: boolean;
+  /** Goes up when a different game is loaded or started, so screens can drop leftover UI state. */
+  session: number;
 }
 
 function freshSeed(): string {
@@ -68,6 +70,7 @@ export function useGame(): GameApi {
   const [state, setState] = useState<GameState>(initial.state);
   const [log, setLog] = useState<LogLine[]>(initial.log);
   const [speed, setSpeed] = useState<Speed>(0);
+  const [session, setSession] = useState(0);
   const [autoPauseEvening, setAutoPauseEvening] = useState(true);
   const [notices, setNotices] = useState<Notice[]>([]);
   const noticeId = useRef(1);
@@ -164,6 +167,7 @@ export function useGame(): GameApi {
     setLog(intro);
     stateRef.current = s;
     setState(s);
+    setSession((n) => n + 1);
     saveToStorage(s, intro);
   }, []);
 
@@ -173,6 +177,7 @@ export function useGame(): GameApi {
     setLog(save.log);
     stateRef.current = save.state;
     setState(save.state);
+    setSession((n) => n + 1);
     saveToStorage(save.state, save.log);
   }, []);
 
@@ -196,5 +201,6 @@ export function useGame(): GameApi {
     loadSave,
     saveNow,
     loadedFromSave: initial.loaded,
+    session,
   };
 }

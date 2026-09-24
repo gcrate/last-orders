@@ -15,16 +15,27 @@ export function classPrimary(c: ClassId): Stat {
   return balance.classes[c].primary as Stat;
 }
 
-function pickPortrait(s: GameState, c: ClassId): string {
+/** How many years `age` falls outside the portrait's believable range (0 = a good fit). */
+function portraitAgeGap(c: ClassId, index: number, age: number): number {
+  const [min, max] = balance.portraitAges[c][index];
+  return age < min ? min - age : age > max ? age - max : 0;
+}
+
+/** Prefers an unused portrait that looks the adventurer's age, then the closest-looking one. */
+function pickPortrait(s: GameState, c: ClassId, age: number): string {
   const used = new Set(
     Object.values(s.adventurers)
       .filter((a) => a.status !== 'dead' && a.status !== 'departed')
       .map((a) => a.portrait),
   );
-  const all: string[] = [];
-  for (let i = 1; i <= PORTRAITS_PER_CLASS; i++) all.push(`adv_${c}_${String(i).padStart(2, '0')}`);
-  const free = all.filter((p) => !used.has(p));
-  return pickOne(s, free.length > 0 ? free : all);
+  const all: { id: string; gap: number }[] = [];
+  for (let i = 0; i < PORTRAITS_PER_CLASS; i++) {
+    all.push({ id: `adv_${c}_${String(i + 1).padStart(2, '0')}`, gap: portraitAgeGap(c, i, age) });
+  }
+  const free = all.filter((p) => !used.has(p.id));
+  const pool = free.length > 0 ? free : all;
+  const bestGap = Math.min(...pool.map((p) => p.gap));
+  return pickOne(s, pool.filter((p) => p.gap === bestGap)).id;
 }
 
 function pickName(s: GameState): string {
@@ -75,7 +86,7 @@ export function generateAdventurer(s: GameState, opts: GenerateOptions): Adventu
     id: newId(s, 'a'),
     name: pickName(s),
     age,
-    portrait: pickPortrait(s, classId),
+    portrait: pickPortrait(s, classId, age),
     classId,
     stats,
     level: 1,
