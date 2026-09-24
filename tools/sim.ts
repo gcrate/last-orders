@@ -7,10 +7,12 @@
 //   expedition  One party of fresh starting adventurers per run, sent at each target depth.
 
 import { mkdirSync, writeFileSync } from 'node:fs';
-import { overrideBalance } from '../src/engine/balance';
+import { balance, overrideBalance } from '../src/engine/balance';
 import { newGame } from '../src/engine/state';
 import { stepInPlace } from '../src/engine/step';
+import { hoursUntil } from '../src/engine/time';
 import type { GameEvent, GameState, Orders } from '../src/engine/types';
+import { POLICIES, type PolicyConfig, policyInputs } from './policies';
 
 interface Args {
   runs: number;
@@ -22,7 +24,7 @@ interface Args {
 }
 
 function parseArgs(argv: string[]): Args {
-  const args: Args = { runs: 200, seed: '42', mode: 'expedition', depths: [1, 2, 3, 5, 8], csv: false, policy: 'default' };
+  const args: Args = { runs: 200, seed: '42', mode: 'generation', depths: [1, 2, 3, 5, 8], csv: false, policy: 'default' };
   for (let i = 0; i < argv.length; i++) {
     const a = argv[i];
     const next = () => argv[++i];
@@ -119,6 +121,93 @@ function expeditionMode(args: Args): void {
 }
 
 // ---------------------------------------------------------------------------
+// Generation mode: a scripted player runs the tavern until the keeper dies.
+
+interface GenerationRun {
+  record: GameState['record'];
+  goldCurve: number[]; // gold at the start of each week
+  status: GameState['status'];
+}
+
+function runGeneration(seed: string, cfg: PolicyConfig, maxDays: number): GenerationRun {
+  const s = newGame(seed);
+  const goldCurve: number[] = [];
+  let lastWeek = -1;
+  while (s.status === 'playing' && s.hour < maxDays * 24) {
+    for (const input of policyInputs(s, cfg)) stepInPlace(s, input, 0);
+    stepInPlace(s, null, hoursUntil(s.hour, balance.time.eveningHour));
+    const week = Math.floor(s.hour / (24 * 7));
+    if (week !== lastWeek) {
+      goldCurve.push(s.gold);
+      lastWeek = week;
+    }
+  }
+  if (s.status === 'playing') s.record.days = Math.floor(s.hour / 24);
+  return { record: s.record, goldCurve, status: s.status };
+}
+
+function generationMode(args: Args): void {
+  const cfg = POLICIES[args.policy];
+  if (!cfg) throw new Error(`Unknown policy ${args.policy}. Try: ${Object.keys(POLICIES).join(', ')}`);
+  const runs: GenerationRun[] = [];
+  const csv = ['seed,days,cause,maxDepth,levelsCleared,bosses,expeditions,deaths,goldEarned,retired'];
+  for (let i = 0; i < args.runs; i++) {
+    const r = runGeneration(`${args.seed}-${i}`, cfg, 400);
+    runs.push(r);
+    const g = r.record;
+    csv.push([`${args.seed}-${i}`, g.days, g.causeOfDeath, g.maxDepth, g.levelsCleared, g.bossesKilled, g.expeditions, g.deaths, g.goldEarned, g.retiredAlive].join(','));
+  }
+  const n = runs.length;
+  const recs = runs.map((r) => r.record);
+  const avg = (f: (g: GenerationRun['record']) => number) => recs.reduce((t, g) => t + f(g), 0) / n;
+  const pctl = (f: (g: GenerationRun['record']) => number, p: number) => {
+    const v = recs.map(f).sort((a, b) => a - b);
+    return v[Math.min(v.length - 1, Math.floor(p * v.length))];
+  };
+
+  printTable(`Generation summary: ${n} runs, policy "${cfg.name}"`, [
+    ['metric', 'mean', 'p10', 'p50', 'p90'],
+    ...([
+      ['days', (g) => g.days],
+      ['max depth', (g) => g.maxDepth],
+      ['levels cleared', (g) => g.levelsCleared],
+      ['bosses killed', (g) => g.bossesKilled],
+      ['expeditions', (g) => g.expeditions],
+      ['deaths', (g) => g.deaths],
+      ['gold earned', (g) => g.goldEarned],
+      ['retired alive', (g) => g.retiredAlive],
+    ] as [string, (g: GenerationRun['record']) => number][]).map(([name, f]) => [
+      name,
+      avg(f).toFixed(1),
+      String(pctl(f, 0.1)),
+      String(pctl(f, 0.5)),
+      String(pctl(f, 0.9)),
+    ]),
+  ]);
+
+  const causes: Record<string, number> = {};
+  for (const g of recs) causes[g.causeOfDeath || 'alive'] = (causes[g.causeOfDeath || 'alive'] ?? 0) + 1;
+  printTable('Keeper cause of death', [['cause', 'share'], ...Object.entries(causes).map(([c, k]) => [c, pct(k / n)])]);
+
+  const bandRows: string[][] = [['band', 'levels', 'expeditions', 'deaths', 'deaths/exp']];
+  for (let b = 0; b < 5; b++) {
+    const exps = recs.reduce((t, g) => t + g.expeditionsByBand[b], 0);
+    const deaths = recs.reduce((t, g) => t + g.deathsByBand[b], 0);
+    bandRows.push([String(b + 1), `${b * 10 + 1}-${b * 10 + 10}`, (exps / n).toFixed(1), (deaths / n).toFixed(1), exps ? (deaths / exps).toFixed(2) : '-']);
+  }
+  printTable('Adventurer deaths per expedition, by deepest band reached (per generation)', bandRows);
+
+  const weeks = Math.max(...runs.map((r) => r.goldCurve.length));
+  const goldRows: string[][] = [['week', 'mean gold', 'runs alive']];
+  for (let w = 0; w < weeks; w += 2) {
+    const vals = runs.filter((r) => r.goldCurve.length > w).map((r) => r.goldCurve[w]);
+    goldRows.push([String(w), (vals.reduce((t, v) => t + v, 0) / vals.length).toFixed(0), String(vals.length)]);
+  }
+  printTable('Gold curve', goldRows);
+  if (args.csv) writeCsv('generations.csv', csv);
+}
+
+// ---------------------------------------------------------------------------
 // Output
 
 function pct(x: number): string {
@@ -145,6 +234,7 @@ function writeCsv(name: string, lines: string[]): void {
 const args = parseArgs(process.argv.slice(2));
 const t0 = performance.now();
 if (args.mode === 'expedition') expeditionMode(args);
+else if (args.mode === 'generation') generationMode(args);
 else {
   console.error(`Unknown mode ${args.mode}`);
   process.exit(1);

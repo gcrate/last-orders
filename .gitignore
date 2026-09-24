@@ -3,3 +3,4 @@ dist
 tools/out
 *.log
 .DS_Store
+assets/placeholders

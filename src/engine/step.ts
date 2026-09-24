@@ -6,7 +6,7 @@ import { expeditionHour, expeditionMidnight } from './expedition';
 import { keeperMidnight, keeperShouldDie } from './keeper';
 import { applyInput } from './input';
 import { hourOfDay } from './time';
-import { tavernEvening } from './tavern';
+import { ageEveryone, tavernEvening } from './tavern';
 import { keeperDies } from './legacy';
 import type { GameState, PlayerInput, StepResult } from './types';
 import { EventSink } from './util';
@@ -49,6 +49,7 @@ function advanceHour(s: GameState, sink: EventSink): void {
   if (hod === 0) {
     keeperMidnight(s, sink);
     dungeonDaily(s);
+    ageEveryone(s);
     for (const id of Object.keys(s.expeditions).sort()) expeditionMidnight(s, s.expeditions[id], sink);
   }
 

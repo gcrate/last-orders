@@ -1,0 +1,32 @@
+.layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(360px, 1fr);
+  gap: 12px;
+  align-items: start;
+}
+
+.row {
+  cursor: pointer;
+}
+
+.row:hover td {
+  background: #2d231c;
+}
+
+.selected td {
+  background: #3a2c1f;
+}
+
+.detail {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  position: sticky;
+  top: 0;
+}
+
+.training {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}

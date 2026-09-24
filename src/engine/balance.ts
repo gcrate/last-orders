@@ -77,7 +77,7 @@ export const DEFAULT_BALANCE = {
       [3, 1],
     ] as [number, number][],
     xpPerLevel: 100, // xp needed = xpPerLevel * level
-    xpPerThreat: 1.0,
+    xpPerThreat: 0.4,
     xpSurvivalBonus: 20, // for returning alive
     levelStatGain: 1, // stat points per level up
     levelPrimaryChance: 0.5, // chance each stat point goes to the class primary
@@ -87,6 +87,7 @@ export const DEFAULT_BALANCE = {
     recruitStayDays: 2,
     maimChance: 0.35, // chance a rescued adventurer is maimed
     maimPowerPenalty: 0.2,
+    maimedRetireChance: 0.2, // per evening for a maimed resident
     purseStartMin: 5,
     purseStartMax: 30,
   },
@@ -170,7 +171,7 @@ export const DEFAULT_BALANCE = {
     levels: 50,
     bandSize: 10,
     threatBase: 30,
-    threatGrowth: 1.058, // per level
+    threatGrowth: 1.065, // per level
     bossThreatMult: 1.7,
     bossHpMult: 2.2,
     sourceThreatMult: 2.2,
@@ -178,7 +179,7 @@ export const DEFAULT_BALANCE = {
     guardianThreatMult: 1.4,
     guardianHpMult: 1.6,
     threatRollMin: 0.75,
-    threatRollMax: 1.3,
+    threatRollMax: 1.5,
     populationFloor: 0.35, // threat multiplier at zero population
     clearPopulation: 0.1,
     repopulatePerDay: 0.02,
@@ -257,10 +258,10 @@ export const DEFAULT_BALANCE = {
     woundedFrac: 0.35, // below this fraction of max HP a member counts as wounded
     severeFrac: 0.15,
     encHpPerThreat: 2.0,
-    dmgFrac: 0.07, // fraction of party max HP dealt per round at ratio 1
+    dmgFrac: 0.15, // fraction of party max HP dealt per round at ratio 1
     rollMin: 0.6,
     rollMax: 1.4,
-    hitsPerRound: 2,
+    hitsPerRound: 1,
     stance: {
       cautious: { dealt: 0.85, taken: 0.8, explore: 0.8 },
       balanced: { dealt: 1.0, taken: 1.0, explore: 1.0 },

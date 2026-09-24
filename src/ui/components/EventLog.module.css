@@ -1,0 +1,36 @@
+.wrap {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.controls {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  padding: 8px 10px;
+  border-bottom: 1px solid var(--border);
+  font-size: 12px;
+}
+
+.controls select {
+  max-width: 220px;
+}
+
+.lines {
+  flex: 1;
+  overflow-y: auto;
+  padding: 8px 10px 20px;
+  line-height: 1.45;
+}
+
+.line {
+  margin-bottom: 5px;
+}
+
+.stamp {
+  color: var(--faint);
+  font-size: 11px;
+  margin-right: 6px;
+  white-space: nowrap;
+}

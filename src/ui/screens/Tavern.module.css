@@ -1,0 +1,33 @@
+.grid {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 1000px;
+}
+
+.keeper {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+}
+
+.bar {
+  display: flex;
+  flex-direction: column;
+}
+
+.scene {
+  margin-bottom: 10px;
+  align-self: flex-start;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+  gap: 8px;
+}
+
+.party {
+  padding: 6px 0;
+  border-bottom: 1px solid #2f261f;
+}

@@ -1,0 +1,164 @@
+// The UI's connection to the engine: holds state and the log, runs the clock, dispatches
+// player inputs through step(), and auto-pauses on important events.
+
+import { useCallback, useEffect, useRef, useState } from 'react';
+import { newGame } from '../engine/state';
+import { step } from '../engine/step';
+import type { GameEvent, GameEventType, GameState, PlayerInput } from '../engine/types';
+import { clearStorage, loadFromStorage, saveToStorage } from '../save/save';
+import { type LogLine, describeEvent } from '../text/templates';
+
+export type Speed = 0 | 1 | 2 | 4;
+
+// Real milliseconds per game hour at 1x.
+const MS_PER_HOUR = 1200;
+const LOG_LIMIT = 1500;
+
+const PAUSE_ON: GameEventType[] = [
+  'ADVENTURER_DIED',
+  'PARTY_RETURNED',
+  'PARTY_WIPED',
+  'BOSS_KILLED',
+  'GRAVE_RECOVERED',
+  'KEEPER_DIED',
+  'GAME_WON',
+  'GAME_LOST',
+];
+
+function isPauseEvent(e: GameEvent, autoPauseEvening: boolean): boolean {
+  if (e.type === 'EVENING') return autoPauseEvening;
+  if (e.type === 'COMBAT_STARTED' && e.boss) return true;
+  return PAUSE_ON.includes(e.type);
+}
+
+export interface Notice {
+  id: number;
+  text: string;
+  tone: LogLine['tone'];
+}
+
+export interface GameApi {
+  state: GameState;
+  log: LogLine[];
+  speed: Speed;
+  setSpeed: (s: Speed) => void;
+  autoPauseEvening: boolean;
+  setAutoPauseEvening: (v: boolean) => void;
+  dispatch: (input: PlayerInput) => GameEvent[];
+  notices: Notice[];
+  dismissNotice: (id: number) => void;
+  newGameWithSeed: (seed: string) => void;
+  loadedFromSave: boolean;
+}
+
+function freshSeed(): string {
+  // Seeds only; the engine never sees wall-clock time.
+  return Math.floor(Math.random() * 1e9).toString(36);
+}
+
+export function useGame(): GameApi {
+  const [initial] = useState(() => {
+    const save = loadFromStorage();
+    if (save) return { state: save.state, log: save.log, loaded: true };
+    return { state: newGame(freshSeed()), log: [] as LogLine[], loaded: false };
+  });
+  const [state, setState] = useState<GameState>(initial.state);
+  const [log, setLog] = useState<LogLine[]>(initial.log);
+  const [speed, setSpeed] = useState<Speed>(0);
+  const [autoPauseEvening, setAutoPauseEvening] = useState(true);
+  const [notices, setNotices] = useState<Notice[]>([]);
+  const noticeId = useRef(1);
+
+  // Refs so the interval sees current values without re-subscribing.
+  const stateRef = useRef(state);
+  const logRef = useRef(log);
+  stateRef.current = state;
+  logRef.current = log;
+
+  const absorb = useCallback((s: GameState, events: GameEvent[]) => {
+    const lines: LogLine[] = [];
+    const newNotices: Notice[] = [];
+    for (const e of events) {
+      const line = describeEvent(e, s);
+      if (!line) continue;
+      lines.push(line);
+      if (e.type === 'ACTION_REJECTED' || isPauseEvent(e, false)) {
+        newNotices.push({ id: noticeId.current++, text: line.text, tone: e.type === 'ACTION_REJECTED' ? 'bad' : line.tone });
+      }
+    }
+    if (lines.length > 0) {
+      const next = [...logRef.current, ...lines].slice(-LOG_LIMIT);
+      logRef.current = next;
+      setLog(next);
+    }
+    if (newNotices.length > 0) setNotices((n) => [...n, ...newNotices].slice(-5));
+    stateRef.current = s;
+    setState(s);
+  }, []);
+
+  const dispatch = useCallback(
+    (input: PlayerInput) => {
+      const r = step(stateRef.current, input, 0);
+      absorb(r.state, r.events);
+      saveToStorage(r.state, logRef.current);
+      return r.events;
+    },
+    [absorb],
+  );
+
+  // The clock.
+  const autoPauseRef = useRef(autoPauseEvening);
+  autoPauseRef.current = autoPauseEvening;
+  useEffect(() => {
+    if (speed === 0) return;
+    const interval = Math.max(50, MS_PER_HOUR / speed);
+    const timer = window.setInterval(() => {
+      if (stateRef.current.status !== 'playing') {
+        setSpeed(0);
+        return;
+      }
+      const r = step(stateRef.current, null, 1);
+      absorb(r.state, r.events);
+      const pause = r.events.some((e) => isPauseEvent(e, autoPauseRef.current));
+      if (pause || r.state.status !== 'playing') {
+        setSpeed(0);
+        saveToStorage(r.state, logRef.current);
+      }
+      if (r.events.some((e) => e.type === 'EVENING')) saveToStorage(r.state, logRef.current);
+    }, interval);
+    return () => window.clearInterval(timer);
+  }, [speed, absorb]);
+
+  useEffect(() => {
+    const onUnload = () => saveToStorage(stateRef.current, logRef.current);
+    window.addEventListener('beforeunload', onUnload);
+    return () => window.removeEventListener('beforeunload', onUnload);
+  }, []);
+
+  const newGameWithSeed = useCallback((seed: string) => {
+    clearStorage();
+    const s = newGame(seed || freshSeed());
+    setSpeed(0);
+    logRef.current = [];
+    setLog([]);
+    stateRef.current = s;
+    setState(s);
+    saveToStorage(s, []);
+  }, []);
+
+  const dismissNotice = useCallback((id: number) => setNotices((n) => n.filter((x) => x.id !== id)), []);
+
+  return {
+    state,
+    log,
+    speed,
+    setSpeed,
+    autoPauseEvening,
+    setAutoPauseEvening,
+    dispatch,
+    notices,
+    dismissNotice,
+    newGameWithSeed,
+    loadedFromSave: initial.loaded,
+  };
+}

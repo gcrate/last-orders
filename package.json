@@ -4,8 +4,9 @@
   "version": "0.1.0",
   "type": "module",
   "scripts": {
+    "predev": "tsx tools/placeholders.ts",
     "dev": "vite",
-    "build": "tsc --noEmit && vite build",
+    "build": "tsx tools/placeholders.ts && tsc --noEmit && vite build",
     "preview": "vite preview",
     "test": "vitest run",
     "typecheck": "tsc --noEmit",

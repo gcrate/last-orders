@@ -12,3 +12,9 @@ export function keeperDies(s: GameState, sink: EventSink): void {
   s.record.causeOfDeath = 'illness';
   sink.emit({ type: 'KEEPER_DIED', generation: s.generation, days });
 }
+
+/** Start the next keeper's life. (Generations arrive in milestone 7.) */
+export function beginGeneration(s: GameState, sink: EventSink): void {
+  if (s.status !== 'keeperDead') return sink.emit({ type: 'ACTION_REJECTED', reason: 'The keeper still lives.' });
+  sink.emit({ type: 'ACTION_REJECTED', reason: 'The line ends here, for now.' });
+}

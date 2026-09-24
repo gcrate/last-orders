@@ -3,7 +3,10 @@
 
 import { balance } from './balance';
 import { createExpedition } from './expedition';
+import { buy, equip, forgeUpgrade, postBounty, sell, unequip } from './economy';
 import { exertBlocked, keeperAction, spendEffort } from './keeper';
+import { beginGeneration } from './legacy';
+import { buyUpgrade, counselLoyalty, dismiss, recruit } from './tavern';
 import type { GameState, PlayerInput } from './types';
 import { EventSink } from './util';
 
@@ -12,12 +15,30 @@ export function applyInput(s: GameState, input: PlayerInput, sink: EventSink): v
   if (s.status !== 'playing' && input.type !== 'BEGIN_GENERATION') return reject('The tavern is closed.');
 
   switch (input.type) {
+    case 'RECRUIT':
+      return recruit(s, input.adventurerId, sink);
+    case 'DISMISS':
+      return dismiss(s, input.adventurerId, sink);
+    case 'EQUIP':
+      return equip(s, input.adventurerId, input.itemId, sink);
+    case 'UNEQUIP':
+      return unequip(s, input.adventurerId, input.slot, sink);
+    case 'BUY':
+      return buy(s, input.kind, input.tier, sink);
+    case 'SELL':
+      return sell(s, input.itemId, sink);
+    case 'UPGRADE_ITEM':
+      return forgeUpgrade(s, input.itemId, sink);
     case 'SEND_PARTY':
       return sendParty(s, input, sink);
     case 'KEEPER':
       return keeperAction(s, input.action, sink);
-    default:
-      return reject(`${input.type} is not available yet.`);
+    case 'BUY_UPGRADE':
+      return buyUpgrade(s, input.upgrade, sink);
+    case 'POST_BOUNTY':
+      return postBounty(s, input.graveId, input.gold, sink);
+    case 'BEGIN_GENERATION':
+      return beginGeneration(s, sink);
   }
 }
 
@@ -73,6 +94,7 @@ function sendParty(s: GameState, input: Extract<PlayerInput, { type: 'SEND_PARTY
   );
   if (input.counsel) {
     spendEffort(s, balance.keeper.counselDaysCost, sink);
+    counselLoyalty(s, ids);
     sink.emit({ type: 'KEEPER_COUNSELLED', expeditionId: exp.id, daysCost: balance.keeper.counselDaysCost });
   }
 }

@@ -1,0 +1,83 @@
+.card {
+  display: flex;
+  gap: 10px;
+  padding: 8px;
+  background: var(--panel-2);
+  border: 1px solid var(--border);
+  align-items: flex-start;
+}
+
+.clickable {
+  cursor: pointer;
+}
+
+.clickable:hover {
+  border-color: var(--accent);
+}
+
+.selected {
+  border-color: var(--accent);
+  background: #3a2c1f;
+}
+
+.body {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+  flex: 1;
+}
+
+.name {
+  font-size: 15px;
+}
+
+.traits {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.trait {
+  font-size: 11px;
+  padding: 0 5px;
+  border: 1px solid var(--border);
+  color: var(--muted);
+  border-radius: 2px;
+}
+
+.maimed {
+  color: var(--danger);
+  border-color: var(--danger);
+}
+
+.meters {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 2px 6px;
+  align-items: center;
+  font-size: 11px;
+  max-width: 260px;
+}
+
+.meter {
+  height: 6px;
+  background: #140f0c;
+  border: 1px solid #3a2e24;
+}
+
+.fill {
+  height: 100%;
+}
+
+.hp {
+  background: #a8443a;
+}
+
+.morale {
+  background: #c9973d;
+}
+
+.loyalty {
+  background: #6f8fb0;
+}

@@ -139,17 +139,15 @@ export function resolveCombat(s: GameState, exp: Expedition, enc: Encounter, sin
     if (ms.length === 0) return { outcome: 'wiped', rounds };
     const power = partyPower(s, exp, enc.monsterId);
 
-    // The party strikes.
+    // Both sides strike at once. The enemy's blow scales with how much of it is left,
+    // so a fight that ends in one round still costs something.
+    const encHpBefore = encHp;
     encHp -= power * rollRange(s, c.rollMin, c.rollMax);
-    if (encHp <= 0) {
-      winCombat(s, exp, enc, ms);
-      return { outcome: 'won', rounds };
-    }
+    const fightingFrac = encHp <= 0 ? Math.min(1, encHpBefore / Math.max(1, encHpBefore - encHp)) : 1;
 
-    // The enemy strikes back.
     const { max } = partyHp(s, exp);
     const ratio = enc.threat / Math.max(1, power);
-    let roundDmg = max * c.dmgFrac * ratio * rollRange(s, c.rollMin, c.rollMax) * stance.taken;
+    let roundDmg = max * c.dmgFrac * ratio * rollRange(s, c.rollMin, c.rollMax) * stance.taken * fightingFrac;
     if (exp.wardActive) roundDmg *= 1 - balance.items.wardReduction;
     for (let h = 0; h < c.hitsPerRound; h++) {
       const living = members(s, exp).filter((a) => a.hp > 0);
@@ -162,6 +160,10 @@ export function resolveCombat(s: GameState, exp: Expedition, enc: Encounter, sin
 
     const after = members(s, exp);
     if (after.length === 0) return { outcome: 'wiped', rounds };
+    if (encHp <= 0) {
+      winCombat(s, exp, enc, after);
+      return { outcome: 'won', rounds };
+    }
 
     // Clerics patch up the worst hurt.
     for (const cl of after.filter((a) => a.classId === 'cleric')) {

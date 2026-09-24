@@ -1,0 +1,20 @@
+.sprite {
+  image-rendering: pixelated;
+  display: block;
+  flex: none;
+}
+
+.block {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  overflow: hidden;
+  border: 1px solid rgba(0, 0, 0, 0.5);
+  color: #ebdec4;
+  font-size: 9px;
+  line-height: 1;
+  text-align: center;
+  text-transform: uppercase;
+  word-break: break-all;
+}

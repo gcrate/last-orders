@@ -2,7 +2,8 @@
 // runs migrations when loading an older shape.
 
 import { STATE_VERSION } from '../engine/state';
-import type { GameEvent, GameState } from '../engine/types';
+import type { GameState } from '../engine/types';
+import type { LogLine } from '../text/templates';
 
 export const SAVE_KEY = 'last-orders-save';
 
@@ -10,7 +11,7 @@ export interface SaveFile {
   version: number;
   savedAt: string;
   state: GameState;
-  log: GameEvent[];
+  log: LogLine[];
 }
 
 type Migration = (save: SaveFile) => SaveFile;
@@ -18,7 +19,7 @@ type Migration = (save: SaveFile) => SaveFile;
 // migrations[n] upgrades a save from version n to n + 1.
 const migrations: Record<number, Migration> = {};
 
-export function serialize(state: GameState, log: GameEvent[] = [], savedAt = ''): string {
+export function serialize(state: GameState, log: LogLine[] = [], savedAt = ''): string {
   const save: SaveFile = { version: STATE_VERSION, savedAt, state, log };
   return JSON.stringify(save);
 }
@@ -37,7 +38,7 @@ export function deserialize(json: string): SaveFile {
 }
 
 /** Browser helpers. Guarded so the module can be imported in Node. */
-export function saveToStorage(state: GameState, log: GameEvent[]): void {
+export function saveToStorage(state: GameState, log: LogLine[]): void {
   if (typeof localStorage === 'undefined') return;
   localStorage.setItem(SAVE_KEY, serialize(state, log.slice(-500), new Date().toISOString()));
 }
