@@ -242,8 +242,8 @@ export const DEFAULT_BALANCE = {
     desertDeathPerLevel: 0.015,
     potionUseBelow: 0.3,
     healingScrollUseBelow: 0.4,
-    descendFear: 0.65, // fear above this makes a member want to turn back at the stairs
-    hesitationFear: 0.4, // fear above this is worth a hesitation beat
+    descendFear: 0.45, // fear above this makes a member want to turn back at the stairs
+    hesitationFear: 0.25, // fear above this is worth a hesitation beat
     pressOnMinHp: 0.5,
     omenGoodChance: 0.5,
     shrineRevisitChance: 0.5,
@@ -327,10 +327,13 @@ export const DEFAULT_BALANCE = {
   },
 
   compliance: {
-    base: 0.45,
-    perLoyalty: 0.006, // per loyalty point
+    base: 0.35,
+    perLoyalty: 0.005, // per loyalty point
     perMorale: 0.002, // per morale point above 50
-    insightBonus: 0.1,
+    insightBonus: 0.1, // at full insight coverage of the level's monsters
+    unreliableLoyalty: 30, // below this the keeper flags an adventurer as unreliable
+    warnRetreatAbove: 0.15, // the keeper warns that a reckless member will ignore retreat orders above this
+    warnDepthFrom: 5, // the keeper warns that a coward will balk at depths from here
     min: 0.05,
     max: 0.97,
   },
@@ -387,7 +390,7 @@ export const DEFAULT_BALANCE = {
   },
 
   insights: {
-    sightingsToUnlock: 4,
+    sightingsToUnlock: 20,
   },
 
   // Per-monster threat multiplier, encounter weight and group size (for flavour text).

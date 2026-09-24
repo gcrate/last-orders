@@ -27,3 +27,9 @@
 .orders p {
   margin: 0;
 }
+
+.read {
+  border-top: 1px solid var(--border);
+  padding-top: 6px;
+  font-size: 13px;
+}

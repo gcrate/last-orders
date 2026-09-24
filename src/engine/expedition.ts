@@ -1,5 +1,6 @@
 // Expedition simulation: encounter sequencing, decisions and compliance, the walk home.
 
+import { checkInsights, complianceChance as complianceFor } from './advice';
 import { balance } from './balance';
 import {
   applyLevelUps,
@@ -61,11 +62,7 @@ function lootMult(s: GameState, exp: Expedition): number {
 }
 
 function complianceChance(s: GameState, exp: Expedition, a: Adventurer): number {
-  const c = balance.compliance;
-  let p = c.base + a.loyalty * c.perLoyalty + (a.morale - 50) * c.perMorale;
-  p += traitSum(a, 'compliance', { firstDay: isFirstDay(s, exp) });
-  if (exp.counsel) p += balance.keeper.counselCompliance;
-  return clamp(p, c.min, c.max);
+  return complianceFor(s, a, { counsel: exp.counsel, depth: exp.level, firstDay: isFirstDay(s, exp) });
 }
 
 /**
@@ -226,7 +223,11 @@ function exploreTick(s: GameState, exp: Expedition, sink: EventSink): void {
         exp,
         'fightBoss',
         ordered,
-        (a) => (has(a, 'glorySeeker') ? true : has(a, 'cowardly') ? false : ordered),
+        (a) => {
+          if (has(a, 'glorySeeker')) return ordered || roll(s, balance.traitExtras.glorySeekerBossDrive);
+          if (has(a, 'cowardly')) return false;
+          return ordered;
+        },
         sink,
       );
       if (fightIt) bossFight(s, exp, sink);
@@ -866,6 +867,18 @@ function returnHome(s: GameState, exp: Expedition, sink: EventSink): void {
   exp.phase = 'done';
   exp.level = 0;
 
+  // Greedy hands: a found item may never reach the stash.
+  for (const a of ms) {
+    if (!has(a, 'greedy') || exp.lootItemIds.length === 0) continue;
+    if (!roll(s, balance.traitExtras.greedyPocketGift)) continue;
+    const itemId = pickOne(s, exp.lootItemIds);
+    const item = s.items[itemId];
+    exp.lootItemIds = exp.lootItemIds.filter((id) => id !== itemId);
+    a.purse += sellPrice(item);
+    sink.emit({ type: 'LOOT_POCKETED', expeditionId: exp.id, adventurerId: a.id, itemName: item.name });
+    delete s.items[itemId];
+  }
+
   // Split the gold; each survivor gifts a share to the tavern.
   let gifts = 0;
   const share = ms.length > 0 ? Math.floor(exp.lootGold / ms.length) : 0;
@@ -933,6 +946,7 @@ function returnHome(s: GameState, exp: Expedition, sink: EventSink): void {
   for (const [monsterId, n] of Object.entries(exp.sightings)) {
     s.journal.sightings[monsterId] = (s.journal.sightings[monsterId] ?? 0) + n + scholars * balance.traitExtras.scholarlyInsight;
   }
+  checkInsights(s, sink);
 
   if (exp.objectiveDone) changeReputation(s, balance.reputation.expeditionSuccess);
 
@@ -940,6 +954,7 @@ function returnHome(s: GameState, exp: Expedition, sink: EventSink): void {
     type: 'PARTY_RETURNED',
     expeditionId: exp.id,
     survivors: ms.map((a) => a.id),
+    lost: exp.originalMemberIds.length - ms.length,
     gold: exp.lootGold,
     itemIds: [...exp.lootItemIds],
     gifts,

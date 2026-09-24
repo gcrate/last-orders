@@ -129,8 +129,20 @@ function expeditionMode(args: Args): void {
 // ---------------------------------------------------------------------------
 // Generation mode: a scripted player runs the tavern until the keeper dies.
 
+const COUNTED: GameEvent['type'][] = [
+  'DEFIANCE',
+  'COMPLIED',
+  'DESERTED',
+  'RESCUE_ATTEMPT',
+  'INSIGHT_UNLOCKED',
+  'ADVENTURER_LEFT',
+  'LOOT_POCKETED',
+  'RELATIONSHIP_CHANGED',
+];
+
 interface GenerationRun {
   record: GameState['record'];
+  counts: Record<string, number>;
   goldCurve: number[]; // gold at the start of each week
   status: GameState['status'];
 }
@@ -139,9 +151,13 @@ function runGeneration(seed: string, cfg: PolicyConfig, maxDays: number): Genera
   const s = newGame(seed);
   const goldCurve: number[] = [];
   let lastWeek = -1;
+  const counts: Record<string, number> = {};
+  const count = (events: GameEvent[]) => {
+    for (const e of events) if (COUNTED.includes(e.type)) counts[e.type] = (counts[e.type] ?? 0) + 1;
+  };
   while (s.status === 'playing' && s.hour < maxDays * 24) {
-    for (const input of policyInputs(s, cfg)) stepInPlace(s, input, 0);
-    stepInPlace(s, null, hoursUntil(s.hour, balance.time.eveningHour));
+    for (const input of policyInputs(s, cfg)) count(stepInPlace(s, input, 0));
+    count(stepInPlace(s, null, hoursUntil(s.hour, balance.time.eveningHour)));
     const week = Math.floor(s.hour / (24 * 7));
     if (week !== lastWeek) {
       goldCurve.push(s.gold);
@@ -149,7 +165,7 @@ function runGeneration(seed: string, cfg: PolicyConfig, maxDays: number): Genera
     }
   }
   if (s.status === 'playing') s.record.days = Math.floor(s.hour / 24);
-  return { record: s.record, goldCurve, status: s.status };
+  return { record: s.record, counts, goldCurve, status: s.status };
 }
 
 function generationMode(args: Args): void {
@@ -193,6 +209,11 @@ function generationMode(args: Args): void {
       String(pctl(f, 0.5)),
       String(pctl(f, 0.9)),
     ]),
+  ]);
+
+  printTable('Story events per generation', [
+    ['event', 'mean'],
+    ...COUNTED.map((t) => [t, (runs.reduce((acc, r) => acc + (r.counts[t] ?? 0), 0) / n).toFixed(1)]),
   ]);
 
   printTable('Deepest level reached', [

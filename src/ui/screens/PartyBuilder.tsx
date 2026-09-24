@@ -1,5 +1,8 @@
 import { useMemo, useState } from 'react';
+import { complianceChance, orderFriction } from '../../engine/advice';
 import { maxHp, powerOf } from '../../engine/adventurers';
+import { complianceWord, frictionText } from '../../text/templates';
+import { firstName } from '../format';
 import { balance } from '../../engine/balance';
 import { bossThreat, isBossLevel, level, levelThreat, portalsActive } from '../../engine/dungeon';
 import { ITEM_KINDS } from '../../engine/items';
@@ -70,6 +73,12 @@ export function PartyBuilder({ game, onSent, initialObjective }: Props) {
   const read = power > 0 ? dangerRead(threat / power) : null;
   const blocked = exertBlocked(s);
   const lvl = level(s, effLevel);
+  const friction = orderFriction(s, members, {
+    objective: { type: objType, level: effLevel, graveId: graveId || null, setPortal },
+    stance,
+    retreatHp: retreat / 100,
+    returnByDay: null,
+  });
 
   const send = () => {
     const supplyIds: string[] = [];
@@ -214,6 +223,21 @@ export function PartyBuilder({ game, onSent, initialObjective }: Props) {
           <p className={read.tone}>
             Your read: {read.text}
           </p>
+        )}
+        {members.length > 0 && (
+          <div className={styles.read}>
+            <h4>Will they listen?</h4>
+            {members.map((id) => (
+              <div key={id} className="muted">
+                {firstName(s.adventurers[id].name)}: {complianceWord(complianceChance(s, s.adventurers[id], { counsel, depth: effLevel, firstDay: false }))}
+              </div>
+            ))}
+            {friction.map((f, i) => (
+              <div key={i} className={f.kind === 'friends' ? 'tone-good' : 'tone-bad'}>
+                {frictionText(f, s)}
+              </div>
+            ))}
+          </div>
         )}
         <button className="primary" disabled={members.length === 0 || (objType === 'recover' && !graveId)} onClick={send}>
           Send them

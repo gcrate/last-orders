@@ -426,9 +426,10 @@ export type GameEvent =
   | (PartyEv & { type: 'OBJECTIVE_DONE'; objective: Objective })
   | (PartyEv & { type: 'TURNED_BACK'; level: number; reason: ReturnReason })
   | (PartyEv & { type: 'PORTAL_OPENED'; level: number })
-  | (PartyEv & { type: 'PARTY_RETURNED'; survivors: string[]; gold: number; itemIds: string[]; gifts: number; days: number })
+  | (PartyEv & { type: 'PARTY_RETURNED'; survivors: string[]; lost: number; gold: number; itemIds: string[]; gifts: number; days: number })
   | (PartyEv & { type: 'PARTY_WIPED'; level: number })
-  | (PartyEv & { type: 'LEVEL_UP'; adventurerId: string; level: number });
+  | (PartyEv & { type: 'LEVEL_UP'; adventurerId: string; level: number })
+  | (PartyEv & { type: 'LOOT_POCKETED'; adventurerId: string; itemName: string });
 
 export type Decision = 'retreat' | 'pressOn' | 'descend' | 'lootGrave' | 'fightBoss' | 'skipBoss' | 'rest';
 

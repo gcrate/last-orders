@@ -2,6 +2,7 @@
 // picked by a hash of the event so the same event always reads the same way, but different
 // events of the same type don't all read identically. Short, understated, specific.
 
+import type { OrderFriction } from '../engine/advice';
 import { monster } from '../engine/monsters';
 import { hashString } from '../engine/rng';
 import { traitDef } from '../engine/traits';
@@ -100,14 +101,14 @@ const COMPLIED: Partial<Record<Decision, string[]>> = {
   lootGrave: ['{name} left the grave undisturbed, as told.'],
 };
 
-const RETURN_REASON: Record<ReturnReason, string> = {
-  objective: 'Job done, they turned for home.',
-  hp: 'Too badly hurt to go on, they turned back.',
-  morale: 'Their nerve was gone. They turned back.',
-  returnBy: 'Mindful of the day, they started back.',
-  supplies: 'Supplies ran low. They started back.',
-  boss: 'They fell back from the lair.',
-  fear: 'They turned back.',
+const RETURN_REASON: Record<ReturnReason, string[]> = {
+  objective: ['Job done, they turned for home from level {level}.', 'That was what they came for. They started back up from level {level}.', 'On level {level}, they called it done.'],
+  hp: ['Too badly hurt to go on, they turned back on level {level}.', 'They were bleeding too much to go deeper than level {level}.', 'On level {level} they had had enough of being hurt.'],
+  morale: ['Their nerve was gone. They turned back on level {level}.', 'Nobody wanted to go on past level {level}.'],
+  returnBy: ['Mindful of the day, they started back from level {level}.', 'You had said to be home by now. They turned back on level {level}.'],
+  supplies: ['Supplies ran low on level {level}. They started back.'],
+  boss: ['They fell back from the lair on level {level}.', 'They left the boss of level {level} for another day.'],
+  fear: ['They turned back on level {level}.', 'On level {level}, they lost their nerve and turned for home.'],
 };
 
 const STAT_NAMES: Record<string, string> = {
@@ -217,7 +218,17 @@ export function describeEvent(e: GameEvent, s: GameState): LogLine | null {
         'keeper',
       );
     case 'INSIGHT_UNLOCKED':
-      return line(`That sounds like ${monsterPhrase(e.monsterId, 1)}. You remember how to deal with those. (Insight)`, 'good');
+      return line(
+        fill(
+          choose(e, [
+            'That sounds like {m}. You remember how to deal with those. (Insight)',
+            'From their description, {m}. You fought those once. You tell them what worked. (Insight)',
+            '{M}. You know that one. You write down what they should do next time. (Insight)',
+          ]),
+          { m: monsterPhrase(e.monsterId, 1), M: capital(monsterPhrase(e.monsterId, 1)) },
+        ),
+        'good',
+      );
     case 'KEEPER_DIED':
       return line('The keeper died in the night.', 'death');
     case 'NEW_GENERATION':
@@ -336,21 +347,68 @@ export function describeEvent(e: GameEvent, s: GameState): LogLine | null {
     case 'OBJECTIVE_DONE':
       return null;
     case 'TURNED_BACK':
-      return line(`${RETURN_REASON[e.reason]} (level ${e.level})`, e.reason === 'objective' ? 'info' : 'bad');
+      return line(fill(choose(e, RETURN_REASON[e.reason]), { level: e.level }), e.reason === 'objective' ? 'info' : 'bad');
     case 'PORTAL_OPENED':
       return line(`They read the portal scroll on level ${e.level} and stepped home through the light.`, 'info');
     case 'PARTY_RETURNED': {
       const names = list(e.survivors.map((id) => first(s, id)));
       const loot = e.gold > 0 || e.itemIds.length > 0 ? ` They brought back ${e.gold} gold${e.itemIds.length ? ` and ${e.itemIds.length} item${e.itemIds.length > 1 ? 's' : ''}` : ''}.` : '';
       const gifts = e.gifts > 0 ? ` ${e.gifts} gold for the tavern.` : '';
-      return line(`${names} came home after ${e.days} day${e.days > 1 ? 's' : ''}.${loot}${gifts}`, 'info');
+      const days = `${e.days} day${e.days > 1 ? 's' : ''}`;
+      const head =
+        e.lost > 0
+          ? fill(choose(e, ['Only {names} came home, after {days}.', '{names} came back. Not everyone did.', 'After {days}, {names} walked in the door. They didn\'t say much.']), { names, days })
+          : fill(choose(e, ['{names} came home after {days}.', '{names} are back, after {days} below.', 'The door opened: {names}, home after {days}.']), { names, days });
+      return line(`${head}${loot}${gifts}`, e.lost > 0 ? 'bad' : 'info');
     }
     case 'PARTY_WIPED':
       return line(fill(choose(e, ['None of them came back from level {level}.', 'The whole party was lost on level {level}.']), { level: e.level }), 'death');
+    case 'LOOT_POCKETED':
+      return line(
+        fill(choose(e, ['{name} kept back {item} for themselves.', 'The {item} never made it to the stash. {name} looks pleased with something.', '{name}\'s pack was heavier going up than coming down.']), {
+          name: first(s, e.adventurerId),
+          item: e.itemName,
+        }),
+        'bad',
+      );
     case 'LEVEL_UP':
       return line(`${first(s, e.adventurerId)} is level ${e.level} now.`, 'quiet');
   }
   return null;
+}
+
+/** The keeper's private read on how a party will take its orders. */
+export function frictionText(f: OrderFriction, s: GameState): string {
+  const n = first(s, f.adventurerId);
+  switch (f.kind) {
+    case 'ignoresRetreat':
+      return `${n} won't turn back when you'd want them to.`;
+    case 'fearsDepth':
+      return `${n} will want to turn back early.`;
+    case 'wantsBoss':
+      return `${n} will want a go at the boss on level ${f.level}.`;
+    case 'wantsMore':
+      return `${n} will find these orders small, and may go further.`;
+    case 'drawnToGraves':
+      return `${n} will be drawn to any grave along the way.`;
+    case 'firstDay':
+      return `${n} will be slow on the first day, after last night.`;
+    case 'unreliable':
+      return `${n} doesn't much care what you think.`;
+    case 'rivals':
+      return `${n} and ${first(s, f.otherId)} can't stand each other. That will cost them.`;
+    case 'friends':
+      return `${n} and ${first(s, f.otherId)} will look out for each other.`;
+  }
+}
+
+/** A word for a compliance chance. */
+export function complianceWord(p: number): string {
+  if (p >= 0.85) return 'will do as told';
+  if (p >= 0.7) return 'usually listens';
+  if (p >= 0.5) return 'listens, mostly';
+  if (p >= 0.3) return 'goes their own way';
+  return 'does what they like';
 }
 
 function causeText(cause: string): string {
