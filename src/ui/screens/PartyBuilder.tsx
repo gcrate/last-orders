@@ -8,11 +8,12 @@ import { bossThreat, isBossLevel, level, levelThreat, portalsActive } from '../.
 import { ITEM_KINDS } from '../../engine/items';
 import { exertBlocked } from '../../engine/keeper';
 import { dayOf } from '../../engine/time';
-import type { ItemKind, ObjectiveType, Stance } from '../../engine/types';
+import type { Adventurer, EquipSlot, GameState, ItemKind, ObjectiveType, Stance } from '../../engine/types';
 import { AdventurerCard } from '../components/AdventurerCard';
 import { Sprite } from '../components/Sprite';
 import { SupplyShop } from '../components/SupplyShop';
 import type { GameApi } from '../useGame';
+import { itemStats } from './Tavern';
 import styles from './PartyBuilder.module.css';
 
 interface Props {
@@ -37,6 +38,36 @@ function dangerRead(ratio: number): { text: string; tone: string } {
   return { text: 'You would be sending them to die.', tone: 'tone-death' };
 }
 
+const SLOTS: EquipSlot[] = ['weapon', 'armour', 'trinket'];
+
+/** Shown while hovering a card, so you can see what they'd carry into the dungeon. */
+function EquipmentPopup({ s, a }: { s: GameState; a: Adventurer }) {
+  return (
+    <div className={`panel ${styles.equipPopup}`} role="tooltip">
+      {SLOTS.map((slot) => {
+        const id = a.equipment[slot];
+        const item = id ? s.items[id] : null;
+        return (
+          <div key={slot} className="row" style={{ gap: 6 }}>
+            <span className="muted" style={{ width: 56, textTransform: 'capitalize' }}>
+              {slot}
+            </span>
+            {item ? (
+              <>
+                <Sprite id={item.asset} />
+                <span className={item.legendary ? 'tone-good' : ''}>{item.name}</span>
+                <span className="faint">{itemStats(item)}</span>
+              </>
+            ) : (
+              <span className="faint">none</span>
+            )}
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+
 export function PartyBuilder({ game, onSent, initialObjective }: Props) {
   const { state: s, dispatch } = game;
   const residents = Object.values(s.adventurers).filter((a) => a.status === 'resident');
@@ -49,12 +80,12 @@ export function PartyBuilder({ game, onSent, initialObjective }: Props) {
   const [retreat, setRetreat] = useState(40);
   const [returnBy, setReturnBy] = useState<string>('');
   const [counsel, setCounsel] = useState(false);
-  const [portalId, setPortalId] = useState<string>('');
+  // null until the player picks: then we default to the deepest portal they can use.
+  const [portalChoice, setPortalChoice] = useState<string | null>(null);
   const [supplies, setSupplies] = useState<Record<string, number>>({});
   const [shopOpen, setShopOpen] = useState(false);
 
   const graves = Object.values(s.graves).filter((g) => !g.recovered);
-  const portals = portalsActive(s).filter((p) => p.level <= objLevel);
   const stashByKind = useMemo(() => {
     const m = new Map<ItemKind, string[]>();
     for (const id of s.stash) {
@@ -71,6 +102,12 @@ export function PartyBuilder({ game, onSent, initialObjective }: Props) {
 
   const power = members.reduce((t, id) => t + powerOf(s, s.adventurers[id]), 0);
   const effLevel = objType === 'recover' && graveId ? s.graves[graveId]?.level ?? objLevel : objLevel;
+  const portals = portalsActive(s).filter((p) => p.level <= effLevel);
+  const deepestPortal = portals
+    .filter((p) => !p.decayed || s.gold >= balance.portals.decayedCost)
+    .reduce<(typeof portals)[number] | null>((best, p) => (!best || p.level > best.level ? p : best), null);
+  const portalId =
+    portalChoice !== null && (portalChoice === '' || portals.some((p) => p.id === portalChoice)) ? portalChoice : deepestPortal?.id ?? '';
   const threat = objType === 'boss' && isBossLevel(effLevel) ? bossThreat(s, effLevel) : levelThreat(s, effLevel);
   const read = power > 0 ? dangerRead(threat / power) : null;
   const blocked = exertBlocked(s);
@@ -101,6 +138,7 @@ export function PartyBuilder({ game, onSent, initialObjective }: Props) {
     if (events.some((e) => e.type === 'PARTY_DEPARTED')) {
       setMembers([]);
       setSupplies({});
+      setPortalChoice(null);
       onSent();
     }
   };
@@ -114,9 +152,12 @@ export function PartyBuilder({ game, onSent, initialObjective }: Props) {
         {residents.length === 0 && <p className="faint">Nobody is at the tavern.</p>}
         <div className={styles.cards}>
           {residents.map((a) => (
-            <AdventurerCard key={a.id} s={s} a={a} compact selected={members.includes(a.id)} onClick={() => toggle(a.id)}>
-              {a.hp < maxHp(s, a) * 0.5 && <span className="tone-bad" style={{ fontSize: 12 }}>Still hurt.</span>}
-            </AdventurerCard>
+            <div key={a.id} className={styles.cardWrap}>
+              <AdventurerCard s={s} a={a} compact selected={members.includes(a.id)} onClick={() => toggle(a.id)}>
+                {a.hp < maxHp(s, a) * 0.5 && <span className="tone-bad" style={{ fontSize: 12 }}>Still hurt.</span>}
+              </AdventurerCard>
+              <EquipmentPopup s={s} a={a} />
+            </div>
           ))}
         </div>
       </section>
@@ -187,7 +228,7 @@ export function PartyBuilder({ game, onSent, initialObjective }: Props) {
         {portals.length > 0 && (
           <div className="row">
             <label>Start at</label>
-            <select value={portalId} onChange={(e) => setPortalId(e.target.value)}>
+            <select value={portalId} onChange={(e) => setPortalChoice(e.target.value)}>
               <option value="">the tavern steps</option>
               {portals.map((p) => (
                 <option key={p.id} value={p.id}>

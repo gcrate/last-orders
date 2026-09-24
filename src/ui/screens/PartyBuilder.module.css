@@ -33,3 +33,37 @@
   padding-top: 6px;
   font-size: 13px;
 }
+
+.cardWrap {
+  position: relative;
+}
+
+.equipPopup {
+  display: none;
+  position: absolute;
+  z-index: 20;
+  left: 8px;
+  right: 8px;
+  top: calc(100% + 2px);
+  padding: 6px 10px;
+  flex-direction: column;
+  gap: 3px;
+  font-size: 13px;
+  pointer-events: none;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+}
+
+/* Only after a second of hovering, so sweeping the mouse across the cards doesn't flash it. */
+.cardWrap:hover .equipPopup {
+  display: flex;
+  animation: showAfterDelay 0s 1s both;
+}
+
+@keyframes showAfterDelay {
+  from {
+    visibility: hidden;
+  }
+  to {
+    visibility: visible;
+  }
+}

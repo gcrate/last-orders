@@ -186,7 +186,7 @@ export function Tavern({ game, onOpenAdventurer }: Props) {
   );
 }
 
-function itemStats(i: Item): string {
+export function itemStats(i: Item): string {
   const parts: string[] = [];
   if (i.attack) parts.push(`atk ${i.attack}`);
   if (i.spell) parts.push(`spell ${i.spell}`);

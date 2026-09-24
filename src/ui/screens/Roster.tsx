@@ -114,7 +114,7 @@ function Detail({ game, a }: { game: GameApi; a: Adventurer }) {
       .filter((o) => o.id !== a.id && o.status === 'resident' && o.equipment[slot] && s.items[o.equipment[slot]!])
       .map((o) => ({ owner: o, item: s.items[o.equipment[slot]!] }));
   const relations = Object.entries(a.relations)
-    .filter(([id, v]) => Math.abs(v) >= 15 && s.adventurers[id])
+    .filter(([id, v]) => Math.abs(v) >= 15 && s.adventurers[id] && s.adventurers[id].status !== 'dead')
     .sort((x, y) => y[1] - x[1]);
 
   return (
