@@ -182,6 +182,10 @@ function generationMode(args: Args): void {
       ['deaths', (g) => g.deaths],
       ['gold earned', (g) => g.goldEarned],
       ['retired alive', (g) => g.retiredAlive],
+      ['graves recovered', (g) => g.gravesRecovered],
+      ['portals opened', (g) => g.portalsOpened],
+      ['deepest portal', (g) => g.deepestPortal],
+      ['revived', (g) => g.revived],
     ] as [string, (g: GenerationRun['record']) => number][]).map(([name, f]) => [
       name,
       avg(f).toFixed(1),

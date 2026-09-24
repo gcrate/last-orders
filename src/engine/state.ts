@@ -10,7 +10,7 @@ import { seedRng } from './rng';
 import type { GameState, GenerationRecord, ItemKind } from './types';
 import { pickOne } from './util';
 
-export const STATE_VERSION = 1;
+export const STATE_VERSION = 2;
 
 export function emptyRecord(generation: number, keeperName: string): GenerationRecord {
   return {
@@ -28,6 +28,9 @@ export function emptyRecord(generation: number, keeperName: string): GenerationR
     retiredAlive: 0,
     deepestPortal: 0,
     goldEarned: 0,
+    gravesRecovered: 0,
+    portalsOpened: 0,
+    revived: 0,
     legacy: null,
   };
 }

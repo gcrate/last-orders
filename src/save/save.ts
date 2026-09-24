@@ -17,7 +17,18 @@ export interface SaveFile {
 type Migration = (save: SaveFile) => SaveFile;
 
 // migrations[n] upgrades a save from version n to n + 1.
-const migrations: Record<number, Migration> = {};
+const migrations: Record<number, Migration> = {
+  // v2: generation records count graves recovered, portals opened and revivals.
+  1: (save) => {
+    const records = [save.state.record, ...(save.state.history ?? [])] as Partial<GameState['record']>[];
+    for (const r of records) {
+      r.gravesRecovered ??= 0;
+      r.portalsOpened ??= 0;
+      r.revived ??= 0;
+    }
+    return { ...save, version: 2 };
+  },
+};
 
 export function serialize(state: GameState, log: LogLine[] = [], savedAt = ''): string {
   const save: SaveFile = { version: STATE_VERSION, savedAt, state, log };

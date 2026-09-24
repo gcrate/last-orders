@@ -249,3 +249,6 @@ Minor questions the doc didn't answer, resolved with the simplest option. Revisi
 - **Desertion:** a member whose morale collapses may leave the party and walk home alone, with a death risk that grows with depth.
 - **Rest** marks the rest of today as a rest day; it can't be taken on a day the keeper has already spent effort (training, counsel).
 - **Stranger events** reveal the way down through the next level.
+- **Grave pull:** parties stop for a grave they pass if someone cares: a friend of the dead, a posted bounty, or greedy members. The same things make graves turn up sooner while exploring.
+- **Shrine revival:** "body recovered" means the grave is recovered and brought home within 10 days of the death. The shrine tier sets the chance.
+- **Bounties** are paid in full from the tavern's gold when posted, and go to the finder's purse on recovery.

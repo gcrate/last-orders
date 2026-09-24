@@ -275,6 +275,9 @@ export interface GenerationRecord {
   retiredAlive: number;
   deepestPortal: number;
   goldEarned: number;
+  gravesRecovered: number;
+  portalsOpened: number;
+  revived: number;
   legacy: LegacyId | null;
 }
 

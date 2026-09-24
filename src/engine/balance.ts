@@ -235,6 +235,9 @@ export const DEFAULT_BALANCE = {
     lootTierRollMin: -0.5,
     lootTierRollMax: 0.7,
     graveRecoverWeightMult: 4,
+    transitGraveChance: 0.35, // per unit of grave draw, when passing through a level
+    graveFriendDraw: 1,
+    graveBountyDraw: 1,
     portalUseMinDepth: 3, // retreating parties burn a portal scroll at or below this depth
     desertDeathPerLevel: 0.015,
     potionUseBelow: 0.3,

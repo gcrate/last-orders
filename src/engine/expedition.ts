@@ -245,6 +245,12 @@ function exploreTick(s: GameState, exp: Expedition, sink: EventSink): void {
       fight(s, exp, ordinaryEncounter(s, exp.level, 1), sink);
       if (members(s, exp).length === 0) return;
     }
+    // A grave on the way: they stop for it if someone cares (a friend, a bounty, greed).
+    const wanted = gravesOnLevel(s, exp.level).find((g) => graveDraw(s, exp, g) > 0);
+    if (wanted && roll(s, Math.min(1, balance.expedition.transitGraveChance * graveDraw(s, exp, wanted)))) {
+      graveFound(s, exp, wanted, sink);
+      if (members(s, exp).length === 0) return;
+    }
     afterEncounter(s, exp, sink);
     if (exp.phase === 'exploring') tryDescend(s, exp, sink);
     return;
@@ -461,7 +467,7 @@ function runEncounter(s: GameState, exp: Expedition, sink: EventSink): void {
   const graves = gravesOnLevel(s, exp.level);
   const o = exp.orders.objective;
   const seekingGrave = o.type === 'recover' && o.level === exp.level && !!o.graveId && graves.some((g) => g.id === o.graveId);
-  let graveWeight = graves.length > 0 ? w.grave : 0;
+  let graveWeight = graves.length > 0 ? w.grave * Math.max(1, Math.max(...graves.map((g) => graveDraw(s, exp, g)))) : 0;
   if (seekingGrave) graveWeight *= e.graveRecoverWeightMult;
   const combatWeight = w.combat * l.population + (l.features.includes('lair') ? d.lairCombatBonus : 0);
 
@@ -698,6 +704,21 @@ function useFeature(s: GameState, exp: Expedition, f: FeatureId, sink: EventSink
 // ---------------------------------------------------------------------------
 // Graves
 
+/**
+ * How strongly this party is pulled toward a grave: 0 if nobody cares. Friends of the dead,
+ * a posted bounty and greedy members all add to it.
+ */
+function graveDraw(s: GameState, exp: Expedition, g: Grave): number {
+  const e = balance.expedition;
+  let draw = 0;
+  const ms = members(s, exp);
+  if (ms.some((a) => isFriend(a, g.adventurerId))) draw += e.graveFriendDraw;
+  if (g.bounty > 0) draw += e.graveBountyDraw;
+  draw += ms.filter((a) => has(a, 'greedy')).length * balance.traitExtras.greedyGraveAttraction;
+  if (exp.orders.objective.type === 'recover' && exp.orders.objective.graveId === g.id) draw += e.graveRecoverWeightMult;
+  return draw;
+}
+
 function graveFound(s: GameState, exp: Expedition, g: Grave, sink: EventSink): void {
   const ms = members(s, exp);
   const finder = ms.find((a) => isFriend(a, g.adventurerId)) ?? ms.find((a) => has(a, 'greedy')) ?? pickOne(s, ms);
@@ -727,6 +748,7 @@ function graveFound(s: GameState, exp: Expedition, g: Grave, sink: EventSink): v
 
 function recoverGrave(s: GameState, exp: Expedition, g: Grave, finder: Adventurer, sink: EventSink): void {
   g.recovered = true;
+  s.record.gravesRecovered += 1;
   exp.recoveredGraveIds.push(g.id);
   exp.lootGold += g.gold;
   let keptItemId: string | null = null;
@@ -784,6 +806,7 @@ function openPortalHome(s: GameState, exp: Expedition, sink: EventSink): void {
     };
   }
   if (exp.level > s.record.deepestPortal) s.record.deepestPortal = exp.level;
+  s.record.portalsOpened += 1;
   sink.emit({ type: 'PORTAL_OPENED', expeditionId: exp.id, level: exp.level });
   returnHome(s, exp, sink);
 }
@@ -859,6 +882,23 @@ function returnHome(s: GameState, exp: Expedition, sink: EventSink): void {
 
   // Items and unused supplies go to the stash.
   s.stash.push(...exp.lootItemIds, ...exp.supplyIds);
+
+  // The shrine can sometimes bring back the recently dead, if their bodies came home.
+  const up = balance.upgrades;
+  for (const graveId of exp.recoveredGraveIds) {
+    const g = s.graves[graveId];
+    const dead = g ? s.adventurers[g.adventurerId] : undefined;
+    if (!g || !dead || dead.status !== 'dead' || s.upgrades.shrine === 0) continue;
+    if (s.hour - g.hour > up.shrineReviveDays * balance.time.hoursPerDay) continue;
+    if (!roll(s, up.shrineReviveChance[s.upgrades.shrine])) continue;
+    dead.status = 'resident';
+    dead.hp = 1;
+    dead.death = null;
+    dead.morale = balance.adventurer.moraleStart;
+    s.journal.fallen = s.journal.fallen.filter((f) => f.adventurerId !== dead.id);
+    s.record.revived += 1;
+    sink.emit({ type: 'REVIVED', expeditionId: exp.id, adventurerId: dead.id });
+  }
 
   // Experience, levels, morale, loyalty.
   for (const a of ms) {

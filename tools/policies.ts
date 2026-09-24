@@ -131,6 +131,11 @@ export function policyInputs(s: GameState, cfg: PolicyConfig): PlayerInput[] {
 
   // 6. Send parties.
   let counselled = false;
+  const claimedGraves = new Set(
+    Object.values(s.expeditions)
+      .map((e) => e.orders.objective.graveId)
+      .filter((g): g is string => !!g),
+  );
   const ready = residentsOf(s)
     .filter((a) => a.hp >= maxHp(s, a) * 0.75)
     .sort((a, b) => powerOf(s, b) - powerOf(s, a));
@@ -138,7 +143,15 @@ export function policyInputs(s: GameState, cfg: PolicyConfig): PlayerInput[] {
   while (ready.length >= Math.min(size, 3)) {
     const party = ready.splice(0, size);
     const power = party.reduce((t, a) => t + powerOf(s, a), 0);
-    const plan = planObjective(s, power, cfg);
+    let plan = planObjective(s, power, cfg);
+    // Now and then, fetch back a grave that lies within safe reach.
+    const grave = Object.values(s.graves)
+      .filter((g) => !g.recovered && !g.guardianAlive && g.level <= plan.level && !claimedGraves.has(g.id))
+      .sort((a, b) => b.itemIds.length - a.itemIds.length)[0];
+    if (grave && plan.type !== 'boss') {
+      claimedGraves.add(grave.id);
+      plan = { type: 'recover', level: grave.level, portalId: bestPortal(s, grave.level), graveId: grave.id };
+    }
     const supplies: string[] = [];
     const take = (kind: ItemKind, n: number) => {
       for (const id of s.stash) {
@@ -159,7 +172,7 @@ export function policyInputs(s: GameState, cfg: PolicyConfig): PlayerInput[] {
       type: 'SEND_PARTY',
       memberIds: party.map((a) => a.id),
       orders: {
-        objective: { type: plan.type, level: plan.level, graveId: null, setPortal: plan.type === 'push' && plan.level >= 5 },
+        objective: { type: plan.type, level: plan.level, graveId: plan.graveId ?? null, setPortal: plan.type === 'push' && plan.level >= 5 },
         stance: cfg.stance,
         retreatHp: cfg.retreatHp,
         returnByDay: null,
@@ -183,9 +196,10 @@ export function policyInputs(s: GameState, cfg: PolicyConfig): PlayerInput[] {
 }
 
 interface Plan {
-  type: 'push' | 'boss' | 'clear';
+  type: 'push' | 'boss' | 'clear' | 'recover';
   level: number;
   portalId: string | null;
+  graveId?: string;
 }
 
 function planObjective(s: GameState, power: number, cfg: PolicyConfig): Plan {
