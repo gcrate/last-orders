@@ -1,0 +1,19 @@
+.layout {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  gap: 12px;
+  align-items: start;
+}
+
+.entry {
+  padding: 5px 0;
+  border-bottom: 1px solid #2f261f;
+}
+
+.fallen {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  padding: 4px 0;
+  border-bottom: 1px solid #2f261f;
+}

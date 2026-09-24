@@ -26,7 +26,7 @@ export const DEFAULT_BALANCE = {
     startDaysMax: 180,
     heirAgeMin: 24,
     heirAgeMax: 50,
-    restDecline: 0.5, // days of life lost on a rest day instead of 1
+    restDecline: 0.85, // days of life lost on a rest day instead of 1
     trainDaysCost: 3,
     trainGain: 2,
     trainLoyalty: 12,

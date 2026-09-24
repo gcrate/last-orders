@@ -6,18 +6,20 @@ import { Sprite } from './components/Sprite';
 import { clockText, dateText, generationDay } from './format';
 import { PartyBuilder } from './screens/PartyBuilder';
 import { DepthView } from './screens/DepthView';
+import { Journal } from './screens/Journal';
 import { Roster } from './screens/Roster';
 import { Tavern } from './screens/Tavern';
 import { type Speed, useGame } from './useGame';
 import styles from './App.module.css';
 
-type Tab = 'tavern' | 'roster' | 'party' | 'depth';
+type Tab = 'tavern' | 'roster' | 'party' | 'depth' | 'journal';
 
 const TABS: { id: Tab; label: string }[] = [
   { id: 'tavern', label: 'Tavern' },
   { id: 'roster', label: 'Roster' },
   { id: 'party', label: 'Send a party' },
   { id: 'depth', label: 'The dungeon' },
+  { id: 'journal', label: 'Journal' },
 ];
 
 export function App() {
@@ -89,6 +91,7 @@ export function App() {
         {tab === 'party' && (
           <PartyBuilder key={plan?.key ?? 0} game={game} initialObjective={plan ?? undefined} onSent={() => setTab('tavern')} />
         )}
+        {tab === 'journal' && <Journal game={game} />}
         {tab === 'depth' && (
           <DepthView game={game} onRecover={(graveId, level) => planParty('recover', level, graveId)} onSendTo={(level) => planParty('push', level)} />
         )}

@@ -4,6 +4,7 @@
 
 import type { OrderFriction } from '../engine/advice';
 import { monster } from '../engine/monsters';
+import { INSIGHT_TEXT } from './insights';
 import { hashString } from '../engine/rng';
 import { traitDef } from '../engine/traits';
 import type { Decision, GameEvent, GameState, Objective, ReturnReason } from '../engine/types';
@@ -221,11 +222,16 @@ export function describeEvent(e: GameEvent, s: GameState): LogLine | null {
       return line(
         fill(
           choose(e, [
-            'That sounds like {m}. You remember how to deal with those. (Insight)',
-            'From their description, {m}. You fought those once. You tell them what worked. (Insight)',
-            '{M}. You know that one. You write down what they should do next time. (Insight)',
+            'That sounds like {m}. {advice}',
+            'From their description, {m}. You fought those once. {advice}',
+            '{M}. You know that one. You write it down: {advice}',
           ]),
-          { m: monsterPhrase(e.monsterId, 1), M: capital(monsterPhrase(e.monsterId, 1)) },
+          {
+            m: monsterPhrase(e.monsterId, 1),
+            M: capital(monsterPhrase(e.monsterId, 1)),
+            // The remembered advice, minus its opening naming sentence.
+            advice: (INSIGHT_TEXT[e.monsterId] ?? '').split('. ').slice(1).join('. ') || 'You know what to do.',
+          },
         ),
         'good',
       );

@@ -143,6 +143,7 @@ const COUNTED: GameEvent['type'][] = [
 interface GenerationRun {
   record: GameState['record'];
   counts: Record<string, number>;
+  keeper: GameState['keeper'];
   goldCurve: number[]; // gold at the start of each week
   status: GameState['status'];
 }
@@ -165,7 +166,7 @@ function runGeneration(seed: string, cfg: PolicyConfig, maxDays: number): Genera
     }
   }
   if (s.status === 'playing') s.record.days = Math.floor(s.hour / 24);
-  return { record: s.record, counts, goldCurve, status: s.status };
+  return { record: s.record, counts, keeper: s.keeper, goldCurve, status: s.status };
 }
 
 function generationMode(args: Args): void {
@@ -209,6 +210,16 @@ function generationMode(args: Args): void {
       String(pctl(f, 0.5)),
       String(pctl(f, 0.9)),
     ]),
+  ]);
+
+  const kAvg = (f: (k: GameState['keeper']) => number) => (runs.reduce((t, r) => t + f(r.keeper), 0) / n).toFixed(1);
+  printTable('The keeper', [
+    ['measure', 'mean'],
+    ['starting days', kAvg((k) => k.startDays)],
+    ['days spent on effort', kAvg((k) => k.effortDaysSpent)],
+    ['rest days', kAvg((k) => k.restDays)],
+    ['tonics', kAvg((k) => k.tonicsTaken)],
+    ['healer visits', kAvg((k) => k.healerVisits)],
   ]);
 
   printTable('Story events per generation', [

@@ -166,7 +166,7 @@ export function policyInputs(s: GameState, cfg: PolicyConfig): PlayerInput[] {
     take('potion', 2);
     take('healing', 1);
     if (plan.level >= 5) take('portal', 1);
-    const counsel = cfg.counselDeep && !counselled && plan.level >= 5 && exertBlocked(s) === null;
+    const counsel = cfg.counselDeep && !counselled && plan.type === 'boss' && exertBlocked(s) === null;
     if (counsel) counselled = true;
     out.push({
       type: 'SEND_PARTY',
