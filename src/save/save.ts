@@ -1,0 +1,59 @@
+// Versioned save files. The engine state is plain JSON; the save wraps it with a version and
+// runs migrations when loading an older shape.
+
+import { STATE_VERSION } from '../engine/state';
+import type { GameEvent, GameState } from '../engine/types';
+
+export const SAVE_KEY = 'last-orders-save';
+
+export interface SaveFile {
+  version: number;
+  savedAt: string;
+  state: GameState;
+  log: GameEvent[];
+}
+
+type Migration = (save: SaveFile) => SaveFile;
+
+// migrations[n] upgrades a save from version n to n + 1.
+const migrations: Record<number, Migration> = {};
+
+export function serialize(state: GameState, log: GameEvent[] = [], savedAt = ''): string {
+  const save: SaveFile = { version: STATE_VERSION, savedAt, state, log };
+  return JSON.stringify(save);
+}
+
+export function deserialize(json: string): SaveFile {
+  let save = JSON.parse(json) as SaveFile;
+  if (typeof save.version !== 'number') throw new Error('Not a Last Orders save file.');
+  if (save.version > STATE_VERSION) throw new Error('This save is from a newer version of the game.');
+  while (save.version < STATE_VERSION) {
+    const migrate = migrations[save.version];
+    if (!migrate) throw new Error(`No migration from save version ${save.version}.`);
+    save = migrate(save);
+  }
+  save.state.version = STATE_VERSION;
+  return save;
+}
+
+/** Browser helpers. Guarded so the module can be imported in Node. */
+export function saveToStorage(state: GameState, log: GameEvent[]): void {
+  if (typeof localStorage === 'undefined') return;
+  localStorage.setItem(SAVE_KEY, serialize(state, log.slice(-500), new Date().toISOString()));
+}
+
+export function loadFromStorage(): SaveFile | null {
+  if (typeof localStorage === 'undefined') return null;
+  const raw = localStorage.getItem(SAVE_KEY);
+  if (!raw) return null;
+  try {
+    return deserialize(raw);
+  } catch {
+    return null;
+  }
+}
+
+export function clearStorage(): void {
+  if (typeof localStorage === 'undefined') return;
+  localStorage.removeItem(SAVE_KEY);
+}
