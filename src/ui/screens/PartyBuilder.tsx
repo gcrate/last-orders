@@ -11,6 +11,7 @@ import { dayOf } from '../../engine/time';
 import type { ItemKind, ObjectiveType, Stance } from '../../engine/types';
 import { AdventurerCard } from '../components/AdventurerCard';
 import { Sprite } from '../components/Sprite';
+import { SupplyShop } from '../components/SupplyShop';
 import type { GameApi } from '../useGame';
 import styles from './PartyBuilder.module.css';
 
@@ -50,6 +51,7 @@ export function PartyBuilder({ game, onSent, initialObjective }: Props) {
   const [counsel, setCounsel] = useState(false);
   const [portalId, setPortalId] = useState<string>('');
   const [supplies, setSupplies] = useState<Record<string, number>>({});
+  const [shopOpen, setShopOpen] = useState(false);
 
   const graves = Object.values(s.graves).filter((g) => !g.recovered);
   const portals = portalsActive(s).filter((p) => p.level <= objLevel);
@@ -196,7 +198,11 @@ export function PartyBuilder({ game, onSent, initialObjective }: Props) {
           </div>
         )}
 
-        <h4>Supplies</h4>
+        <div className="row" style={{ justifyContent: 'space-between' }}>
+          <h4>Supplies</h4>
+          <button onClick={() => setShopOpen(true)}>Buy supplies…</button>
+        </div>
+        {shopOpen && <SupplyShop game={game} onClose={() => setShopOpen(false)} />}
         {stashByKind.size === 0 && <span className="faint">Nothing in the stash to take.</span>}
         {[...stashByKind.entries()].map(([kind, ids]) => (
           <div key={kind} className="row">
