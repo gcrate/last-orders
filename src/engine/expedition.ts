@@ -27,6 +27,7 @@ import {
 } from './dungeon';
 import { CONSUMABLE_KINDS, GEAR_KINDS, SCROLL_KINDS, createItem, sellPrice } from './items';
 import { keeperShock } from './keeper';
+import { recordVictory } from './legacy';
 import { bandMonsters, bossForBand, monster, monsterStats } from './monsters';
 import { changeReputation } from './reputation';
 import { dayOf } from './time';
@@ -559,7 +560,9 @@ function bossFight(s: GameState, exp: Expedition, sink: EventSink): void {
     changeReputation(s, balance.reputation.bossKill);
     treasure(s, exp, balance.dungeon.bossLootMult, false, sink);
     if (isSourceLevel(exp.level)) {
-      s.status = 'won';
+      // They walk home to tell it. The curse is lifted.
+      returnHome(s, exp, sink);
+      recordVictory(s);
       sink.emit({ type: 'GAME_WON', adventurerId: killerId, generation: s.generation });
       return;
     }

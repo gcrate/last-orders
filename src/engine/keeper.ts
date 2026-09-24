@@ -21,6 +21,7 @@ export function createKeeper(s: GameState, name: string, portrait: string): Keep
     estimateBias: rollBias(s, k.estimateWidthStart),
     restingUntilHour: null,
     lastEffortDay: -1,
+    lastLoss: 'illness',
     restDays: 0,
     effortDaysSpent: 0,
     alive: true,
@@ -61,9 +62,10 @@ export function exertBlocked(s: GameState): string | null {
   return null;
 }
 
-function loseDays(s: GameState, days: number, sink: EventSink): void {
+function loseDays(s: GameState, days: number, cause: Keeper['lastLoss'], sink: EventSink): void {
   const before = portraitStage(s.keeper);
   s.keeper.daysRemaining -= days;
+  s.keeper.lastLoss = cause;
   const after = portraitStage(s.keeper);
   if (after !== before) sink.emit({ type: 'KEEPER_STAGE', stage: after });
 }
@@ -71,14 +73,14 @@ function loseDays(s: GameState, days: number, sink: EventSink): void {
 export function spendEffort(s: GameState, days: number, sink: EventSink): void {
   s.keeper.effortDaysSpent += days;
   s.keeper.lastEffortDay = dayOf(s.hour);
-  loseDays(s, days, sink);
+  loseDays(s, days, 'effort', sink);
 }
 
 export function keeperShock(s: GameState, cause: 'favourite' | 'wipe' | 'bossFail', adventurerId: string | null, sink: EventSink): void {
   const k = balance.keeper;
   const days = cause === 'favourite' ? k.shockFavourite : cause === 'wipe' ? k.shockWipe : k.shockBossFail;
   sink.emit({ type: 'KEEPER_SHOCK', cause, adventurerId });
-  loseDays(s, days, sink);
+  loseDays(s, days, 'grief', sink);
 }
 
 /** Midnight: the illness advances. */
@@ -91,7 +93,7 @@ export function keeperMidnight(s: GameState, sink: EventSink): void {
     k.restingUntilHour = null;
   }
   k.estimateWidth = Math.max(balance.keeper.estimateWidthMin, k.estimateWidth * balance.keeper.estimateNarrowDaily);
-  loseDays(s, decline, sink);
+  loseDays(s, decline, 'illness', sink);
 }
 
 export function keeperShouldDie(s: GameState): boolean {

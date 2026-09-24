@@ -10,7 +10,7 @@ import { seedRng } from './rng';
 import type { GameState, GenerationRecord, ItemKind } from './types';
 import { pickOne } from './util';
 
-export const STATE_VERSION = 2;
+export const STATE_VERSION = 3;
 
 export function emptyRecord(generation: number, keeperName: string): GenerationRecord {
   return {

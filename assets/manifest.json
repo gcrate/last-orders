@@ -1793,6 +1793,26 @@
       ],
       "usage": "Button, 9-slice 4px corners",
       "prompt": "Small dark wooden button with brass edge, muted earthy colors, fantasy RPG style"
+    },
+    {
+      "id": "legacy_journal",
+      "file": "items/legacy_journal.png",
+      "size": [
+        32,
+        32
+      ],
+      "usage": "Legacy object: the Journal",
+      "prompt": "Item icon of a worn leather-bound journal tied with cord, loose map pages sticking out, single object centered, dark background, muted earthy colors, fantasy RPG style"
+    },
+    {
+      "id": "legacy_portalstone",
+      "file": "items/legacy_portalstone.png",
+      "size": [
+        32,
+        32
+      ],
+      "usage": "Legacy object: the portal stone",
+      "prompt": "Item icon of a cracked grey stone with a faint blue glow inside the cracks, single object centered, dark background, muted earthy colors, fantasy RPG style"
     }
   ]
 }

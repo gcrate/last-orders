@@ -220,6 +220,7 @@ export const DEFAULT_BALANCE = {
     legendaryGraveCount: 3,
     legendaryGraveMinLevel: 5, // adventurer level needed to become a legendary grave
     legendaryGraveItemTierBonus: 1,
+    legendaryGraveGoldMult: 2,
   },
 
   expedition: {
@@ -433,6 +434,7 @@ export const DEFAULT_BALANCE = {
     lifeDays: 30,
     decayedUses: 2,
     decayedCost: 150,
+    stoneLifeDays: 120, // the inherited portal stone lasts longer than a fresh portal
   },
 
   generation: {
@@ -446,6 +448,9 @@ export const DEFAULT_BALANCE = {
     oldFriendsMinRetired: 3,
     oldFriendsCount: 3,
     oldFriendsLevelBonus: 3,
+    oldFriendsQualityBonus: 25,
+    oldFriendsLoyalty: 70,
+    veteranMaxAge: 80, // retired veterans older than this are gone by the next generation
   },
 
   traits: {

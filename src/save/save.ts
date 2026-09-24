@@ -28,6 +28,12 @@ const migrations: Record<number, Migration> = {
     }
     return { ...save, version: 2 };
   },
+  // v3: the keeper remembers what took their last days, for the cause of death.
+  2: (save) => {
+    const k = save.state.keeper as Partial<GameState['keeper']>;
+    k.lastLoss ??= 'illness';
+    return { ...save, version: 3 };
+  },
 };
 
 export function serialize(state: GameState, log: LogLine[] = [], savedAt = ''): string {

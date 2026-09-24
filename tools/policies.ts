@@ -49,6 +49,7 @@ function wanted(s: GameState, kind: ItemKind): number {
 export function policyInputs(s: GameState, cfg: PolicyConfig): PlayerInput[] {
   const out: PlayerInput[] = [];
   let gold = s.gold;
+  if (s.status === 'keeperDead') return [{ type: 'BEGIN_GENERATION' }];
   if (s.status !== 'playing') return out;
   if (cfg.pushRatio === 0) return out;
 

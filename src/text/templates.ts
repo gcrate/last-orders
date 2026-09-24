@@ -7,7 +7,7 @@ import { monster } from '../engine/monsters';
 import { INSIGHT_TEXT } from './insights';
 import { hashString } from '../engine/rng';
 import { traitDef } from '../engine/traits';
-import type { Decision, GameEvent, GameState, Objective, ReturnReason } from '../engine/types';
+import type { Decision, GameEvent, GameState, LegacyId, Objective, ReturnReason } from '../engine/types';
 
 export type Tone = 'death' | 'bad' | 'good' | 'info' | 'keeper' | 'quiet';
 
@@ -236,9 +236,9 @@ export function describeEvent(e: GameEvent, s: GameState): LogLine | null {
         'good',
       );
     case 'KEEPER_DIED':
-      return line('The keeper died in the night.', 'death');
+      return line(fill(choose(e, ['{name} died in the night.', 'The candle went out, and {name} with it.', '{name} did not come down in the morning.']), { name: s.keeper.name }), 'death');
     case 'NEW_GENERATION':
-      return line(`${e.years} years later, the tavern opens again.`, 'keeper');
+      return line(`${e.years} years later, ${s.keeper.name} opens the tavern again. ${LEGACY_TEXT[e.legacy].found}`, 'keeper');
     case 'GAME_WON':
       return line(`${first(s, e.adventurerId)} struck the last blow. The source is dead. The curse is lifted.`, 'good');
     case 'GAME_LOST':
@@ -382,6 +382,29 @@ export function describeEvent(e: GameEvent, s: GameState): LogLine | null {
   }
   return null;
 }
+
+export const LEGACY_TEXT: Record<LegacyId, { name: string; found: string; effect: string }> = {
+  journal: {
+    name: 'The Journal',
+    found: 'In a drawer, the old journal: maps, and notes on what lives below.',
+    effect: 'Mapped levels stay known, and every insight carries over.',
+  },
+  portalStone: {
+    name: 'The portal stone',
+    found: 'Under the floorboards, a cracked stone that still hums. It remembers a way down.',
+    effect: 'A decayed portal to the deepest level the last keeper reached. Costly to wake.',
+  },
+  keepersGear: {
+    name: "The keeper's gear",
+    found: 'The old sword still hangs on the wall. Someone should carry it again.',
+    effect: 'A legendary item for one adventurer.',
+  },
+  oldFriends: {
+    name: 'Old friends',
+    found: 'Letters came from the old crowd. Some of them sent their best students.',
+    effect: 'Veterans return as trainers, and elite recruits wait at the bar.',
+  },
+};
 
 /** The keeper's private read on how a party will take its orders. */
 export function frictionText(f: OrderFriction, s: GameState): string {

@@ -232,6 +232,7 @@ export interface Keeper {
   estimateBias: number; // hidden offset so the estimate's midpoint isn't the truth
   restingUntilHour: number | null;
   lastEffortDay: number;
+  lastLoss: 'illness' | 'effort' | 'grief'; // what took the last days (the cause of death, in the end)
   restDays: number;
   effortDaysSpent: number;
   alive: boolean;

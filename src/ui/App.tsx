@@ -7,6 +7,7 @@ import { clockText, dateText, generationDay } from './format';
 import { PartyBuilder } from './screens/PartyBuilder';
 import { DepthView } from './screens/DepthView';
 import { Journal } from './screens/Journal';
+import { Legacy } from './screens/Legacy';
 import { Roster } from './screens/Roster';
 import { Tavern } from './screens/Tavern';
 import { type Speed, useGame } from './useGame';
@@ -101,6 +102,7 @@ export function App() {
         <EventLog state={state} log={game.log} />
       </aside>
 
+      <Legacy game={game} />
       <Notices notices={game.notices} onDismiss={game.dismissNotice} />
     </div>
   );

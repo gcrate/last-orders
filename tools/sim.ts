@@ -4,7 +4,8 @@
 //   npm run sim -- --set combat.dmgFrac=0.08 --csv
 //
 // Modes:
-//   generation  (default) A scripted player (--policy) runs the tavern until the keeper dies.
+//   campaign    (default) A scripted player (--policy) plays whole games across generations.
+//   generation  Just the first keeper's life, with more detail.
 //   expedition  One party of fresh starting adventurers per run, sent at each target depth.
 //   demo        Play --days days and write tools/out/demo-save.json for the dev UI (?save=...).
 
@@ -29,7 +30,7 @@ interface Args {
 }
 
 function parseArgs(argv: string[]): Args {
-  const args: Args = { runs: 200, seed: '42', mode: 'generation', depths: [1, 2, 3, 5, 8], csv: false, policy: 'default', days: 40 };
+  const args: Args = { runs: 200, seed: '42', mode: 'campaign', depths: [1, 2, 3, 5, 8], csv: false, policy: 'default', days: 40 };
   for (let i = 0; i < argv.length; i++) {
     const a = argv[i];
     const next = () => argv[++i];
@@ -255,6 +256,107 @@ function generationMode(args: Args): void {
 }
 
 // ---------------------------------------------------------------------------
+// Campaign mode: whole games, generation after generation, until the source dies or the
+// bloodline ends.
+
+interface CampaignRun {
+  status: GameState['status'];
+  history: GameState['history'];
+  goldCurve: number[]; // first generation only
+}
+
+function runCampaign(seed: string, cfg: PolicyConfig): CampaignRun {
+  const s = newGame(seed);
+  const goldCurve: number[] = [];
+  let lastWeek = -1;
+  const maxHours = 24 * 400 * balance.generation.maxGenerations;
+  while ((s.status === 'playing' || s.status === 'keeperDead') && s.hour < maxHours) {
+    for (const input of policyInputs(s, cfg)) stepInPlace(s, input, 0);
+    if (s.status !== 'playing') continue;
+    stepInPlace(s, null, hoursUntil(s.hour, balance.time.eveningHour));
+    const week = Math.floor(s.hour / (24 * 7));
+    if (s.generation === 1 && week !== lastWeek) {
+      goldCurve.push(s.gold);
+      lastWeek = week;
+    }
+  }
+  return { status: s.status, history: s.history, goldCurve };
+}
+
+function campaignMode(args: Args): void {
+  const cfg = POLICIES[args.policy];
+  if (!cfg) throw new Error(`Unknown policy ${args.policy}. Try: ${Object.keys(POLICIES).join(', ')}`);
+  const runs: CampaignRun[] = [];
+  const csv = ['seed,generation,keeper,days,cause,maxDepth,levelsCleared,bosses,expeditions,deaths,goldEarned,legacy,outcome'];
+  for (let i = 0; i < args.runs; i++) {
+    const r = runCampaign(`${args.seed}-${i}`, cfg);
+    runs.push(r);
+    for (const g of r.history) {
+      csv.push([`${args.seed}-${i}`, g.generation, g.keeperName, g.days, g.causeOfDeath, g.maxDepth, g.levelsCleared, g.bossesKilled, g.expeditions, g.deaths, g.goldEarned, g.legacy ?? '', r.status].join(','));
+    }
+  }
+  const n = runs.length;
+  const wins = runs.filter((r) => r.status === 'won');
+  const gens = wins.map((r) => r.history.length);
+  printTable(`Campaign summary: ${n} runs, policy "${cfg.name}"`, [
+    ['measure', 'value'],
+    ['win rate', pct(wins.length / n)],
+    ['generations to win (mean)', gens.length ? (gens.reduce((a, b) => a + b, 0) / gens.length).toFixed(2) : '-'],
+    ...[1, 2, 3, 4, 5].map((g) => [`  won in generation ${g}`, pct(gens.filter((x) => x === g).length / n)]),
+    ['bloodline ended', pct(runs.filter((r) => r.status === 'lost').length / n)],
+  ]);
+
+  const genRows: string[][] = [['gen', 'runs', 'days', 'max depth', 'bosses', 'cleared', 'exped.', 'deaths', 'deaths/exp', 'cause', 'legacy left']];
+  for (let g = 1; g <= balance.generation.maxGenerations; g++) {
+    const recs = runs.map((r) => r.history.find((h) => h.generation === g)).filter((h): h is NonNullable<typeof h> => !!h);
+    if (recs.length === 0) continue;
+    const m = (f: (h: (typeof recs)[number]) => number) => (recs.reduce((t, h) => t + f(h), 0) / recs.length).toFixed(1);
+    const top = (f: (h: (typeof recs)[number]) => string) => {
+      const c: Record<string, number> = {};
+      for (const h of recs) c[f(h)] = (c[f(h)] ?? 0) + 1;
+      return Object.entries(c)
+        .sort((a, b) => b[1] - a[1])
+        .map(([k, v]) => `${k || 'won'} ${Math.round((v / recs.length) * 100)}%`)
+        .join(' ');
+    };
+    const exps = recs.reduce((t, h) => t + h.expeditions, 0);
+    const deaths = recs.reduce((t, h) => t + h.deaths, 0);
+    genRows.push([
+      String(g),
+      String(recs.length),
+      m((h) => h.days),
+      m((h) => h.maxDepth),
+      m((h) => h.bossesKilled),
+      m((h) => h.levelsCleared),
+      m((h) => h.expeditions),
+      m((h) => h.deaths),
+      exps ? (deaths / exps).toFixed(2) : '-',
+      top((h) => h.causeOfDeath),
+      top((h) => h.legacy ?? '-'),
+    ]);
+  }
+  printTable('Per generation (mean over runs that reached it)', genRows);
+
+  const all = runs.flatMap((r) => r.history);
+  const bandRows: string[][] = [['band', 'levels', 'expeditions', 'deaths', 'deaths/exp']];
+  for (let b = 0; b < 5; b++) {
+    const exps = all.reduce((t, g) => t + g.expeditionsByBand[b], 0);
+    const deaths = all.reduce((t, g) => t + g.deathsByBand[b], 0);
+    bandRows.push([String(b + 1), `${b * 10 + 1}-${b * 10 + 10}`, String(exps), String(deaths), exps ? (deaths / exps).toFixed(2) : '-']);
+  }
+  printTable('Adventurer deaths per expedition, by deepest band reached (all generations)', bandRows);
+
+  const weeks = Math.max(...runs.map((r) => r.goldCurve.length));
+  const goldRows: string[][] = [['week', 'mean gold', 'runs']];
+  for (let w = 0; w < weeks; w += 3) {
+    const vals = runs.filter((r) => r.goldCurve.length > w).map((r) => r.goldCurve[w]);
+    goldRows.push([String(w), (vals.reduce((t, v) => t + v, 0) / vals.length).toFixed(0), String(vals.length)]);
+  }
+  printTable('Gold curve, first generation', goldRows);
+  if (args.csv) writeCsv('campaigns.csv', csv);
+}
+
+// ---------------------------------------------------------------------------
 // Demo mode: play one game with the policy for --days days and write a save file the dev
 // UI can load with ?save=/tools/out/demo-save.json
 
@@ -308,6 +410,7 @@ const args = parseArgs(process.argv.slice(2));
 const t0 = performance.now();
 if (args.mode === 'expedition') expeditionMode(args);
 else if (args.mode === 'generation') generationMode(args);
+else if (args.mode === 'campaign') campaignMode(args);
 else if (args.mode === 'demo') demoMode(args);
 else {
   console.error(`Unknown mode ${args.mode}`);

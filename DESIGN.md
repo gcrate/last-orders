@@ -252,3 +252,9 @@ Minor questions the doc didn't answer, resolved with the simplest option. Revisi
 - **Grave pull:** parties stop for a grave they pass if someone cares: a friend of the dead, a posted bounty, or greedy members. The same things make graves turn up sooner while exploring.
 - **Shrine revival:** "body recovered" means the grave is recovered and brought home within 10 days of the death. The shrine tier sets the chance.
 - **Bounties** are paid in full from the tavern's gold when posted, and go to the finder's purse on recovery.
+- **Legacy choice:** the game picks the single most remarkable object the keeper earned, in this order: portal stone (a portal at level 20+), old friends (3+ retired alive), the keeper's gear (reached level 10), else the Journal.
+- **What carries over between generations:** upgrades lose one tier each; reputation keeps 30%; gold resets to the starting amount; the stash, adventurers and portals are lost (except what the legacy object gives). Without the Journal, insights and maps are lost too. The memorial list of the fallen always stays.
+- **Regrowth** keeps each level's layout (features, where the stairs are) but resets knowledge, population and bosses, and raises difficulty 10–15%. "Theme variation" is left to the art and text for now.
+- **Legendary graves:** up to 3 unrecovered graves of level 5+ adventurers from the last generation become legendary (guarded, gear one tier better, double gold). Unclaimed legendary graves persist.
+- **Cause of death** is whatever took the keeper's last days: illness, exhaustion (spent on training and counsel) or grief (shocks).
+- **Parties in the dungeon when the keeper dies** are simply gone by the time the heir arrives.
