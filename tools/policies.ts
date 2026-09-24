@@ -205,6 +205,8 @@ function planObjective(s: GameState, power: number, cfg: PolicyConfig): Plan {
   }
   const frontier = s.levels.findIndex((l) => !l.stairsKnown) + 1 || balance.dungeon.levels;
   const lvl = Math.min(target, Math.max(1, frontier));
+  // Not strong enough to push on: clear the deepest safe level for experience and reputation.
+  if (lvl < frontier && level(s, lvl).population > 0.5) return { type: 'clear', level: lvl, portalId: bestPortal(s, lvl) };
   return { type: 'push', level: lvl, portalId: bestPortal(s, lvl) };
 }
 

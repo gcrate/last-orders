@@ -209,6 +209,7 @@ export const DEFAULT_BALANCE = {
     vaultGoldMult: 6,
     springHeal: 0.5,
     goldPerThreat: 0.9,
+    combatGoldPerThreat: 0.08, // coin carried by the things they kill
     goldRollMin: 0.5,
     goldRollMax: 1.6,
     itemChance: 0.3,
@@ -339,7 +340,7 @@ export const DEFAULT_BALANCE = {
     giftBase: 0.25, // fraction of carried gold given to the tavern
     giftPerLoyalty: 0.005,
     itemKeepChanceGreedy: 0.35,
-    daysBrokeLeave: 7,
+    daysBrokeLeave: 10,
     signingPerLevel: 15,
     signingRepFree: 25, // recruits are free below this reputation
   },

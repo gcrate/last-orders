@@ -332,7 +332,7 @@ export function describeEvent(e: GameEvent, s: GameState): LogLine | null {
     case 'LEVEL_MAPPED':
       return line(`Level ${e.level} is fully mapped.`, 'good');
     case 'BOSS_KILLED':
-      return line(fill(choose(e, ['{killer} killed {boss}.', '{boss} is dead. {killer} struck the blow.']), { killer: first(s, e.killerId), boss: monster(e.monsterId).name }), 'good');
+      return line(fill(choose(e, ['{killer} killed {boss}.', '{Boss} is dead. {killer} struck the blow.']), { killer: first(s, e.killerId), boss: monster(e.monsterId).name, Boss: capital(monster(e.monsterId).name) }), 'good');
     case 'OBJECTIVE_DONE':
       return null;
     case 'TURNED_BACK':

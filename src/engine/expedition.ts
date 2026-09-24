@@ -519,6 +519,7 @@ function fight(s: GameState, exp: Expedition, enc: Encounter, sink: EventSink): 
     sink.emit({ type: 'COMBAT_WON', expeditionId: exp.id, level: enc.depth, monsterId: enc.monsterId, rounds: result.rounds, boss: enc.boss });
     const l = level(s, enc.depth);
     l.population = Math.max(0, l.population - balance.expedition.populationPerWin);
+    exp.lootGold += Math.round(enc.threat * balance.dungeon.combatGoldPerThreat * lootMult(s, exp));
   }
   exp.wardActive = false;
   return result.outcome;

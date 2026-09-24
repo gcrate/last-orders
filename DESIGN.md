@@ -243,7 +243,7 @@ Minor questions the doc didn't answer, resolved with the simplest option. Revisi
 - **Party size** is 1–4 adventurers.
 - **Bosses guard the stairs down.** A party can't go below a boss level (10, 20, …) until that boss is dead. Parties sent deeper must fight it; parties with other business on that level only fight it if a glory-seeker insists.
 - **Recruits** who aren't hired leave after 2 evenings.
-- **Room and board** comes out of each adventurer's own purse (their share of loot). An adventurer who can't pay for 7 days leaves.
+- **Room and board** comes out of each adventurer's own purse (their share of loot). An adventurer who can't pay for 10 days leaves.
 - **Loot split:** carried gold is split among survivors on return; each gifts a share to the tavern (loyalty and traits set the share). Found items go to the stash; a greedy finder may pocket one grave item.
 - **Portals on the way home:** a returning party that passes a standing portal uses it to get home (costs a use).
 - **Desertion:** a member whose morale collapses may leave the party and walk home alone, with a death risk that grows with depth.

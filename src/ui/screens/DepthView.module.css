@@ -1,0 +1,113 @@
+.layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 340px;
+  gap: 12px;
+  align-items: start;
+}
+
+.track {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.band {
+  display: flex;
+  flex-direction: column;
+}
+
+.bandHead {
+  display: flex;
+  gap: 10px;
+  align-items: flex-end;
+  margin-bottom: 4px;
+}
+
+.bandHead img,
+.bandHead > div:first-child {
+  height: 48px !important;
+  width: 256px !important;
+  object-fit: cover;
+  object-position: center;
+}
+
+.bandTitle {
+  color: var(--accent);
+}
+
+.level {
+  display: grid;
+  grid-template-columns: 30px 90px 150px 1fr 80px;
+  align-items: center;
+  gap: 8px;
+  padding: 1px 6px;
+  cursor: pointer;
+  border-bottom: 1px solid #2a211a;
+  min-height: 34px;
+}
+
+.level:hover {
+  background: #2d231c;
+}
+
+.selected {
+  background: #3a2c1f !important;
+}
+
+.unvisited {
+  opacity: 0.5;
+}
+
+.depth {
+  text-align: right;
+  color: var(--muted);
+}
+
+.explored {
+  height: 6px;
+  background: #140f0c;
+  border: 1px solid #3a2e24;
+}
+
+.explored > div {
+  height: 100%;
+  background: #7d6a4c;
+}
+
+.icons {
+  display: flex;
+  gap: 2px;
+  align-items: center;
+}
+
+
+.parties {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.party {
+  font-size: 12px;
+  color: var(--accent);
+  border: 1px solid #6b5230;
+  padding: 0 4px;
+}
+
+.danger {
+  font-size: 12px;
+  text-align: right;
+}
+
+.detail {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  position: sticky;
+  top: 0;
+}
+
+.grave {
+  border-bottom: 1px solid #2f261f;
+  padding-bottom: 6px;
+}

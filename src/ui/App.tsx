@@ -1,31 +1,43 @@
 import { useState } from 'react';
+import type { ObjectiveType } from '../engine/types';
 import { EventLog } from './components/EventLog';
 import { Notices } from './components/Notices';
 import { Sprite } from './components/Sprite';
 import { clockText, dateText, generationDay } from './format';
 import { PartyBuilder } from './screens/PartyBuilder';
+import { DepthView } from './screens/DepthView';
 import { Roster } from './screens/Roster';
 import { Tavern } from './screens/Tavern';
 import { type Speed, useGame } from './useGame';
 import styles from './App.module.css';
 
-type Tab = 'tavern' | 'roster' | 'party';
+type Tab = 'tavern' | 'roster' | 'party' | 'depth';
 
 const TABS: { id: Tab; label: string }[] = [
   { id: 'tavern', label: 'Tavern' },
   { id: 'roster', label: 'Roster' },
   { id: 'party', label: 'Send a party' },
+  { id: 'depth', label: 'The dungeon' },
 ];
 
 export function App() {
   const game = useGame();
   const { state } = game;
-  const [tab, setTab] = useState<Tab>('tavern');
+  const [tab, setTab] = useState<Tab>(() => {
+    const t = new URLSearchParams(window.location.search).get('tab');
+    return TABS.some((x) => x.id === t) ? (t as Tab) : 'tavern';
+  });
   const [selected, setSelected] = useState<string | null>(null);
+
+  const [plan, setPlan] = useState<{ type: ObjectiveType; level: number; graveId?: string; key: number } | null>(null);
 
   const openAdventurer = (id: string) => {
     setSelected(id);
     setTab('roster');
+  };
+  const planParty = (type: ObjectiveType, level: number, graveId?: string) => {
+    setPlan({ type, level, graveId, key: Date.now() });
+    setTab('party');
   };
 
   return (
@@ -74,7 +86,12 @@ export function App() {
       <main className={styles.main}>
         {tab === 'tavern' && <Tavern game={game} onOpenAdventurer={openAdventurer} />}
         {tab === 'roster' && <Roster game={game} selected={selected} onSelect={setSelected} />}
-        {tab === 'party' && <PartyBuilder game={game} onSent={() => setTab('tavern')} />}
+        {tab === 'party' && (
+          <PartyBuilder key={plan?.key ?? 0} game={game} initialObjective={plan ?? undefined} onSent={() => setTab('tavern')} />
+        )}
+        {tab === 'depth' && (
+          <DepthView game={game} onRecover={(graveId, level) => planParty('recover', level, graveId)} onSendTo={(level) => planParty('push', level)} />
+        )}
       </main>
 
       <aside className={styles.log}>

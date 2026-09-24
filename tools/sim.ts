@@ -4,7 +4,9 @@
 //   npm run sim -- --set combat.dmgFrac=0.08 --csv
 //
 // Modes:
+//   generation  (default) A scripted player (--policy) runs the tavern until the keeper dies.
 //   expedition  One party of fresh starting adventurers per run, sent at each target depth.
+//   demo        Play --days days and write tools/out/demo-save.json for the dev UI (?save=...).
 
 import { mkdirSync, writeFileSync } from 'node:fs';
 import { balance, overrideBalance } from '../src/engine/balance';
@@ -12,6 +14,8 @@ import { newGame } from '../src/engine/state';
 import { stepInPlace } from '../src/engine/step';
 import { hoursUntil } from '../src/engine/time';
 import type { GameEvent, GameState, Orders } from '../src/engine/types';
+import { serialize } from '../src/save/save';
+import { type LogLine, describeEvent } from '../src/text/templates';
 import { POLICIES, type PolicyConfig, policyInputs } from './policies';
 
 interface Args {
@@ -21,10 +25,11 @@ interface Args {
   depths: number[];
   csv: boolean;
   policy: string;
+  days: number;
 }
 
 function parseArgs(argv: string[]): Args {
-  const args: Args = { runs: 200, seed: '42', mode: 'generation', depths: [1, 2, 3, 5, 8], csv: false, policy: 'default' };
+  const args: Args = { runs: 200, seed: '42', mode: 'generation', depths: [1, 2, 3, 5, 8], csv: false, policy: 'default', days: 40 };
   for (let i = 0; i < argv.length; i++) {
     const a = argv[i];
     const next = () => argv[++i];
@@ -34,6 +39,7 @@ function parseArgs(argv: string[]): Args {
     else if (a === '--policy') args.policy = next();
     else if (a === '--depths') args.depths = next().split(',').map(Number);
     else if (a === '--csv') args.csv = true;
+    else if (a === '--days') args.days = Number(next());
     else if (a === '--set') {
       const [path, value] = next().split('=');
       overrideBalance(path, JSON.parse(value));
@@ -185,6 +191,11 @@ function generationMode(args: Args): void {
     ]),
   ]);
 
+  printTable('Deepest level reached', [
+    ['reached', 'share of runs'],
+    ...[5, 10, 11, 20, 21, 30, 31, 40, 41, 50].map((d) => [`level ${d}+`, pct(recs.filter((g) => g.maxDepth >= d).length / n)]),
+  ]);
+
   const causes: Record<string, number> = {};
   for (const g of recs) causes[g.causeOfDeath || 'alive'] = (causes[g.causeOfDeath || 'alive'] ?? 0) + 1;
   printTable('Keeper cause of death', [['cause', 'share'], ...Object.entries(causes).map(([c, k]) => [c, pct(k / n)])]);
@@ -205,6 +216,32 @@ function generationMode(args: Args): void {
   }
   printTable('Gold curve', goldRows);
   if (args.csv) writeCsv('generations.csv', csv);
+}
+
+// ---------------------------------------------------------------------------
+// Demo mode: play one game with the policy for --days days and write a save file the dev
+// UI can load with ?save=/tools/out/demo-save.json
+
+function demoMode(args: Args): void {
+  const cfg = POLICIES[args.policy];
+  const s = newGame(args.seed);
+  const log: LogLine[] = [];
+  const keep = (events: GameEvent[]) => {
+    for (const e of events) {
+      const line = describeEvent(e, s);
+      if (line) log.push(line);
+    }
+  };
+  while (s.status === 'playing' && s.hour < args.days * 24) {
+    for (const input of policyInputs(s, cfg)) keep(stepInPlace(s, input, 0));
+    // Leave the last evening unplayed so the bar has recruits in it.
+    const next = hoursUntil(s.hour, balance.time.eveningHour);
+    if (s.hour + next >= args.days * 24) break;
+    keep(stepInPlace(s, null, next));
+  }
+  mkdirSync('tools/out', { recursive: true });
+  writeFileSync('tools/out/demo-save.json', serialize(s, log.slice(-1500)));
+  console.log(`Wrote tools/out/demo-save.json (day ${Math.floor(s.hour / 24) + 1}, ${log.length} log lines)`);
 }
 
 // ---------------------------------------------------------------------------
@@ -235,6 +272,7 @@ const args = parseArgs(process.argv.slice(2));
 const t0 = performance.now();
 if (args.mode === 'expedition') expeditionMode(args);
 else if (args.mode === 'generation') generationMode(args);
+else if (args.mode === 'demo') demoMode(args);
 else {
   console.error(`Unknown mode ${args.mode}`);
   process.exit(1);
